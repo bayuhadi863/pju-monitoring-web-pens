@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import DashboardPage from './pages/DashboardPage';
-import RootLayout from './layouts/RootLayout';
-import LoginPage from './pages/LoginPage';
-import DashboardLayout from './layouts/DashboardLayout';
-import PjuPage from './pages/PjuPage';
-import CctvPage from './pages/CctvPage';
+import LandingPage from './pages/home/landing-page';
+import DashboardPage from './pages/dashboard/dashboard-page';
+import RootLayout from './layouts/root-layout';
+import LoginPage from './pages/auth/login-page';
+import DashboardLayout from './layouts/dashboard-layout';
+import PjuPage from './pages/dashboard/pju-page';
+import CctvPage from './pages/dashboard/cctv-page';
+import ChatbotPage from './pages/dashboard/chatbot-page';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
           {
             path: 'cctv',
             element: <CctvPage />,
+          },
+          {
+            path: 'chatbot',
+            element: <ChatbotPage />,
           },
         ],
       },
