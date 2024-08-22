@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 
-const PjuPage = () => {
+const PjuPage: React.FC = () => {
   const pjuMonitoringDatas = [
     {
       title: 'Voltage',

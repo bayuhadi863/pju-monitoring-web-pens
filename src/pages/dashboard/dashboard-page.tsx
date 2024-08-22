@@ -12,8 +12,7 @@ const DashboardPage: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://pju-api-hveq5uky7q-et.a.run.app';
   const [data, setData] = useState<SensorData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const [, setIsUpdating] = useState<boolean>(false);
 
   const fetchData = async () => {
     try {
