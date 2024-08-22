@@ -7,7 +7,7 @@ const DashboardLayout: React.FC = () => {
   return (
     <>
       <Sidebar />
-      <div className='p-4 sm:ml-64 bg-muted/40 min-h-screen'>
+      <div className='p-4 lg:ml-64 bg-muted/40 min-h-screen'>
         <DashboardHeader />
         <main>
           <Outlet />
