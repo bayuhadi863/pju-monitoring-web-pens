@@ -7,36 +7,37 @@ import { GoCheckCircleFill } from 'react-icons/go';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
+import Location from '@/components/dashboard/location';
 
 const PjuPage: React.FC = () => {
   const pjuMonitoringDatas = [
     {
-      title: 'Voltage',
-      subtitle: 'Tegangan',
+      title: 'Tegangan',
+      subtitle: 'Besar Tegangan Listrik PJU',
       value: 6,
       unit: 'V',
       color: 'yellow',
       icon: <IoIosWarning className='text-yellow-400' />,
     },
     {
-      title: 'Current',
-      subtitle: 'Arus',
+      title: 'Arus',
+      subtitle: 'Besar Arus Listrik PJU',
       value: 3,
       unit: 'A',
       color: 'green',
       icon: <GoCheckCircleFill className='text-green-600' />,
     },
     {
-      title: 'Power',
-      subtitle: 'Daya',
+      title: 'Daya',
+      subtitle: 'Besar Daya Listrik PJU',
       value: 18,
       unit: 'W',
       color: 'green',
       icon: <GoCheckCircleFill className='text-green-600' />,
     },
     {
-      title: 'Frequency',
-      subtitle: 'Frekuensi',
+      title: 'Frekuensi',
+      subtitle: 'Besar Frekuensi Listrik PJU',
       value: 144,
       unit: 'Hz',
       color: 'green',
@@ -51,16 +52,16 @@ const PjuPage: React.FC = () => {
       icon: <RiErrorWarningFill className='text-red-600' />,
     },
     {
-      title: 'Temperature',
-      subtitle: 'Suhu',
+      title: 'Suhu',
+      subtitle: 'Besar Suhu PJU',
       value: 40,
       unit: '°C',
       color: 'red',
       icon: <RiErrorWarningFill className='text-red-600' />,
     },
     {
-      title: 'Luminouse Intensity',
-      subtitle: 'Intensitas Cahaya PJU',
+      title: 'Intensitas Cahaya',
+      subtitle: 'Besar Intensitas Cahaya PJU',
       value: 400,
       unit: 'Lumen',
       color: 'green',
@@ -70,7 +71,8 @@ const PjuPage: React.FC = () => {
 
   return (
     <div className='mt-4'>
-      <div className='flex flex-col lg:flex-row gap-4'>
+      <Location />
+      <div className='flex flex-col lg:flex-row gap-4 mt-4'>
         <div className='lg:basis-2/3'>
           <BlockTitle>PJU Monitoring</BlockTitle>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-2'>
@@ -93,8 +95,8 @@ const PjuPage: React.FC = () => {
             <Card className='p-3 shadow'>
               <div className='h-full flex justify-between items-center'>
                 <div>
-                  <h3 className='text-sm font-semibold'>PJU Lamp Status</h3>
-                  <p className='text-xs text-muted-foreground'>Turn On/Off Lampu PJU</p>
+                  <h3 className='text-sm font-semibold'>Status Lampu</h3>
+                  <p className='text-xs text-muted-foreground'>Nyalakan/Matikan Lampu PJU</p>
                 </div>
                 <div>
                   <Switch />
@@ -103,8 +105,8 @@ const PjuPage: React.FC = () => {
             </Card>
             <Card className='p-3 shadow'>
               <div>
-                <h3 className='text-sm font-semibold'>Brightness Level</h3>
-                <p className='text-xs text-muted-foreground'>Atur tingkat kecerahan lampu</p>
+                <h3 className='text-sm font-semibold'>Tingkat Kecerahan</h3>
+                <p className='text-xs text-muted-foreground'>Atur Tingkat Kecerahan Lampu PJU</p>
               </div>
               <div className='mt-3 mb-2'>
                 <Slider
@@ -118,8 +120,8 @@ const PjuPage: React.FC = () => {
             <Card className='p-3 shadow'>
               <div className='h-full flex justify-between items-center'>
                 <div>
-                  <h3 className='text-sm font-semibold'>Auto Mode</h3>
-                  <p className='text-xs text-muted-foreground'>Turn On/Off lampu PJU otomatis</p>
+                  <h3 className='text-sm font-semibold'>Mode Otomatis</h3>
+                  <p className='text-xs text-muted-foreground'>Aktifkan Mode Nyalakan/Matikan Lampu PJU Otomatis</p>
                 </div>
                 <div>
                   <Switch />

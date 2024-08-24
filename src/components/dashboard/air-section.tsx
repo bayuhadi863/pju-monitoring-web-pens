@@ -23,7 +23,7 @@ const AirSection: React.FC<AirSectionProps> = ({ data }) => {
 
   return (
     <section className='mt-4'>
-      <BlockTitle>Latest Air Quality Sensor Data</BlockTitle>
+      <BlockTitle>Data Sensor Kualitas Udara Terbaru</BlockTitle>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2'>
         {carbonMonoxideSensor && (
           <SensorCard

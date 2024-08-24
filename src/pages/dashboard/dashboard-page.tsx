@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { IoLocationSharp } from 'react-icons/io5';
 import WeatherSection from '@/components/dashboard/weather-section';
 import AirSection from '@/components/dashboard/air-section';
 import io, { Socket } from 'socket.io-client';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
+import Location from '@/components/dashboard/location';
 
 const socket: Socket = io(import.meta.env.VITE_API_BASE_URL || 'https://pju-api-hveq5uky7q-et.a.run.app');
 
@@ -42,11 +42,8 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className='py-4'>
-      <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-        <IoLocationSharp />
-        <p>Jl. Keputih, Surabaya</p>
-      </div>
       <div>
+        <Location />
         {isLoading ? (
           <p>Loading...</p>
         ) : (

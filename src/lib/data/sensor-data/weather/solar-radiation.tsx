@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const solarSensorTypeCode = 'SOLAR';
-export const solarTitle = 'Solar Radiation';
+export const solarTitle = 'Radiasi Matahari';
 export const solarSubtitle = 'Tingkat Radiasi Matahari Area';
 
 export const solarGenerateColor = (value?: number) => {

@@ -7,8 +7,8 @@ const DashboardHeader: React.FC = () => {
 
   const generatePageTitle = () => {
     if (pathname === '/dashboard') return 'Dashboard';
-    if (pathname === '/dashboard/pju') return 'PJU Device(s)';
-    if (pathname === '/dashboard/cctv') return 'Live CCTV';
+    if (pathname === '/dashboard/pju') return 'Perangkat PJU';
+    if (pathname === '/dashboard/cctv') return 'Rekaman Live CCTV';
     if (pathname === '/dashboard/chatbot') return 'Chatbot AI';
   };
 
@@ -20,7 +20,7 @@ const DashboardHeader: React.FC = () => {
   };
 
   return (
-    <header className='flex justify-between items-center gap-2'>
+    <header className='flex justify-between items-center gap-2 w-full'>
       <div>
         <h1 className='text-lg font-semibold'>{generatePageTitle()}</h1>
         <p className='text-xs text-muted-foreground'>{generatePageSubTitle()}</p>

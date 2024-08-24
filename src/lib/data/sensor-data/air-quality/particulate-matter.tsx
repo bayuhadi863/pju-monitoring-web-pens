@@ -4,8 +4,8 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const particulateMatterSensorTypeCode = 'PM';
-export const particulateMatterTitle = 'Particulate Matter';
-export const particulateMatterSubtitle = 'Partikulat Udara Area';
+export const particulateMatterTitle = 'Materi Partikulat';
+export const particulateMatterSubtitle = 'Kadar Materi Partikulat Udara Area';
 
 export const particulateMatterGenerateColor = (value?: number) => {
   if (!value) return 'blue';

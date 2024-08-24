@@ -1,7 +1,7 @@
 import { BsFillCloudRainFill, BsFillCloudRainHeavyFill, BsFillCloudLightningRainFill } from 'react-icons/bs';
 
 export const rainfallSensorTypeCode = 'RAIN';
-export const rainfallTitle = 'Rainfall Level';
+export const rainfallTitle = 'Curah Hujan';
 export const rainfallSubtitle = 'Tingkat Curah Hujan Area';
 
 export const rainfallGenerateColor = (value?: number) => {

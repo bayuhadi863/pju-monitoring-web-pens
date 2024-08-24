@@ -3,7 +3,7 @@ import { FaHouseFloodWater } from "react-icons/fa6";
 import { MdFlood } from "react-icons/md";
 
 export const waterLevelSensorTypeCode = 'WATER';
-export const waterLevelTitle = 'Water Level';
+export const waterLevelTitle = 'Tinggi Air';
 export const waterLevelSubtitle = 'Tinggi Air Area';
 
 export const waterLevelGenerateColor = (value?: number) => {

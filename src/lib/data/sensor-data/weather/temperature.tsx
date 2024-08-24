@@ -2,7 +2,7 @@
 import { TbTemperatureSnow, TbTemperatureSun } from 'react-icons/tb';
 
 export const temperatureSensorTypeCode = 'TEMP';
-export const temperatureTitle = 'Temperature';
+export const temperatureTitle = 'Suhu';
 export const temperatureSubtitle = 'Suhu Area';
 
 export const temperatureGenerateColor = (value?: number) => {

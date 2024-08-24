@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const nitrogenDioxideSensorTypeCode = 'NO2';
-export const nitrogenDioxideTitle = 'Nitrogen Dioxide';
+export const nitrogenDioxideTitle = 'Nitrogen Dioksida';
 export const nitrogenDioxideSubtitle = 'Kadar Nitrogren Dioksida (NO2) Area';
 
 export const nitrogenDioxideGenerateColor = (value?: number) => {

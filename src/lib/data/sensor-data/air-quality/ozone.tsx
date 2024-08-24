@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const ozoneSensorTypeCode = 'O3';
-export const ozoneTitle = 'Ozone Gas';
+export const ozoneTitle = 'Gas Ozon';
 export const ozoneSubtitle = 'Kadar Gas Ozon (O3) Area';
 
 export const ozoneGenerateColor = (value?: number) => {

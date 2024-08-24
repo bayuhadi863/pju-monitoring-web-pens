@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const humiditySensorTypeCode = 'HUM';
-export const humidityTitle = 'Humidity';
+export const humidityTitle = 'Kelembapan Udara';
 export const humiditySubtitle = 'Tingkat Kelembapan Udara Area';
 
 export const humidityGenerateColor = (value?: number) => {

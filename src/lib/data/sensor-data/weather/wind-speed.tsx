@@ -15,7 +15,7 @@ import {
 } from 'react-icons/wi';
 
 export const windSpeedSensorTypeCode = 'WINDSPD';
-export const windSpeedTitle = 'Wind Speed';
+export const windSpeedTitle = 'Kecepatan Angin';
 export const windSpeedSubtitle = 'Kecepatan Angin Area';
 
 export const windSpeedGenerateColor = (value?: number) => {

@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const carbonMonoxideSensorTypeCode = 'CO';
-export const carbonMonoxideTitle = 'Carbon Monoxide';
+export const carbonMonoxideTitle = 'Karbon Monoksida';
 export const carbonMonoxideSubtitle = 'Kadar Karbon Monoksida (CO) Area';
 
 export const carbonMonoxideGenerateColor = (value?: number) => {

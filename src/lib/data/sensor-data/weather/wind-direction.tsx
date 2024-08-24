@@ -4,7 +4,7 @@ import { RiErrorWarningFill } from 'react-icons/ri';
 import { GoCheckCircleFill } from 'react-icons/go';
 
 export const windDirectionSensorTypeCode = 'WINDDIR';
-export const windDirectionTitle = 'Wind Direction';
+export const windDirectionTitle = 'Arah Angin';
 export const windDirectionSubtitle = 'Arah Angin Area';
 
 export const windDirectionGenerateColor = (value?: number) => {
