@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from '../ui/card';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type SensorCardProps = {
   title: string;
@@ -47,18 +48,19 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
         <div className={`${generateBackgroundColor(color)} w-1 min-h-full rounded-md`}></div>
         <div className='h-full flex flex-col justify-between gap-3 w-full'>
           <div>
-            <h3 className='text-sm font-semibold'>{title}</h3>
+            <div className='flex items-center gap-1'>
+              <h3 className='text-sm font-semibold'>{title}</h3>
+            </div>
             <p className='text-xs text-muted-foreground'>{subTitle}</p>
           </div>
           <div className='flex justify-between items-center w-full'>
             <p className={`font-semibold ${generateTextColor(color)}`}>
               {value} <span>{unit}</span>
             </p>
-
-            <div>
-              <div>{icon}</div>
-              <div>{/* <LiaTemperatureLowSolid className='text-yellow-600' /> */}</div>
-            </div>
+            <Popover>
+              <PopoverTrigger>{title === 'Kecepatan Angin' ? <div className='hover:bg-accent rounded'>{icon}</div> : <div className='hover:bg-accent rounded p-1'>{icon}</div>}</PopoverTrigger>
+              <PopoverContent>Place content for the popover here.</PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
