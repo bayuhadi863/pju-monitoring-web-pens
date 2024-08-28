@@ -9,14 +9,16 @@ export const ozoneSubtitle = 'Kadar Gas Ozon (O3) Area';
 
 export const ozoneGenerateColor = (value?: number) => {
   if (!value) return 'blue';
-  if (value >= 40 && value <= 60) return 'green';
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return 'yellow';
-  return 'red';
+  if (value >= 0 && value <= 0.124) return 'green';
+  if (value >= 0.125 && value <= 0.164) return 'yellow';
+  if (value >= 0.165) return 'red';
+  return 'blue';
 };
 
 export const ozoneGenerateIcon = (value?: number) => {
   if (!value) return <div></div>;
-  if (value >= 40 && value <= 60) return <GoCheckCircleFill className='text-green-600' />;
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return <IoIosWarning className='text-yellow-400' />;
-  return <RiErrorWarningFill className='text-red-600' />;
+  if (value >= 0 && value <= 0.124) return <GoCheckCircleFill className='text-green-600' />;
+  if (value >= 0.125 && value <= 0.164) return <IoIosWarning className='text-yellow-400' />;
+  if (value >= 0.165) return <RiErrorWarningFill className='text-red-600' />;
+  return <div></div>;
 };

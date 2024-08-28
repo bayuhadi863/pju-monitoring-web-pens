@@ -9,14 +9,16 @@ export const particulateMatterSubtitle = 'Kadar Materi Partikulat Udara Area';
 
 export const particulateMatterGenerateColor = (value?: number) => {
   if (!value) return 'blue';
-  if (value >= 40 && value <= 60) return 'green';
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return 'yellow';
-  return 'red';
+  if (value >= 0 && value <= 60.99) return 'green';
+  if (value >= 61 && value <= 120.99) return 'yellow';
+  if (value >= 121) return 'red';
+  return 'blue';
 };
 
 export const particulateMatterGenerateIcon = (value?: number) => {
   if (!value) return <div></div>;
-  if (value >= 40 && value <= 60) return <GoCheckCircleFill className='text-green-600' />;
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return <IoIosWarning className='text-yellow-400' />;
-  return <RiErrorWarningFill className='text-red-600' />;
+  if (value >= 0 && value <= 60.99) return <GoCheckCircleFill className='text-green-600' />;
+  if (value >= 61 && value <= 120.99) return <IoIosWarning className='text-yellow-400' />;
+  if (value >= 121) return <RiErrorWarningFill className='text-red-600' />;
+  return <div></div>;
 };

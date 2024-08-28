@@ -1,22 +1,27 @@
-// icons import
-import { IoIosWarning } from 'react-icons/io';
-import { RiErrorWarningFill } from 'react-icons/ri';
-import { GoCheckCircleFill } from 'react-icons/go';
-
 export const windDirectionSensorTypeCode = 'WINDDIR';
 export const windDirectionTitle = 'Arah Angin';
 export const windDirectionSubtitle = 'Arah Angin Area';
 
-export const windDirectionGenerateColor = (value?: number) => {
-  if (!value) return 'blue';
-  if (value >= 40 && value <= 60) return 'green';
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return 'yellow';
-  return 'red';
+export const windDirectionGenerateColor = () => {
+  return 'green';
 };
 
 export const windDirectionGenerateIcon = (value?: number) => {
-  if (!value) return <div></div>;
-  if (value >= 40 && value <= 60) return <GoCheckCircleFill className='text-green-600' />;
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return <IoIosWarning className='text-yellow-400' />;
-  return <RiErrorWarningFill className='text-red-600' />;
+  return (
+    <div className='w-4 h-4 flex items-center justify-center'>
+      <p className='text-green-600 font-semibold text-sm'>{generateDirection(value)}</p>
+    </div>
+  );
+};
+
+const generateDirection = (value?: number) => {
+  if (!value) return 'Tidak Ada Data';
+  if (value >= 0 && value < 45) return 'U';
+  if (value >= 45 && value < 90) return 'TL';
+  if (value >= 90 && value < 135) return 'T';
+  if (value >= 135 && value < 180) return 'TG';
+  if (value >= 180 && value < 225) return 'S';
+  if (value >= 225 && value < 270) return 'BD';
+  if (value >= 270 && value < 315) return 'B';
+  if (value >= 315) return 'Barat Laut';
 };

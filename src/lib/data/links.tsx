@@ -1,6 +1,7 @@
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidCctv } from 'react-icons/bi';
 import { GiStreetLight } from 'react-icons/gi';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BsChatTextFill } from 'react-icons/bs';
 
 type SidebarLink = {
@@ -25,9 +26,9 @@ export const sidebarLinks: SidebarLink[] = [
     label: 'CCTV',
     icon: <BiSolidCctv />,
   },
-  {
-    to: '/dashboard/chatbot',
-    label: 'Chatbot AI',
-    icon: <BsChatTextFill />,
-  },
+  // {
+  //   to: '/dashboard/chatbot',
+  //   label: 'Chatbot AI',
+  //   icon: <BsChatTextFill />,
+  // },
 ];

@@ -6,6 +6,7 @@ import { carbonMonoxideTitle, carbonMonoxideSubtitle, carbonMonoxideSensorTypeCo
 import { nitrogenDioxideTitle, nitrogenDioxideSubtitle, nitrogenDioxideSensorTypeCode, nitrogenDioxideGenerateColor, nitrogenDioxideGenerateIcon } from '@/lib/data/sensor-data/air-quality/nitrogen-dioxide';
 import { ozoneTitle, ozoneSubtitle, ozoneSensorTypeCode, ozoneGenerateColor, ozoneGenerateIcon } from '@/lib/data/sensor-data/air-quality/ozone';
 import { particulateMatterTitle, particulateMatterSubtitle, particulateMatterSensorTypeCode, particulateMatterGenerateColor, particulateMatterGenerateIcon } from '@/lib/data/sensor-data/air-quality/particulate-matter';
+import { sulfurDioxideTitle, sulfurDioxideSubtitle, sulfurDioxideSensorTypeCode, sulfurDioxideGenerateColor, sulfurDioxideGenerateIcon } from '@/lib/data/sensor-data/air-quality/sulfur-dioxide';
 
 type AirSectionProps = {
   data: SensorData[];
@@ -20,6 +21,7 @@ const AirSection: React.FC<AirSectionProps> = ({ data }) => {
   const nitrogenDioxideSensor = getSensorDataBySensorTypeCode(nitrogenDioxideSensorTypeCode);
   const ozoneSensor = getSensorDataBySensorTypeCode(ozoneSensorTypeCode);
   const particulateMatterSensor = getSensorDataBySensorTypeCode(particulateMatterSensorTypeCode);
+  const sulfurDioxideSensor = getSensorDataBySensorTypeCode(sulfurDioxideSensorTypeCode);
 
   return (
     <section className='mt-4'>
@@ -63,6 +65,16 @@ const AirSection: React.FC<AirSectionProps> = ({ data }) => {
             unit={particulateMatterSensor.sensorType.unit}
             color={particulateMatterGenerateColor(particulateMatterSensor.value)}
             icon={particulateMatterGenerateIcon(particulateMatterSensor.value)}
+          />
+        )}
+        {sulfurDioxideSensor && (
+          <SensorCard
+            title={sulfurDioxideTitle}
+            subTitle={sulfurDioxideSubtitle}
+            value={sulfurDioxideSensor.value}
+            unit={sulfurDioxideSensor.sensorType.unit}
+            color={sulfurDioxideGenerateColor(sulfurDioxideSensor.value)}
+            icon={sulfurDioxideGenerateIcon(sulfurDioxideSensor.value)}
           />
         )}
       </div>

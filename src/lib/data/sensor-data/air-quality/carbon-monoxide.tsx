@@ -9,14 +9,16 @@ export const carbonMonoxideSubtitle = 'Kadar Karbon Monoksida (CO) Area';
 
 export const carbonMonoxideGenerateColor = (value?: number) => {
   if (!value) return 'blue';
-  if (value >= 40 && value <= 60) return 'green';
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return 'yellow';
-  return 'red';
+  if (value >= 0 && value <= 199.99) return 'green';
+  if (value >= 200 && value <= 399.99) return 'yellow';
+  if (value >= 400) return 'red';
+  return 'blue';
 };
 
 export const carbonMonoxideGenerateIcon = (value?: number) => {
   if (!value) return <div></div>;
-  if (value >= 40 && value <= 60) return <GoCheckCircleFill className='text-green-600' />;
-  if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return <IoIosWarning className='text-yellow-400' />;
-  return <RiErrorWarningFill className='text-red-600' />;
+  if (value >= 0 && value <= 199.99) return <GoCheckCircleFill className='text-green-600' />;
+  if (value >= 200 && value <= 399.99) return <IoIosWarning className='text-yellow-400' />;
+  if (value >= 400) return <RiErrorWarningFill className='text-red-600' />;
+  return <div></div>;
 };
