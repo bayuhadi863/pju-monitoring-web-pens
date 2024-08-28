@@ -98,7 +98,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             subTitle={windDirectionSubtitle}
             value={windDirectionSensor.value}
             unit={windDirectionSensor.sensorType.unit}
-            color={windDirectionGenerateColor(windDirectionSensor.value)}
+            color={windDirectionGenerateColor()}
             icon={windDirectionGenerateIcon(windDirectionSensor.value)}
           />
         )}
