@@ -20,3 +20,13 @@ export const temperatureGenerateIcon = (value?: number) => {
   if (value > 25 && value <= 35) return <TbTemperatureSun className='text-yellow-400' />;
   return <TbTemperatureSun className='text-red-600' />;
 };
+
+export const temperatureInfo = (
+  <div className='text-xs flex flex-col gap-1'>
+    <p>Suhu adalah ukuran rata-rata energi kinetik partikel dalam suatu benda.</p>
+    <p>
+      Suhu yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600'>20°C hingga 25°C</span>.
+    </p>
+    <p>Suhu yang terlalu rendah atau terlalu tinggi dapat menyebabkan masalah kesehatan.</p>
+  </div>
+);

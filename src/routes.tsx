@@ -7,6 +7,7 @@ import DashboardLayout from './layouts/dashboard-layout';
 import PjuPage from './pages/dashboard/pju-page';
 import CctvPage from './pages/dashboard/cctv-page';
 import ChatbotPage from './pages/dashboard/chatbot-page';
+import ProtectedRoute from './layouts/protected-route';
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ export const router = createBrowserRouter([
           },
           {
             path: 'pju',
-            element: <PjuPage />,
+            element: (
+              <ProtectedRoute>
+                <PjuPage />
+              </ProtectedRoute>
+            ),
           },
           {
             path: 'cctv',

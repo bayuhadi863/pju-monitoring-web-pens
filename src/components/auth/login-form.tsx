@@ -8,7 +8,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { login } from '@/lib/services/auth-service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '@/components/hooks/use-toast';
 
 const formSchema = z
   .object({
@@ -22,6 +24,10 @@ const formSchema = z
 
 export function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -36,11 +42,34 @@ export function LoginForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const response = await login(values.email, values.password);
-    if (response.status === 200) {
-      console.log('Login success:', response.data);
-    } else {
-      console.error('Login failed:', response.data);
+    try {
+      setLoading(true);
+
+      const response = await login(values.email, values.password);
+
+      if (response.status === 200) {
+        const token = response.data.data.token;
+
+        localStorage.setItem('token', token);
+
+        toast({
+          variant: 'success',
+          duration: 3000,
+          title: 'Login Berhasil!',
+          description: 'Anda berhasil login ke akun Anda.',
+        });
+        navigate('/dashboard/pju');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      toast({
+        variant: 'destructive',
+        duration: 3000,
+        title: 'Login Gagal!',
+        description: 'Email atau password Anda salah.',
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,14 +127,21 @@ export function LoginForm() {
             <Button
               className='w-full mt-6'
               type='submit'
+              disabled={loading}
             >
+              {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
               Masuk
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter>
-        <Link to='/' className='text-sm underline text-primary hover:text-blue-400'>Kembali ke beranda</Link>
+        <Link
+          to='/'
+          className='text-sm underline text-primary hover:text-blue-400'
+        >
+          Kembali ke beranda
+        </Link>
       </CardFooter>
     </Card>
   );

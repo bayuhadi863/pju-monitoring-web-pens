@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import { ThemeProvider } from '@/components/theme/theme-provider';
+import { Toaster } from '@/components/ui/toaster';
 
 const RootLayout: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const RootLayout: React.FC = () => {
       defaultTheme='light'
       storageKey='vite-ui-theme'
     >
+      <Toaster />
       <Outlet />
     </ThemeProvider>
   );

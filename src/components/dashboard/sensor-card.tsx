@@ -9,9 +9,10 @@ type SensorCardProps = {
   unit?: string;
   color?: string;
   icon: React.ReactNode;
+  info?: React.ReactNode;
 };
 
-const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, color, icon }) => {
+const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, color, icon, info }) => {
   const generateTextColor = (color?: string) => {
     switch (color) {
       case 'red':
@@ -59,7 +60,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
             </p>
             <Popover>
               <PopoverTrigger>{title === 'Kecepatan Angin' ? <div className='hover:bg-accent rounded'>{icon}</div> : <div className='hover:bg-accent rounded p-1'>{icon}</div>}</PopoverTrigger>
-              <PopoverContent>Place content for the popover here.</PopoverContent>
+              <PopoverContent>{info}</PopoverContent>
             </Popover>
           </div>
         </div>

@@ -6,10 +6,10 @@ import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
 import Location from '@/components/dashboard/location';
 
-const socket: Socket = io(import.meta.env.VITE_API_BASE_URL || 'https://pju-api-hveq5uky7q-et.a.run.app');
+const socket: Socket = io(import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000');
 
 const DashboardPage: React.FC = () => {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://pju-api-hveq5uky7q-et.a.run.app';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const [data, setData] = useState<SensorData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import SensorCard from '@/components/dashboard/sensor-card';
 import BlockTitle from '@/components/dashboard/block-title';

@@ -43,3 +43,48 @@ export const windSpeedGenerateIcon = (value?: number) => {
   if (value >= 64 && value <= 72) return <WiWindBeaufort11 className='text-red-600 text-2xl' />;
   if (value >= 73) return <WiWindBeaufort12 className='text-red-600 text-2xl' />;
 };
+
+export const windSpeedInfo = (
+  <div className='text-xs flex flex-col gap-1'>
+    <p>Kecepatan angin:</p>
+    <p>
+      <span className='text-blue-600'>kurang dari 1 mph</span> berstatus Tenang.
+    </p>
+    <p>
+      <span className='text-blue-600'>1 hingga 3 mph</span> berstatus Udara Ringan.
+    </p>
+    <p>
+      <span className='text-blue-600'>4-7 mph</span> berstatus Angin Sepoi-Sepoi Ringan.
+    </p>
+    <p>
+      <span className='text-green-600'>8-12 mph</span> berstatus Angin Sepoi-Sepoi.
+    </p>
+    <p>
+      <span className='text-green-600'>13-18 mph</span> berstatus Angin Sedang.
+    </p>
+    <p>
+      <span className='text-green-600'>19-24 mph</span> berstatus Angin Segar.
+    </p>
+    <p>
+      <span className='text-yellow-400'>25-31 mph</span> berstatus Angin Kencang Ringan.
+    </p>
+    <p>
+      <span className='text-yellow-400'>32-38 mph</span> berstatus Angin Kencang Sedang.
+    </p>
+    <p>
+      <span className='text-yellow-400'>39-46 mph</span> berstatus Angin Kencang.
+    </p>
+    <p>
+      <span className='text-red-600'>47-54 mph</span> berstatus Angin Sangat Kencang.
+    </p>
+    <p>
+      <span className='text-red-600'>55-63 mph</span> berstatus Angin Badai.
+    </p>
+    <p>
+      <span className='text-red-600'>64-72 mph</span> berstatus Badai Dahsyat.
+    </p>
+    <p>
+      <span className='text-red-600'>lebih dari 72 mph</span> berstatus Badai Sangat Dahsyat.
+    </p>
+  </div>
+);

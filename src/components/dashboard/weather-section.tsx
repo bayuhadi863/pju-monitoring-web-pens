@@ -2,13 +2,13 @@ import React from 'react';
 import BlockTitle from './block-title';
 import SensorCard from './sensor-card';
 import { SensorData } from '@/lib/types/sensor-data-type';
-import { humidityTitle, humiditySubtitle, humiditySensorTypeCode, humidityGenerateColor, humidityGenerateIcon } from '@/lib/data/sensor-data/weather/humidity';
-import { temperatureSensorTypeCode, temperatureTitle, temperatureSubtitle, temperatureGenerateColor, temperatureGenerateIcon } from '@/lib/data/sensor-data/weather/temperature';
-import { solarSensorTypeCode, solarTitle, solarSubtitle, solarGenerateColor, solarGenerateIcon } from '@/lib/data/sensor-data/weather/solar-radiation';
-import { rainfallSensorTypeCode, rainfallTitle, rainfallSubtitle, rainfallGenerateColor, rainfallGenerateIcon } from '@/lib/data/sensor-data/weather/rainfall-level';
-import { windSpeedSensorTypeCode, windSpeedTitle, windSpeedSubtitle, windSpeedGenerateColor, windSpeedGenerateIcon } from '@/lib/data/sensor-data/weather/wind-speed';
-import { waterLevelSensorTypeCode, waterLevelTitle, waterLevelSubtitle, waterLevelGenerateColor, waterLevelGenerateIcon } from '@/lib/data/sensor-data/weather/water-level';
-import { windDirectionSensorTypeCode, windDirectionTitle, windDirectionSubtitle, windDirectionGenerateColor, windDirectionGenerateIcon } from '@/lib/data/sensor-data/weather/wind-direction';
+import { humidityTitle, humiditySubtitle, humiditySensorTypeCode, humidityGenerateColor, humidityGenerateIcon, humidityInfo } from '@/lib/data/sensor-data/weather/humidity';
+import { temperatureSensorTypeCode, temperatureTitle, temperatureSubtitle, temperatureGenerateColor, temperatureGenerateIcon, temperatureInfo } from '@/lib/data/sensor-data/weather/temperature';
+import { solarSensorTypeCode, solarTitle, solarSubtitle, solarGenerateColor, solarGenerateIcon, solarInfo } from '@/lib/data/sensor-data/weather/solar-radiation';
+import { rainfallSensorTypeCode, rainfallTitle, rainfallSubtitle, rainfallGenerateColor, rainfallGenerateIcon, rainfallInfo } from '@/lib/data/sensor-data/weather/rainfall-level';
+import { windSpeedSensorTypeCode, windSpeedTitle, windSpeedSubtitle, windSpeedGenerateColor, windSpeedGenerateIcon, windSpeedInfo } from '@/lib/data/sensor-data/weather/wind-speed';
+import { waterLevelSensorTypeCode, waterLevelTitle, waterLevelSubtitle, waterLevelGenerateColor, waterLevelGenerateIcon, waterLevelInfo } from '@/lib/data/sensor-data/weather/water-level';
+import { windDirectionSensorTypeCode, windDirectionTitle, windDirectionSubtitle, windDirectionGenerateColor, windDirectionGenerateIcon, windDirectionInfo } from '@/lib/data/sensor-data/weather/wind-direction';
 
 type WeatherSectionProps = {
   data: SensorData[];
@@ -40,6 +40,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={humiditySensor.sensorType.unit}
             color={humidityGenerateColor(humiditySensor.value)}
             icon={humidityGenerateIcon(humiditySensor.value)}
+            info={humidityInfo}
           />
         )}
         {temperatureSensor && (
@@ -50,6 +51,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={temperatureSensor.sensorType.unit}
             color={temperatureGenerateColor(temperatureSensor.value)}
             icon={temperatureGenerateIcon(temperatureSensor.value)}
+            info={temperatureInfo}
           />
         )}
         {solarSensor && (
@@ -60,6 +62,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={solarSensor.sensorType.unit}
             color={solarGenerateColor(solarSensor.value)}
             icon={solarGenerateIcon(solarSensor.value)}
+            info={solarInfo}
           />
         )}
         {rainfallSensor && (
@@ -70,6 +73,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={rainfallSensor.sensorType.unit}
             color={rainfallGenerateColor(rainfallSensor.value)}
             icon={rainfallGenerateIcon(rainfallSensor.value)}
+            info={rainfallInfo}
           />
         )}
         {waterLevelSensor && (
@@ -80,6 +84,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={waterLevelSensor.sensorType.unit}
             color={waterLevelGenerateColor(waterLevelSensor.value)}
             icon={waterLevelGenerateIcon(waterLevelSensor.value)}
+            info={waterLevelInfo}
           />
         )}
         {windSpeedSensor && (
@@ -90,6 +95,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={windSpeedSensor.sensorType.unit}
             color={windSpeedGenerateColor(windSpeedSensor.value)}
             icon={windSpeedGenerateIcon(windSpeedSensor.value)}
+            info={windSpeedInfo}
           />
         )}
         {windDirectionSensor && (
@@ -100,6 +106,7 @@ const WeatherSection: React.FC<WeatherSectionProps> = ({ data }) => {
             unit={windDirectionSensor.sensorType.unit}
             color={windDirectionGenerateColor()}
             icon={windDirectionGenerateIcon(windDirectionSensor.value)}
+            info={windDirectionInfo}
           />
         )}
       </div>

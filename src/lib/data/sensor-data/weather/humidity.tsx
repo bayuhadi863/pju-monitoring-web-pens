@@ -20,3 +20,13 @@ export const humidityGenerateIcon = (value?: number) => {
   if ((value < 40 && value >= 20) || (value > 60 && value <= 80)) return <IoIosWarning className='text-yellow-400' />;
   return <RiErrorWarningFill className='text-red-600' />;
 };
+
+export const humidityInfo = (
+  <div className='text-xs flex flex-col gap-1'>
+    <p>Kelembapan udara adalah jumlah uap air yang terkandung dalam udara.</p>
+    <p>
+      Kelembapan udara yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600'>40% hingga 60%</span>.
+    </p>
+    <p>Kelembapan udara yang terlalu rendah atau terlalu tinggi dapat menyebabkan masalah kesehatan dan kerusakan pada barang.</p>
+  </div>
+);
