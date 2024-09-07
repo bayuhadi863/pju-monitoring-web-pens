@@ -5,6 +5,7 @@ import io, { Socket } from 'socket.io-client';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
 import Location from '@/components/dashboard/location';
+import SensorSkeleton from '@/components/dashboard/sensor-skeleton';
 
 const socket: Socket = io(import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000');
 
@@ -45,7 +46,7 @@ const DashboardPage: React.FC = () => {
       <div>
         <Location />
         {isLoading ? (
-          <p>Loading...</p>
+          <SensorSkeleton />
         ) : (
           <>
             <WeatherSection data={data} />

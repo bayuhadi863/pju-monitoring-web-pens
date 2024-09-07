@@ -25,7 +25,7 @@ export const temperatureInfo = (
   <div className='text-xs flex flex-col gap-1'>
     <p>Suhu adalah ukuran rata-rata energi kinetik partikel dalam suatu benda.</p>
     <p>
-      Suhu yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600'>20°C hingga 25°C</span>.
+      Suhu yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600 font-semibold'>20°C hingga 25°C</span>.
     </p>
     <p>Suhu yang terlalu rendah atau terlalu tinggi dapat menyebabkan masalah kesehatan.</p>
   </div>
