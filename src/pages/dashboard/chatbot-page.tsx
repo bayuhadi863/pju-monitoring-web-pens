@@ -32,7 +32,7 @@ const Chatbot: React.FC = () => {
         {messages.map((message, index) => (
           <div className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div
-              className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/40'} p-2 rounded-lg`}
+              className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/20'} p-2 rounded-lg`}
               key={index}
             >
               {message.text}
