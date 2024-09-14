@@ -25,19 +25,19 @@ export const rainfallInfo = (
   <div className='text-xs flex flex-col gap-1'>
     <p>Curah hujan adalah jumlah hujan yang jatuh dalam satu periode waktu tertentu.</p>
     <p>
-      Curah hujan <span className='text-green-600'>0 hingga 10,0 mm</span> adalah Hujan Ringan.
+      Curah hujan <span className='text-green-600 font-semibold'>0 hingga 10,0 mm</span> adalah Hujan Ringan.
     </p>
     <p>
-      Curah hujan <span className='text-green-600'>10,1 hingga 24,9 mm</span> adalah Hujan Sedang.
+      Curah hujan <span className='text-green-600 font-semibold'>10,1 hingga 24,9 mm</span> adalah Hujan Sedang.
     </p>
     <p>
-      Curah hujan <span className='text-yellow-400'>25,0 hingga 49,9 mm</span> adalah Hujan Lebat.
+      Curah hujan <span className='text-yellow-400 font-semibold'>25,0 hingga 49,9 mm</span> adalah Hujan Lebat.
     </p>
     <p>
-      Curah hujan <span className='text-yellow-400'>50,0 hingga 99,9 mm</span> adalah Hujan Badai.
+      Curah hujan <span className='text-yellow-400 font-semibold'>50,0 hingga 99,9 mm</span> adalah Hujan Badai.
     </p>
     <p>
-      Curah hujan <span className='text-red-600'>100,0 hingga 249,9 mm</span> adalah Hujan Badai Lebat.
+      Curah hujan <span className='text-red-600 font-semibold'>100,0 hingga 249,9 mm</span> adalah Hujan Badai Lebat.
     </p>
   </div>
 );

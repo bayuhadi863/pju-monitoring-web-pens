@@ -29,16 +29,16 @@ export const waterLevelInfo = (
   <div className='text-xs flex flex-col gap-1'>
     <p>Tinggi air adalah jarak vertikal antara permukaan air dengan titik nol tertentu.</p>
     <p>
-      Tinggi air <span className='text-blue-600'>0 hingga 250 cm</span> berstatus Siaga IV / Aman.
+      Tinggi air <span className='text-blue-600 font-semibold'>0 hingga 250 cm</span> berstatus Siaga IV / Aman.
     </p>
     <p>
-      Tinggi air <span className='text-green-600'>251 hingga 300 cm</span> berstatus Siaga III / Waspada.
+      Tinggi air <span className='text-green-600 font-semibold'>251 hingga 300 cm</span> berstatus Siaga III / Waspada.
     </p>
     <p>
-      Tinggi air <span className='text-yellow-400'>301 hingga 350 cm</span> berstatus Siaga II / Kritis.
+      Tinggi air <span className='text-yellow-400 font-semibold'>301 hingga 350 cm</span> berstatus Siaga II / Kritis.
     </p>
     <p>
-      Tinggi air <span className='text-red-600'>351 hingga 400 cm</span> berstatus Siaga I / Bencana.
+      Tinggi air <span className='text-red-600 font-semibold'>351 hingga 400 cm</span> berstatus Siaga I / Bencana.
     </p>
   </div>
 );

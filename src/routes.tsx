@@ -8,11 +8,13 @@ import PjuPage from './pages/dashboard/pju-page';
 import CctvPage from './pages/dashboard/cctv-page';
 import ChatbotPage from './pages/dashboard/chatbot-page';
 import ProtectedRoute from './layouts/protected-route';
+import NotFound from './pages/error/not-found';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
