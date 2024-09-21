@@ -1,12 +1,18 @@
 export type SensorData = {
   id: number;
   value: number;
-  sensorTypeId: number;
   timestamp: string;
-  sensorType: {
-    id: number;
-    code: string;
-    name: string;
-    unit: string;
-  };
+  code: string;
+  sensorTypeId: number;
 };
+
+export type SensorStaticData = {
+  sensorTypeCode: string;
+  title: string;
+  subtitle: string;
+  unit: string;
+  generateColor: (value?: number) => string;
+  generateIcon: (value?: number) => JSX.Element;
+  info: JSX.Element;
+};
+
