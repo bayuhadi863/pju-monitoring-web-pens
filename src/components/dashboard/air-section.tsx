@@ -41,9 +41,9 @@ const AirSection: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-    socket.on('dataUpdate', handleDataUpdate);
+    socket.on('airQualityUpdate', handleDataUpdate);
     return () => {
-      socket.off('dataUpdate');
+      socket.off('airQualityUpdate');
     };
   }, []);
 

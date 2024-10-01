@@ -18,7 +18,7 @@ export const windDirectionGenerateIcon = (value?: number) => {
 };
 
 const generateDirection = (value?: number) => {
-  if (!value) return 'Tidak Ada Data';
+  if (value === null || value === undefined) return 'Tidak Ada Data';
   if (value >= 0 && value < 45) return 'U';
   if (value >= 45 && value < 90) return 'TL';
   if (value >= 90 && value < 135) return 'T';
