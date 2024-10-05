@@ -7,10 +7,7 @@ import qs from 'qs';
 const Chatbot: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
 
-  const [messages, setMessages] = useState<{ text: string, sender: string }[]>([
-    { text: "Good Morning", sender: 'user' },
-    { text: "Good Morning, How can I assist you today?", sender: 'bot' },
-  ]);
+  const [messages, setMessages] = useState<{ text: string, sender: string }[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend = async (event: any) => {
@@ -59,8 +56,14 @@ const Chatbot: React.FC = () => {
 
   return (
     <div className=' w-full h-[80vh] mt-6 relative border rounded-lg shadow-md bg-background'>
-      <div className='overflow-y-auto space-y-4 h-full p-4'>
-        {messages.map((message, index) => (
+      <div className='flex flex-col overflow-y-auto space-y-4 h-full p-4'>
+        {messages.length === 0 ? (
+          <div className='flex items-center justify-center text-center w-full h-[80%]'>
+            <div className='font-semibold text-lg'>
+              Selamat Datang!<br />Apa yang bisa Saya bantu Hari ini?
+            </div>
+          </div>
+        ) : (messages.map((message, index) => (
           <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div
               className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/20'} p-2 rounded-lg`}
@@ -69,7 +72,7 @@ const Chatbot: React.FC = () => {
               {message.text}
             </div>
           </div>
-        ))}
+        )))}
       </div>
       <div className='bg-background p-4 absolute bottom-0 left-0 right-0 rounded-lg'>
         <div className='relative'>
