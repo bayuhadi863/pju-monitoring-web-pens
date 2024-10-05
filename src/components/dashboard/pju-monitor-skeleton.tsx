@@ -9,12 +9,12 @@ const generateSkeletons = (count: number, className: string) => {
   ));
 };
 
-const SensorSkeleton: React.FC = () => {
+const PjuMonitorSkeleton: React.FC = () => {
   return (
     <div className='mt-4 mb-2'>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2'>{generateSkeletons(8, 'h-24 bg-slate-200 dark:bg-slate-800')}</div>
+      <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>{generateSkeletons(6, 'h-40 bg-slate-200 dark:bg-slate-800')}</div>
     </div>
   );
 };
 
-export default SensorSkeleton;
+export default PjuMonitorSkeleton;

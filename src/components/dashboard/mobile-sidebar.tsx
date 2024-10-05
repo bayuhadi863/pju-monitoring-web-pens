@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
-import { sidebarLinks } from '@/lib/data/links';
+import { userSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLink from './mobile-sidebar-link';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,23 @@ const MobileSidebar: React.FC = () => {
         </SheetHeader>
         <div className='mt-4'>
           <ul>
-            {sidebarLinks.map((link, i) => (
+            {userSidebarLinks.map((link, i) => (
+              <li key={i}>
+                <SheetClose className='w-full'>
+                  <MobileSidebarLink
+                    to={link.to}
+                    icon={link.icon}
+                    className='w-full mb-1'
+                  >
+                    {link.label}
+                  </MobileSidebarLink>
+                </SheetClose>
+              </li>
+            ))}
+          </ul>
+          <hr className='my-4 border-t border-border' />
+          <ul>
+            {adminSidebarLinks.map((link, i) => (
               <li key={i}>
                 <SheetClose className='w-full'>
                   <MobileSidebarLink

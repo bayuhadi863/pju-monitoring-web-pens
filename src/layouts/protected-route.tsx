@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PageLoader from '@/components/page-loader';
 import { getCurrentUser } from '@/lib/services/auth-service';
+import PageLoading from '@/components/dashboard/page-loading';
 
 type ProtectedRouteProps = PropsWithChildren;
 
@@ -31,7 +31,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }, [navigate, token]);
 
   if (loading) {
-    return <PageLoader />;
+    return <PageLoading />;
   }
 
   return <>{children}</>;

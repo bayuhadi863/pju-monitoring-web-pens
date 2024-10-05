@@ -3,8 +3,7 @@ import BlockTitle from './block-title';
 import SensorCard from './sensor-card';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
-import io, { Socket } from 'socket.io-client';
-import SensorSkeleton from '@/components/dashboard/sensor-skeleton';
+import { socket } from '@/lib/configs/socket';
 import { humidity } from '@/lib/data/sensor-data/weather/humidity';
 import { temperature } from '@/lib/data/sensor-data/weather/temperature';
 import { solar } from '@/lib/data/sensor-data/weather/solar-radiation';
@@ -12,8 +11,6 @@ import { rainfall } from '@/lib/data/sensor-data/weather/rainfall-level';
 import { windSpeed } from '@/lib/data/sensor-data/weather/wind-speed';
 import { windDirection } from '@/lib/data/sensor-data/weather/wind-direction';
 import { airPressure } from '@/lib/data/sensor-data/weather/air-pressure';
-
-const socket: Socket = io(import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000');
 
 const WeatherSection: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
@@ -63,89 +60,84 @@ const WeatherSection: React.FC = () => {
     <section className='mt-4'>
       <BlockTitle>Data Sensor Cuaca Terbaru</BlockTitle>
 
-      {isLoading ? (
-        <SensorSkeleton />
-      ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2'>
-          {humiditySensor && (
-            <SensorCard
-              title={humidity.title}
-              subTitle={humidity.subtitle}
-              value={humiditySensor.value}
-              unit={humidity.unit}
-              color={humidity.generateColor(humiditySensor.value)}
-              icon={humidity.generateIcon(humiditySensor.value)}
-              info={humidity.info}
-            />
-          )}
-          {temperatureSensor && (
-            <SensorCard
-              title={temperature.title}
-              subTitle={temperature.subtitle}
-              value={temperatureSensor.value}
-              unit={temperature.unit}
-              color={temperature.generateColor(temperatureSensor.value)}
-              icon={temperature.generateIcon(temperatureSensor.value)}
-              info={temperature.info}
-            />
-          )}
-          {solarSensor && (
-            <SensorCard
-              title={solar.title}
-              subTitle={solar.subtitle}
-              value={solarSensor.value}
-              unit={solar.unit}
-              color={solar.generateColor(solarSensor.value)}
-              icon={solar.generateIcon(solarSensor.value)}
-              info={solar.info}
-            />
-          )}
-          {airPressureSensor && (
-            <SensorCard
-              title={airPressure.title}
-              subTitle={airPressure.subtitle}
-              value={airPressureSensor.value}
-              unit={airPressure.unit}
-              color={airPressure.generateColor(airPressureSensor.value)}
-              icon={airPressure.generateIcon(airPressureSensor.value)}
-              info={airPressure.info}
-            />
-          )}
-          {rainfallSensor && (
-            <SensorCard
-              title={rainfall.title}
-              subTitle={rainfall.subtitle}
-              value={rainfallSensor.value}
-              unit={rainfall.unit}
-              color={rainfall.generateColor(rainfallSensor.value)}
-              icon={rainfall.generateIcon(rainfallSensor.value)}
-              info={rainfall.info}
-            />
-          )}
-          {windSpeedSensor && (
-            <SensorCard
-              title={windSpeed.title}
-              subTitle={windSpeed.subtitle}
-              value={windSpeedSensor.value}
-              unit={windSpeed.unit}
-              color={windSpeed.generateColor(windSpeedSensor.value)}
-              icon={windSpeed.generateIcon(windSpeedSensor.value)}
-              info={windSpeed.info}
-            />
-          )}
-          {windDirectionSensor && (
-            <SensorCard
-              title={windDirection.title}
-              subTitle={windDirection.subtitle}
-              value={windDirectionSensor.value}
-              unit={windDirection.unit}
-              color={windDirection.generateColor(windDirectionSensor.value)}
-              icon={windDirection.generateIcon(windDirectionSensor.value)}
-              info={windDirection.info}
-            />
-          )}
-        </div>
-      )}
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2'>
+        <SensorCard
+          title={humidity.title}
+          subTitle={humidity.subtitle}
+          value={humiditySensor?.value}
+          unit={humidity.unit}
+          color={humiditySensor ? humidity.generateColor(humiditySensor.value) : ''}
+          icon={humiditySensor ? humidity.generateIcon(humiditySensor.value) : ''}
+          info={humidity.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={temperature.title}
+          subTitle={temperature.subtitle}
+          value={temperatureSensor?.value}
+          unit={temperature.unit}
+          color={temperatureSensor ? temperature.generateColor(temperatureSensor.value) : ''}
+          icon={temperatureSensor ? temperature.generateIcon(temperatureSensor.value) : ''}
+          info={temperature.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={solar.title}
+          subTitle={solar.subtitle}
+          value={solarSensor?.value}
+          unit={solar.unit}
+          color={solarSensor ? solar.generateColor(solarSensor.value) : ''}
+          icon={solarSensor ? solar.generateIcon(solarSensor.value) : ''}
+          info={solar.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={airPressure.title}
+          subTitle={airPressure.subtitle}
+          value={airPressureSensor?.value}
+          unit={airPressure.unit}
+          color={airPressureSensor ? airPressure.generateColor(airPressureSensor.value) : ''}
+          icon={airPressureSensor ? airPressure.generateIcon(airPressureSensor.value) : ''}
+          info={airPressure.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={rainfall.title}
+          subTitle={rainfall.subtitle}
+          value={rainfallSensor?.value}
+          unit={rainfall.unit}
+          color={rainfallSensor ? rainfall.generateColor(rainfallSensor.value) : ''}
+          icon={rainfallSensor ? rainfall.generateIcon(rainfallSensor.value) : ''}
+          info={rainfall.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={windSpeed.title}
+          subTitle={windSpeed.subtitle}
+          value={windSpeedSensor?.value}
+          unit={windSpeed.unit}
+          color={windSpeedSensor ? windSpeed.generateColor(windSpeedSensor.value) : ''}
+          icon={windSpeedSensor ? windSpeed.generateIcon(windSpeedSensor.value) : ''}
+          info={windSpeed.info}
+          isLoading={isLoading}
+        />
+
+        <SensorCard
+          title={windDirection.title}
+          subTitle={windDirection.subtitle}
+          value={windDirectionSensor?.value}
+          unit={windDirection.unit}
+          color={windDirectionSensor ? windDirection.generateColor(windDirectionSensor.value) : ''}
+          icon={windDirectionSensor ? windDirection.generateIcon(windDirectionSensor.value) : ''}
+          info={windDirection.info}
+          isLoading={isLoading}
+        />
+      </div>
     </section>
   );
 };

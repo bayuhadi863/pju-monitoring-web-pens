@@ -1,6 +1,6 @@
 import React from 'react';
 import SidebarLink from './sidebar-link';
-import { sidebarLinks } from '@/lib/data/links';
+import { userSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import { Link } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
@@ -15,7 +15,23 @@ const Sidebar: React.FC = () => {
         </Link>
       </div>
       <ul>
-        {sidebarLinks.map((link) => (
+        {userSidebarLinks.map((link) => (
+          <li key={link.to}>
+            <SidebarLink
+              to={link.to}
+              icon={link.icon}
+              className='mb-1'
+            >
+              {link.label}
+            </SidebarLink>
+          </li>
+        ))}
+      </ul>
+
+      <hr className='my-4 border-t border-border' />
+
+      <ul>
+        {adminSidebarLinks.map((link) => (
           <li key={link.to}>
             <SidebarLink
               to={link.to}

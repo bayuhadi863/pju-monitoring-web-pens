@@ -23,7 +23,7 @@ const MobileSidebarLink: React.FC<MobileSidebarLinkProps> = ({ to, children, cla
       className={`${className} flex items-center gap-2 py-2 px-4 rounded ${isActive ? 'bg-accent text-primary' : ''} transition hover:bg-accent`}
     >
       {icon}
-      <span className='text-sm font-medium'>{children}</span>
+      <span className='text font-medium'>{children}</span>
     </button>
   );
 };

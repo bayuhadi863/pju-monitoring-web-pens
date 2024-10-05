@@ -10,16 +10,11 @@ type SidebarLink = {
   icon: React.ReactNode;
 };
 
-export const sidebarLinks: SidebarLink[] = [
+export const userSidebarLinks: SidebarLink[] = [
   {
     to: '/dashboard',
     label: 'Dashboard',
     icon: <RiDashboardFill />,
-  },
-  {
-    to: '/dashboard/pju',
-    label: 'PJU',
-    icon: <GiStreetLight />,
   },
   {
     to: '/dashboard/cctv',
@@ -30,5 +25,13 @@ export const sidebarLinks: SidebarLink[] = [
     to: '/dashboard/chatbot',
     label: 'Chatbot AI',
     icon: <BsChatTextFill />,
+  },
+];
+
+export const adminSidebarLinks: SidebarLink[] = [
+  {
+    to: '/dashboard/pju',
+    label: 'Device PJU',
+    icon: <GiStreetLight />,
   },
 ];

@@ -12,6 +12,7 @@ const Chatbot: React.FC = () => {
     { text: "Good Morning, How can I assist you today?", sender: 'bot' },
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend = async (event: any) => {
     if ((event.type === 'click' || event.key === 'Enter') && inputValue.trim() !== '') {
 

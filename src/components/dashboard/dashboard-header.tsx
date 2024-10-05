@@ -22,7 +22,7 @@ const DashboardHeader: React.FC = () => {
   return (
     <header className='flex justify-between items-center gap-2 w-full'>
       <div>
-        <h1 className='text-lg font-semibold'>{generatePageTitle()}</h1>
+        <h1 className='text-xl font-semibold mb-1'>{generatePageTitle()}</h1>
         <p className='text-xs text-muted-foreground'>{generatePageSubTitle()}</p>
       </div>
       <ThemeSwitch />

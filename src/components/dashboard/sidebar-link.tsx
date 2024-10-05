@@ -16,10 +16,10 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({ to, children, className, icon
   return (
     <Link
       to={to}
-      className={`${className} flex items-center gap-2 py-2 px-4 rounded ${isActive ? 'bg-accent text-primary' : ''} transition hover:bg-accent`}
+      className={`${className} flex items-center gap-2 py-2 px-4 rounded ${isActive ? 'bg-primary/10 text-primary' : ''} transition hover:bg-primary/10`}
     >
       {icon}
-      <span className='text-sm font-medium'>{children}</span>
+      <span className='font-medium'>{children}</span>
     </Link>
   );
 };
