@@ -6,7 +6,7 @@ import { apiBaseUrl } from '@/lib/configs/api';
 import { pjuMonitorStaticData, PjuMonitorStaticDataType } from '@/lib/data/pju-monitor-data';
 
 const PjuMonitorGrid: React.FC = () => {
-  const [data, setData] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
+  const [data] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
   const [, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);
 

@@ -7,47 +7,38 @@ import qs from 'qs';
 const Chatbot: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
 
-  const [messages, setMessages] = useState<{ text: string, sender: string }[]>([]);
+  const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend = async (event: any) => {
     if ((event.type === 'click' || event.key === 'Enter') && inputValue.trim() !== '') {
-
-      const newMessages = [
-        ...messages,
-        { text: inputValue, sender: 'user' }
-      ];
+      const newMessages = [...messages, { text: inputValue, sender: 'user' }];
       setMessages(newMessages);
 
       const formData = new FormData();
       formData.append('input_user', inputValue);
 
       const data = qs.stringify({
-        user_input: inputValue
+        user_input: inputValue,
       });
       // Send the message to the server
-      axios.post('http://localhost:5000/api/chat', data, {
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(response => {
+      axios
+        .post('http://localhost:5000/api/chat', data, {
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        })
+        .then((response) => {
           const data = response.data;
 
           // Add bot's response
-          const strippedResponse = data.response.replace(/<\/?[^>]+(>|$)/g, "");
-          setMessages([
-            ...newMessages,
-            { text: strippedResponse, sender: 'bot' }
-          ]);
+          const strippedResponse = data.response.replace(/<\/?[^>]+(>|$)/g, '');
+          setMessages([...newMessages, { text: strippedResponse, sender: 'bot' }]);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error:', error);
-          setMessages([
-            ...newMessages,
-            { text: 'Mohon maaf terjadi kesalahan, Silahkan coba lagi nanti.', sender: 'bot' }
-          ]);
+          setMessages([...newMessages, { text: 'Mohon maaf terjadi kesalahan, Silahkan coba lagi nanti.', sender: 'bot' }]);
         });
 
       setInputValue('');
@@ -60,19 +51,26 @@ const Chatbot: React.FC = () => {
         {messages.length === 0 ? (
           <div className='flex items-center justify-center text-center w-full h-[80%]'>
             <div className='font-semibold text-lg'>
-              Selamat Datang!<br />Apa yang bisa Saya bantu Hari ini?
+              Selamat Datang!
+              <br />
+              Apa yang bisa Saya bantu Hari ini?
             </div>
           </div>
-        ) : (messages.map((message, index) => (
-          <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+        ) : (
+          messages.map((message, index) => (
             <div
-              className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/20'} p-2 rounded-lg`}
               key={index}
+              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              {message.text}
+              <div
+                className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/20'} p-2 rounded-lg`}
+                key={index}
+              >
+                {message.text}
+              </div>
             </div>
-          </div>
-        )))}
+          ))
+        )}
       </div>
       <div className='bg-background p-4 absolute bottom-0 left-0 right-0 rounded-lg'>
         <div className='relative'>
@@ -90,7 +88,6 @@ const Chatbot: React.FC = () => {
           >
             Kirim
           </Button>
-
         </div>
       </div>
     </div>
