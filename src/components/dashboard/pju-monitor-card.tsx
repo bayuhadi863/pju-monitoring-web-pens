@@ -9,6 +9,8 @@ export type PjuMonitorCardProps = {
 };
 
 export default function PjuMonitorCard({ value, title, subTitle, unit, icon }: PjuMonitorCardProps) {
+  const roundedValue = Math.round(Number(value) * 10) / 10;
+
   return (
     <Card className='overflow-hidden shadow-md'>
       <CardContent className='p-6'>
@@ -20,7 +22,7 @@ export default function PjuMonitorCard({ value, title, subTitle, unit, icon }: P
           <div className='bg-primary/10 p-3 rounded-full'>{icon}</div>
         </div>
         <div className='mt-4 flex items-baseline space-x-2'>
-          <span className='text-4xl font-bold tracking-tighter'>{value}</span>
+          <span className='text-4xl font-bold tracking-tighter'>{roundedValue}</span>
           <span className='text-sm font-medium text-muted-foreground'>{unit}</span>
         </div>
       </CardContent>

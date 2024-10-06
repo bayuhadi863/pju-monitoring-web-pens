@@ -14,6 +14,9 @@ type SensorCardProps = {
 };
 
 const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, color, icon, info, isLoading }) => {
+  const roundedValue = Math.round(Number(value) * 10) / 10;
+  const valueExists = value !== null && value !== undefined;
+
   const generateTextColor = (color?: string) => {
     switch (color) {
       case 'red':
@@ -23,7 +26,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
       case 'yellow':
         return 'text-yellow-400';
       case 'blue':
-        return 'text-blue-600';
+        return 'text-primary';
       default:
         return '';
     }
@@ -38,9 +41,9 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
       case 'yellow':
         return 'bg-yellow-400/10 hover:bg-yellow-400/20 transition';
       case 'blue':
-        return 'bg-blue-600/10 hover:bg-blue-400/20 transition';
+        return 'bg-primary/10 hover:bg-primary/20 transition';
       default:
-        return 'bg-blue-600/10 hover:bg-blue-600/20 transition';
+        return 'bg-primary/10 hover:bg-primary/20 transition';
     }
   };
 
@@ -56,11 +59,11 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
           </div>
           <div className='flex justify-between items-center w-full'>
             <div className={`flex items-baseline gap-1 ${generateTextColor(color)}`}>
-              <p className={`font-bold text-3xl`}>{isLoading ? '---' : value}</p>
+              <p className={`font-bold text-3xl`}>{isLoading ? '---' : roundedValue}</p>
               <p className='font-semibold'>{unit}</p>
             </div>
 
-            {icon && (
+            {valueExists && (
               <Popover>
                 <PopoverTrigger>
                   {title === 'Kecepatan Angin' ? (

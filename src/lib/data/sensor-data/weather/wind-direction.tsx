@@ -6,13 +6,13 @@ export const windDirectionSubtitle = 'Arah Angin Area';
 export const windDirectionUnit = '°';
 
 export const windDirectionGenerateColor = () => {
-  return 'green';
+  return 'blue';
 };
 
 export const windDirectionGenerateIcon = (value?: number) => {
   return (
     <div className='w-4 h-4 flex items-center justify-center'>
-      <p className='text-green-600 font-semibold text-sm'>{generateDirection(value)}</p>
+      <p className='text-primary font-semibold text-sm'>{generateDirection(value)}</p>
     </div>
   );
 };
