@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 
 type MobileSidebarProps = {
@@ -18,14 +18,14 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ headerContent, footerCont
       </SheetTrigger>
       <SheetContent
         side='left'
-        className='w-72'
+        className='w-72 flex flex-col'
       >
         <SheetHeader>
           <SheetTitle>{headerContent}</SheetTitle>
         </SheetHeader>
-        <div className='mt-4'>{content}</div>
+        <div className='flex-1 overflow-auto'>{content}</div>
+        <SheetFooter>{footerContent}</SheetFooter>
       </SheetContent>
-      <SheetFooter>{footerContent}</SheetFooter>
     </Sheet>
   );
 };
