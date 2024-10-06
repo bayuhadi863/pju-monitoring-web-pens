@@ -5,12 +5,12 @@ import RootLayout from './layouts/root-layout';
 import LoginPage from './pages/auth/login-page';
 import DashboardLayout from './layouts/dashboard-layout';
 import PjuPage from './pages/dashboard/pju-page';
-import CctvPage from './pages/chatbot/cctv-page';
+import CctvPage from './pages/dashboard/cctv-page';
 import ProtectedRoute from './layouts/protected-route';
 import NotFound from './pages/error/not-found';
 import ChatbotLayout from './pages/chatbot/chatbot-layout';
 import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
-import Chatbot from './pages/dashboard/chatbot-page';
+import Chatbot from './pages/chatbot/chatbot-page';
 
 export const router = createBrowserRouter([
   {
