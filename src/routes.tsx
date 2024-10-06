@@ -5,10 +5,12 @@ import RootLayout from './layouts/root-layout';
 import LoginPage from './pages/auth/login-page';
 import DashboardLayout from './layouts/dashboard-layout';
 import PjuPage from './pages/dashboard/pju-page';
-import CctvPage from './pages/dashboard/cctv-page';
-import ChatbotPage from './pages/dashboard/chatbot-page';
+import CctvPage from './pages/chatbot/cctv-page';
 import ProtectedRoute from './layouts/protected-route';
 import NotFound from './pages/error/not-found';
+import ChatbotLayout from './pages/chatbot/chatbot-layout';
+import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
+import Chatbot from './pages/dashboard/chatbot-page';
 
 export const router = createBrowserRouter([
   {
@@ -40,9 +42,19 @@ export const router = createBrowserRouter([
             path: 'cctv',
             element: <CctvPage />,
           },
+        ],
+      },
+      {
+        path: 'chatbot',
+        element: <ChatbotLayout />,
+        children: [
           {
-            path: 'chatbot',
-            element: <ChatbotPage />,
+            index: true,
+            element: <ChatbotWelcomePage />,
+          },
+          {
+            path: ':conversationId',
+            element: <Chatbot />,
           },
         ],
       },

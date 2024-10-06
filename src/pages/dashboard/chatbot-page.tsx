@@ -3,8 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import qs from 'qs';
+import { useParams } from 'react-router';
 
 const Chatbot: React.FC = () => {
+  const { conversationId } = useParams();
+
   const [inputValue, setInputValue] = useState<string>('');
 
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
@@ -46,8 +49,9 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className=' w-full h-[80vh] mt-6 relative border rounded-lg shadow-md bg-background'>
-      <div className='flex flex-col overflow-y-auto space-y-4 h-full p-4'>
+    <div className='w-full h-full flex flex-col'>
+      <div className='flex-1 overflow-auto space-y-4 p-4 pt-20'>
+        <div>Ini obrolan dengan conversationId: {conversationId}</div>
         {messages.length === 0 ? (
           <div className='flex items-center justify-center text-center w-full h-[80%]'>
             <div className='font-semibold text-lg'>
@@ -63,7 +67,7 @@ const Chatbot: React.FC = () => {
               className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-muted-foreground/20'} p-2 rounded-lg`}
+                className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-background'} py-3 px-4 rounded-xl`}
                 key={index}
               >
                 {message.text}
@@ -72,19 +76,19 @@ const Chatbot: React.FC = () => {
           ))
         )}
       </div>
-      <div className='bg-background p-4 absolute bottom-0 left-0 right-0 rounded-lg'>
+      <div className='p-4 mb-2'>
         <div className='relative'>
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleSend}
-            className='h-12 rounded-lg'
+            className='h-14 px-6 rounded-full'
             placeholder='Tulis Pertanyaan'
             required
           />
           <Button
             onClick={handleSend}
-            className='absolute end-1 bottom-0 top-1 rounded-md'
+            className='absolute end-2 bottom-0 top-2 rounded-full'
           >
             Kirim
           </Button>
