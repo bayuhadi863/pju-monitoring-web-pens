@@ -12,7 +12,7 @@ const ThemeSwitch: React.FC = () => {
         variant='ghost'
         size='icon'
         onClick={() => setTheme('dark')}
-        className='dark:hidden'
+        className='dark:hidden hover:bg-slate-200'
       >
         <Moon className='h-5 w-5' />
       </Button>

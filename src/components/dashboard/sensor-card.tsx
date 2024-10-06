@@ -23,7 +23,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
       case 'yellow':
         return 'text-yellow-400';
       case 'blue':
-        return 'text-blue-400';
+        return 'text-blue-600';
       default:
         return '';
     }
@@ -38,7 +38,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
       case 'yellow':
         return 'bg-yellow-400/10 hover:bg-yellow-400/20 transition';
       case 'blue':
-        return 'bg-blue-400/10 hover:bg-blue-400/20 transition';
+        return 'bg-blue-600/10 hover:bg-blue-400/20 transition';
       default:
         return 'bg-blue-600/10 hover:bg-blue-600/20 transition';
     }
