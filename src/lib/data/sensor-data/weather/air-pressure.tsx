@@ -9,7 +9,7 @@ const airPressureSubtitle = 'Tingkat Tekanan Udara Area';
 const airPressureUnit = 'mbar';
 
 const airPressureGenerateColor = (value?: number) => {
-  if (!value) return 'blue';
+  if (value === null || value === undefined) return 'blue';
   if (value >= 1005 && value <= 1025) return 'green';
   if (value >= 995 && value <= 1004.99) return 'yellow';
   if (value < 994.99) return 'red';
@@ -17,7 +17,7 @@ const airPressureGenerateColor = (value?: number) => {
 };
 
 const airPressureGenerateIcon = (value?: number) => {
-  if (!value) return <div></div>;
+  if (value === null || value === undefined) return <div></div>;
   if (value >= 1005 && value <= 1025) return <GoCheckCircleFill className='text-green-600' />;
   if (value >= 995 && value <= 1004.99) return <IoIosWarning className='text-yellow-400' />;
   if (value < 994.99) return <RiErrorWarningFill className='text-red-600' />;

@@ -21,7 +21,7 @@ const windSpeedSubtitle = 'Kecepatan Angin Area';
 const windSpeedUnit = 'm/s';
 
 const windSpeedGenerateColor = (value?: number) => {
-  if (!value) return 'blue';
+  if (value === null || value === undefined) return 'blue';
   if (value >= 0 && value <= 7) return 'blue';
   if (value >= 8 && value <= 24) return 'green';
   if (value >= 25 && value <= 46) return 'yellow';
@@ -30,10 +30,10 @@ const windSpeedGenerateColor = (value?: number) => {
 };
 
 const windSpeedGenerateIcon = (value?: number) => {
-  if (!value) return <div></div>;
-  if (value < 1) return <WiWindBeaufort0 className='text-blue-600 text-2xl' />;
-  if (value >= 1 && value <= 3) return <WiWindBeaufort1 className='text-blue-600 text-2xl' />;
-  if (value >= 4 && value <= 7) return <WiWindBeaufort2 className='text-blue-600 text-2xl' />;
+  if (value === null || value === undefined) return <div></div>;
+  if (value < 1) return <WiWindBeaufort0 className='text-primary text-2xl' />;
+  if (value >= 1 && value <= 3) return <WiWindBeaufort1 className='text-primary text-2xl' />;
+  if (value >= 4 && value <= 7) return <WiWindBeaufort2 className='text-primary text-2xl' />;
   if (value >= 8 && value <= 12) return <WiWindBeaufort3 className='text-green-600 text-2xl' />;
   if (value >= 13 && value <= 18) return <WiWindBeaufort4 className='text-green-600 text-2xl' />;
   if (value >= 19 && value <= 24) return <WiWindBeaufort5 className='text-green-600 text-2xl' />;
@@ -51,13 +51,13 @@ const windSpeedInfo = (
   <div className='text-xs flex flex-col gap-1'>
     <p>Kecepatan angin:</p>
     <p>
-      <span className='text-blue-600 font-semibold'>kurang dari 1 mph</span> berstatus Tenang.
+      <span className='text-primary font-semibold'>kurang dari 1 mph</span> berstatus Tenang.
     </p>
     <p>
-      <span className='text-blue-600 font-semibold'>1 - 3 mph</span> berstatus Udara Ringan.
+      <span className='text-primary font-semibold'>1 - 3 mph</span> berstatus Udara Ringan.
     </p>
     <p>
-      <span className='text-blue-600 font-semibold'>4-7 mph</span> berstatus Angin Sepoi-Sepoi Ringan.
+      <span className='text-primary font-semibold'>4-7 mph</span> berstatus Angin Sepoi-Sepoi Ringan.
     </p>
     <p>
       <span className='text-green-600 font-semibold'>8-12 mph</span> berstatus Angin Sepoi-Sepoi.

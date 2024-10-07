@@ -9,7 +9,7 @@ const solarSubtitle = 'Tingkat Radiasi Matahari Area';
 const solarUnit = 'W/m²';
 
 const solarGenerateColor = (value?: number) => {
-  if (!value) return 'blue';
+  if (value === null || value === undefined) return 'blue';
   if (value >= 600) return 'green';
   if (value >= 400 && value <= 599.99) return 'yellow';
   if (value >= 0 && value <= 399.99) return 'red';
@@ -17,7 +17,7 @@ const solarGenerateColor = (value?: number) => {
 };
 
 const solarGenerateIcon = (value?: number) => {
-  if (!value) return <div></div>;
+  if (value === null || value === undefined) return <div></div>;
   if (value >= 600) return <GoCheckCircleFill className='text-green-600' />;
   if (value >= 400 && value <= 599.99) return <IoIosWarning className='text-yellow-400' />;
   if (value >= 0 && value <= 399.99) return <RiErrorWarningFill className='text-red-600' />;

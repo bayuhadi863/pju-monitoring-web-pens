@@ -98,7 +98,7 @@ const Chatbot: React.FC = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleSend}
-            className='h-14 px-6 rounded-full'
+            className='h-14 px-6 rounded-full shadow-md border '
             placeholder='Tulis Pertanyaan'
             required
           />
