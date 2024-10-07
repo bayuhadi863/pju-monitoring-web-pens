@@ -20,34 +20,34 @@ const ChatbotLayout: React.FC = () => {
       to: '/chatbot',
       label: 'Welcome',
       removeIcon: <GoTrash />,
-          onRemove: () => handleDeleteConversation('tes'),
+      onRemove: () => handleDeleteConversation('tes'),
     },
   ]);
 
   const handleDeleteConversation = (conversationId: string) => {
-    axios.delete(`http://localhost:5000/api/conversations/${conversationId}`, {
-      headers: {
-        'accept': 'application/json',
-        'Authorization': userId
-      }
-    })
+    axios
+      .delete(`http://localhost:5000/api/conversations/${conversationId}`, {
+        headers: {
+          accept: 'application/json',
+          Authorization: userId,
+        },
+      })
       .then((response) => {
         console.log('Conversation deleted:', response);
       })
       .catch((error) => {
         console.error('Error deleting conversation:', error);
       });
-  }
+  };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/conversations',
-      {
+    axios
+      .get('http://localhost:5000/api/conversations', {
         headers: {
-          'accept': 'application/json',
-          'Authorization': userId
+          accept: 'application/json',
+          Authorization: userId,
         },
-      }
-    )
+      })
       .then((response) => {
         console.log(response);
         const data = response.data;
@@ -57,7 +57,7 @@ const ChatbotLayout: React.FC = () => {
           removeIcon: <GoTrash />,
           onRemove: () => handleDeleteConversation(conversation.id),
         }));
-        setSidebarLinks(prevLinks => [...prevLinks, ...links]);
+        setSidebarLinks((prevLinks) => [...prevLinks, ...links]);
       })
       .catch((error) => {
         console.error('Error fetching conversations:', error);
