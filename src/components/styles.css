@@ -1,0 +1,16 @@
+.sidebar-item {
+    position: relative;
+  }
+  
+  .remove-button {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .sidebar-item:hover .remove-button {
+    display: block;
+  }
+  

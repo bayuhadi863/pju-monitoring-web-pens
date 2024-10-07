@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/sidebar';
 import MobileSidebar from '@/components/dashboard/mobile-sidebar';
 import { SidebarLinkDataType } from '@/lib/types/sidebar-types';
@@ -6,66 +6,63 @@ import { Outlet } from 'react-router';
 import ChatbotHeader from '@/components/chatbot/chatbot-header';
 import SidebarLinks from '@/components/dashboard/sidebar-links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
+import axios from 'axios';
+import { GoTrash } from 'react-icons/go';
 
 const SidebarHeader = () => {
   return <h1 className='text-xl font-semibold'>Chatbot</h1>;
 };
 
 const ChatbotLayout: React.FC = () => {
-  const sidebarLinks: SidebarLinkDataType[] = [
+  const userId = localStorage.getItem('userId');
+  const [sidebarLinks, setSidebarLinks] = useState<SidebarLinkDataType[]>([
     {
       to: '/chatbot',
       label: 'Welcome',
+      removeIcon: <GoTrash />,
+          onRemove: () => handleDeleteConversation('tes'),
     },
-    {
-      to: '/chatbot/1',
-      label: 'Obrolan 1',
-    },
-    {
-      to: '/chatbot/2',
-      label: 'Obrolan 2',
-    },
-    {
-      to: '/chatbot/3',
-      label: 'Obrolan 3',
-    },
-    {
-      to: '/chatbot/4',
-      label: 'Obrolan 4',
-    },
-    {
-      to: '/chatbot/5',
-      label: 'Obrolan 5',
-    },
-    {
-      to: '/chatbot/6',
-      label: 'Obrolan 6',
-    },
-    {
-      to: '/chatbot/7',
-      label: 'Obrolan 7',
-    },
-    {
-      to: '/chatbot/8',
-      label: 'Obrolan 8',
-    },
-    {
-      to: '/chatbot/9',
-      label: 'Obrolan 9',
-    },
-    {
-      to: '/chatbot/10',
-      label: 'Obrolan 10',
-    },
-    {
-      to: '/chatbot/11',
-      label: 'Obrolan 11',
-    },
-    {
-      to: '/chatbot/12',
-      label: 'Obrolan 12',
-    },
-  ];
+  ]);
+
+  const handleDeleteConversation = (conversationId: string) => {
+    axios.delete(`http://localhost:5000/api/conversations/${conversationId}`, {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': userId
+      }
+    })
+      .then((response) => {
+        console.log('Conversation deleted:', response);
+      })
+      .catch((error) => {
+        console.error('Error deleting conversation:', error);
+      });
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/conversations',
+      {
+        headers: {
+          'accept': 'application/json',
+          'Authorization': userId
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        const data = response.data;
+        const links = data.map((conversation: { id: string; title: string }) => ({
+          to: `/chatbot/${conversation.id}`,
+          label: conversation.title,
+          removeIcon: <GoTrash />,
+          onRemove: () => handleDeleteConversation(conversation.id),
+        }));
+        setSidebarLinks(prevLinks => [...prevLinks, ...links]);
+      })
+      .catch((error) => {
+        console.error('Error fetching conversations:', error);
+      });
+  }, []);
 
   return (
     <div>

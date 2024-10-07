@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
-import qs from 'qs';
 import { useParams } from 'react-router';
 
 const Chatbot: React.FC = () => {
   const { conversationId } = useParams();
-
   const [inputValue, setInputValue] = useState<string>('');
-
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
+  const userId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/conversations/${conversationId}`, {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': userId
+      }
+    }
+    )
+      .then((response) => {
+        const data = response.data;
+        const formattedMessages = data.map((item: { message: string }, index: number) => ({
+          text: item.message,
+          sender: index % 2 === 0 ? 'user' : 'bot',
+        }));
+        setMessages(formattedMessages);
+      })
+      .catch((error) => {
+        console.error('Error fetching messages:', error);
+      });
+  }, [conversationId]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend = async (event: any) => {
@@ -18,20 +37,17 @@ const Chatbot: React.FC = () => {
       const newMessages = [...messages, { text: inputValue, sender: 'user' }];
       setMessages(newMessages);
 
-      const formData = new FormData();
-      formData.append('input_user', inputValue);
-
-      const data = qs.stringify({
-        user_input: inputValue,
-      });
       // Send the message to the server
       axios
-        .post('http://localhost:5000/api/chat', data, {
-          headers: {
-            accept: 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        })
+        .post('http://localhost:5000/api/conversations/${conversationId}',
+          { "user_input": inputValue },
+          {
+            headers: {
+              'accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': userId
+            },
+          })
         .then((response) => {
           const data = response.data;
 

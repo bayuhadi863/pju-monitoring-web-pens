@@ -48,9 +48,10 @@ export function LoginForm() {
       const response = await login(values.email, values.password);
 
       if (response.status === 200) {
-        const token = response.data.data.token;
+        const data = response.data.data;
 
-        localStorage.setItem('token', token);
+        localStorage.setItem('userId', data.user.id);
+        localStorage.setItem('token', data.token);
 
         toast({
           variant: 'success',
