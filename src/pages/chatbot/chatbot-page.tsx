@@ -13,12 +13,13 @@ const Chatbot: React.FC = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/api/conversations/${conversationId}`, {
       headers: {
-        'accept': 'application/json',
-        'Authorization': userId
+        Accept: 'application/json',
+        Authorization: userId,
       }
     }
     )
       .then((response) => {
+        console.log("response", response);
         const data = response.data;
         const formattedMessages = data.map((item: { message: string }, index: number) => ({
           text: item.message,
@@ -43,9 +44,9 @@ const Chatbot: React.FC = () => {
           { "user_input": inputValue },
           {
             headers: {
-              'accept': 'application/json',
+              Accept: 'application/json',
               'Content-Type': 'application/json',
-              'Authorization': userId
+              Authorization: userId
             },
           })
         .then((response) => {

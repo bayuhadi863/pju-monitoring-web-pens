@@ -12,7 +12,7 @@ const VideoPlayer: React.FC = () => {
         allowFullScreen
       ></iframe> */}
       <img
-        src='https://c993g0v4-3000.asse.devtunnels.ms/cctv/stream/1'
+        src='https://khanza.pythonanywhere.com/cctv-stream'
         alt='live-cctv'
         className='rounded-md w-full aspect-video'
       />

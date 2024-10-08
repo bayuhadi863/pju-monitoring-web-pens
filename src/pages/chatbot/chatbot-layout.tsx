@@ -28,7 +28,7 @@ const ChatbotLayout: React.FC = () => {
     axios
       .delete(`http://localhost:5000/api/conversations/${conversationId}`, {
         headers: {
-          accept: 'application/json',
+          Accept: 'application/json',
           Authorization: userId,
         },
       })
@@ -44,7 +44,7 @@ const ChatbotLayout: React.FC = () => {
     axios
       .get('http://localhost:5000/api/conversations', {
         headers: {
-          accept: 'application/json',
+          Accept: 'application/json',
           Authorization: userId,
         },
       })

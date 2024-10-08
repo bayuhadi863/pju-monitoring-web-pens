@@ -22,9 +22,9 @@ const ChatbotWelcomePage: React.FC = () => {
           { title: title },
           {
           headers: {
-            'accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userId
+            Authorization: userId
           },
         })
         .then((response) => {
