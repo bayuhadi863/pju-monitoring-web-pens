@@ -55,7 +55,7 @@ const DashboardLayout: React.FC = () => {
           />
           <DashboardHeader />
         </div>
-        <main className=''>
+        <main className='min-h-screen'>
           <Outlet />
         </main>
         <DashboardFooter className='mt-4' />

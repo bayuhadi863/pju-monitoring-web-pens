@@ -11,6 +11,7 @@ import NotFound from './pages/error/not-found';
 import ChatbotLayout from './pages/chatbot/chatbot-layout';
 import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
 import Chatbot from './pages/chatbot/chatbot-page';
+import AccountPage from './pages/dashboard/account-page';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: 'cctv',
             element: <CctvPage />,
+          },
+          {
+            path: 'account',
+            element: <AccountPage />,
           },
         ],
       },
