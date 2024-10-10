@@ -133,7 +133,7 @@ export const UpdateForm: React.FC = () => {
 
         {/* Submit Button */}
         <div>
-          <Button className="w-full mt-4 text-white" type="submit">
+          <Button className="mt-4 text-white" type="submit">
             Update
           </Button>
         </div>

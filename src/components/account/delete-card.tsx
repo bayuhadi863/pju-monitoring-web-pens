@@ -1,10 +1,10 @@
-import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import React from 'react';
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 
 const DeleteCard: React.FC = () => {
   const handleDelete = () => {
     // Logic for delete action
-    console.log("Deleting user...");
+    console.log('Deleting user...');
   };
 
   return (
@@ -14,16 +14,15 @@ const DeleteCard: React.FC = () => {
         <CardDescription>Are you sure you want to delete this user?</CardDescription>
       </CardHeader>
       <CardFooter>
-        <div className="flex justify-start w-full">
+        <div className='flex justify-start w-full'>
           <button
-            type="button"
+            type='button'
             onClick={handleDelete}
-            className="w-full bg-red-500 text-white py-2 px-4 rounded-lg"
+            className='bg-red-500 text-white py-2 px-4 rounded-lg'
           >
             Delete
           </button>
         </div>
-
       </CardFooter>
     </Card>
   );
