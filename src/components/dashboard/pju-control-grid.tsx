@@ -111,12 +111,6 @@ export default function PjuControlGrid() {
     );
   };
 
-  console.log('weAutoMode:', webAutoMode);
-  console.log('pjuAutoMode:', pjuAutoMode);
-
-  console.log('webOn:', webOn);
-  console.log('pjuOn:', pjuOn);
-
   return (
     <div className='grid gap-4 md:grid-cols-2 lg:gap-8'>
       <PjuControlCard

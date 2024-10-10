@@ -2,8 +2,9 @@
 import React from 'react';
 import BlockTitle from '@/components/dashboard/block-title';
 import Location from '@/components/dashboard/location';
-import PjuControlGrid from '@/components/dashboard/pju-control-grid';
+// import PjuControlGrid from '@/components/dashboard/pju-control-grid';
 import PjuMonitorGrid from '@/components/dashboard/pju-monitor-grid';
+import PjuControlCardNew from '@/components/dashboard/pju/pju-control-card-new';
 
 const PjuPage: React.FC = () => {
   return (
@@ -19,7 +20,8 @@ const PjuPage: React.FC = () => {
       <div className='mt-4'>
         <BlockTitle>Kontrol PJU</BlockTitle>
         <div className='mt-2'>
-          <PjuControlGrid />
+          {/* <PjuControlGrid /> */}
+          <PjuControlCardNew />
         </div>
       </div>
     </div>
