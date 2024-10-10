@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, Settings, LogOut } from 'lucide-react';
+import { Settings, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ProfileAvatarProps {
