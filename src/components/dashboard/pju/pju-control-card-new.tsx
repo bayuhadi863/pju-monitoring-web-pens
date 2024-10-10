@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { thingspeakApiBaseUrl } from '@/lib/configs/api';
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ const PjuControlCardNew: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [entryId, setEntryId] = useState<number>(0);
-  const [timer, setTimer] = useState<number>(0); // State untuk timer hitung mundur
+  const [timer, setTimer] = useState<number>(0); 
 
   const sendLampValueToApi = async (lampValue: number) => {
     const response = await axios.post(`${thingspeakApiBaseUrl}/update`, {
@@ -34,16 +34,14 @@ const PjuControlCardNew: React.FC = () => {
 
       setIsSuccess(true);
 
-      // Memulai hitung mundur 5 detik
       setTimer(20);
       const countdown = setInterval(() => {
         setTimer((prev) => prev - 1);
       }, 1000);
 
-      // Nonaktifkan tombol selama 5 detik
       setTimeout(() => {
         setSendLoading(false);
-        clearInterval(countdown); // Hentikan interval setelah 5 detik
+        clearInterval(countdown); 
       }, 20000);
     } catch (error) {
       console.error('Error sending lamp value:', error);
