@@ -14,11 +14,11 @@ import { useToast } from '@/components/hooks/use-toast';
 
 const formSchema = z
   .object({
-    email: z.string().email({ message: 'Email tidak valid' }),
+    username_email: z.string(),
     password: z.string().min(4, { message: 'Password minimal 4 karakter' }),
   })
   .required({
-    email: true,
+    username_email: true,
     password: true,
   });
 
@@ -36,7 +36,7 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: undefined,
+      username_email: undefined,
       password: undefined,
     },
   });
@@ -45,13 +45,13 @@ export function LoginForm() {
     try {
       setLoading(true);
 
-      const response = await login(values.email, values.password);
+      const response = await login(values.username_email, values.password);
 
       if (response.status === 200) {
         const data = response.data.data;
 
         localStorage.setItem('userId', data.user.id);
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('access_token', data.token.access_token);
 
         toast({
           variant: 'success',
@@ -85,13 +85,13 @@ export function LoginForm() {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name='email'
+              name='username_email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Username atau Email</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='m@example.com'
+                      placeholder='username123 atau user@gmail.com'
                       {...field}
                     />
                   </FormControl>

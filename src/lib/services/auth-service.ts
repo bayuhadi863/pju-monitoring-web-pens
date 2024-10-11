@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://pju-api-hveq5uky7q-et.a.run.app';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 type AxiosConfig = {
   method: 'get' | 'post' | 'put' | 'delete';
@@ -10,10 +10,10 @@ type AxiosConfig = {
   headers?: Record<string, string>;
 };
 
-export const login = async (email: string, password: string) => {
+export const login = async (usernameEmail: string, password: string) => {
   return await axios.post(`${apiBaseUrl}/login`, {
-    email,
-    password,
+    username_email: usernameEmail,
+    password: password,
   });
 };
 

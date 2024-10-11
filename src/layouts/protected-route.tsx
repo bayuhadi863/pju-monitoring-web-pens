@@ -8,7 +8,8 @@ type ProtectedRouteProps = PropsWithChildren;
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('access_token');
+  console.log('token', token);
   const navigate = useNavigate();
 
   useEffect(() => {
