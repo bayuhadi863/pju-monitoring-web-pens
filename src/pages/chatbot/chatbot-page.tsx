@@ -8,7 +8,7 @@ const Chatbot: React.FC = () => {
   const { conversationId } = useParams();
   const [inputValue, setInputValue] = useState<string>('');
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
-  const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId'); 
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/conversations/${conversationId}`, {
@@ -40,7 +40,7 @@ const Chatbot: React.FC = () => {
 
       // Send the message to the server
       axios
-        .post('http://localhost:5000/api/conversations/${conversationId}',
+        .post(`http://localhost:5000/api/conversations/${conversationId}`,
           { "user_input": inputValue },
           {
             headers: {
@@ -68,7 +68,6 @@ const Chatbot: React.FC = () => {
   return (
     <div className='w-full h-full flex flex-col'>
       <div className='flex-1 overflow-auto space-y-4 p-4 pt-20'>
-        <div>Ini obrolan dengan conversationId: {conversationId}</div>
         {messages.length === 0 ? (
           <div className='flex items-center justify-center text-center w-full h-[80%]'>
             <div className='font-semibold text-lg'>

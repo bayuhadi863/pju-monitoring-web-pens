@@ -2,31 +2,33 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/sidebar';
 import MobileSidebar from '@/components/dashboard/mobile-sidebar';
 import { SidebarLinkDataType } from '@/lib/types/sidebar-types';
-import { Outlet } from 'react-router';
+import { Outlet, useParams } from 'react-router';
 import ChatbotHeader from '@/components/chatbot/chatbot-header';
 import SidebarLinks from '@/components/dashboard/sidebar-links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
 import axios from 'axios';
 import { GoTrash } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
 
 const SidebarHeader = () => {
   return <h1 className='text-xl font-semibold'>Chatbot</h1>;
 };
 
 const ChatbotLayout: React.FC = () => {
+  const { conversationId } = useParams();
+  const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
+  const [triggerFetch, setTriggerFetch] = useState(false);
   const [sidebarLinks, setSidebarLinks] = useState<SidebarLinkDataType[]>([
     {
       to: '/chatbot',
-      label: 'Welcome',
-      removeIcon: <GoTrash />,
-      onRemove: () => handleDeleteConversation('tes'),
+      label: 'Welcome'
     },
   ]);
 
-  const handleDeleteConversation = (conversationId: string) => {
+  const handleDeleteConversation = (conversationIdDelete: string) => {    
     axios
-      .delete(`http://localhost:5000/api/conversations/${conversationId}`, {
+      .delete(`http://localhost:5000/api/conversations/${conversationIdDelete}`, {
         headers: {
           Accept: 'application/json',
           Authorization: userId,
@@ -34,13 +36,17 @@ const ChatbotLayout: React.FC = () => {
       })
       .then((response) => {
         console.log('Conversation deleted:', response);
+        setTriggerFetch(prev => !prev);
+        if (conversationId === conversationIdDelete) {
+          navigate('/chatbot');
+        }
       })
       .catch((error) => {
         console.error('Error deleting conversation:', error);
       });
   };
 
-  useEffect(() => {
+  useEffect(() => {  
     axios
       .get('http://localhost:5000/api/conversations', {
         headers: {
@@ -49,20 +55,29 @@ const ChatbotLayout: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         const data = response.data;
-        const links = data.map((conversation: { id: string; title: string }) => ({
+        const newLinks = data.map((conversation: { id: string; title: string }) => ({
           to: `/chatbot/${conversation.id}`,
           label: conversation.title,
           removeIcon: <GoTrash />,
           onRemove: () => handleDeleteConversation(conversation.id),
         }));
-        setSidebarLinks((prevLinks) => [...prevLinks, ...links]);
+
+        setSidebarLinks((prevLinks) => {
+          const firstLink = prevLinks[0];
+          const filteredLinks = prevLinks.slice(1).filter(link => 
+            data.some((conversation: { id: any; }) => `/chatbot/${conversation.id}` === link.to)
+          );
+          const uniqueNewLinks = newLinks.filter((newLink: { to: string; }) => 
+            !filteredLinks.some(prevLink => prevLink.to === newLink.to)
+          );
+          return [firstLink, ...filteredLinks, ...uniqueNewLinks];
+        });
       })
       .catch((error) => {
         console.error('Error fetching conversations:', error);
       });
-  }, []);
+  }, [triggerFetch]);
 
   return (
     <div>
@@ -89,7 +104,8 @@ const ChatbotLayout: React.FC = () => {
           <ChatbotHeader />
         </div>
         <main className='h-full'>
-          <Outlet />
+          {/* <Outlet /> */}
+          <Outlet context={{ setTriggerFetch }} />
         </main>
       </div>
     </div>

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const ChatbotWelcomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const { setTriggerFetch } = useOutletContext() as any;
   const [chatStarted, setChatStarted] = useState(false);
   const [title, setTitle] = useState('');
   const [welcomeMessage, setWelcomeMessage] = useState('Selamat Datang!\nApa yang bisa Saya bantu Hari ini?');
@@ -14,9 +17,9 @@ const ChatbotWelcomePage: React.FC = () => {
 
   const handleSend = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && title) {
-      console.log('Message sent:', title);
       const userId = localStorage.getItem('userId');
-
+  
+      //buat conversation
       axios
         .post('http://localhost:5000/api/conversations',
           { title: title },
@@ -28,16 +31,34 @@ const ChatbotWelcomePage: React.FC = () => {
           },
         })
         .then((response) => {
-          console.log('Response:', response);
-          
           const data = response.data.id;
-          window.location.href = `/chatbot/${data}`;
+          
+          //kirim pesan user
+          axios.post(`http://localhost:5000/api/conversations/${data}`,
+            { "user_input": title },
+            {
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: userId
+              },
+            }
+          )
+          .catch((error) => {
+            console.error('Error in second POST request:', error);
+          })
+          .finally(() => {
+            setTriggerFetch((prev: any) => !prev);
+            navigate(`/chatbot/${data}`);
+          });
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error('Error in first POST request:', error);
           setWelcomeMessage('Mohon maaf terjadi kesalahan\nSilahkan coba lagi nanti.');
+        })
+        .finally(() => {
+          setTitle('');
         });
-      setTitle('');
     }
   };
 
@@ -70,7 +91,7 @@ const ChatbotWelcomePage: React.FC = () => {
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                onKeyPress={handleSend}
+                onKeyDown={handleSend}
                 className='h-14 px-6 rounded-full'
                 placeholder='Tulis Pertanyaan'
                 required

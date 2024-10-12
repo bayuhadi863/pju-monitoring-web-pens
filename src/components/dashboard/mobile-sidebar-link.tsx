@@ -24,7 +24,9 @@ const MobileSidebarLink: React.FC<MobileSidebarLinkProps> = ({ to, children, cla
       className={`${className} flex items-center gap-2 py-2 px-4 rounded ${isActive ? 'bg-primary/10 text-primary' : ''} transition hover:bg-primary/10`}
     >
       {icon}
-      <span className={fontWeight || 'font-medium'}>{children}</span>
+      <div className='max-w-full truncate'>
+        <span className={fontWeight || 'font-medium'}>{children}</span>
+      </div>
     </button>
   );
 };
