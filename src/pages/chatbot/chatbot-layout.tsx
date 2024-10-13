@@ -103,7 +103,7 @@ const ChatbotLayout: React.FC = () => {
           />
         }
       />
-      <div className='px-4 lg:ml-64 bg-muted dark:bg-muted/40 h-screen flex flex-col relative'>
+      <div className='lg:ml-64 bg-muted dark:bg-muted/40 h-screen flex flex-col relative'>
         <div className='flex items-center gap-3 absolute inset-x-0 px-4'>
           <MobileSidebar
             headerContent={<SidebarHeader />}
