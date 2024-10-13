@@ -10,7 +10,6 @@ type UserActionsProps = {
 };
 
 const UserActions: React.FC<UserActionsProps> = ({ userId }) => {
-  const confirmDeleteUserDialogOpen = useUserManagementStore((state) => state.confirmDeleteUserDialogOpen);
   const setConfirmDeleteUserDialogOpen = useUserManagementStore((state) => state.setConfirmDeleteUserDialogOpen);
 
   return (
