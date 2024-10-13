@@ -7,14 +7,15 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { login } from '@/lib/services/auth-service';
+import { useAuth } from '@/context/auth-context';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/components/hooks/use-toast';
+import { exceptionHandler } from '@/lib/utils/exception-handler';
 
 const formSchema = z
   .object({
-    username_email: z.string(),
+    username_email: z.string().min(1, { message: "Username atau email wajib diisi" }),
     password: z.string().min(4, { message: 'Password minimal 4 karakter' }),
   })
   .required({
@@ -23,6 +24,8 @@ const formSchema = z
   });
 
 export function LoginForm() {
+  const { loginUser } = useAuth();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -45,29 +48,43 @@ export function LoginForm() {
     try {
       setLoading(true);
 
-      const response = await login(values.username_email, values.password);
+      await loginUser(values.username_email, values.password);
 
-      if (response.status === 200) {
-        const data = response.data.data;
-
-        localStorage.setItem('userId', data.user.id);
-        localStorage.setItem('access_token', data.token.access_token);
-
-        toast({
-          variant: 'success',
-          duration: 3000,
-          title: 'Login Berhasil!',
-          description: 'Anda berhasil login ke akun Anda.',
-        });
-        navigate('/dashboard/pju');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
       toast({
-        variant: 'destructive',
+        variant: 'success',
         duration: 3000,
-        title: 'Login Gagal!',
-        description: 'Email atau password Anda salah.',
+        title: 'Login Berhasil!',
+        description: 'Anda berhasil login ke akun Anda.',
+      });
+
+      navigate('/dashboard/pju');
+    } catch (error) {
+      exceptionHandler(error, {
+        onClientError: (status, message) => {
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: `Login Gagal (Status: ${status})`,
+            description: message,
+          });
+        },
+        onServerError: () => {
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: 'Terjadi Kesalahan!',
+            description: 'Internal server error. Coba lagi nanti.',
+          });
+        },
+        onUnexpectedError: () => {
+          console.error('Unexpected error:', error);
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: 'Terjadi Kesalahan!',
+            description: 'Error tidak diketahui. Coba lagi nanti.',
+          });
+        },
       });
     } finally {
       setLoading(false);

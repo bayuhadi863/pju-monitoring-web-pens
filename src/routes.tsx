@@ -12,6 +12,7 @@ import ChatbotLayout from './pages/chatbot/chatbot-layout';
 import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
 import Chatbot from './pages/chatbot/chatbot-page';
 import AccountPage from './pages/dashboard/account-page';
+import UserManagementPage from './pages/dashboard/user-management/user-management-page';
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,19 @@ export const router = createBrowserRouter([
           },
           {
             path: 'account',
-            element: <AccountPage />,
+            element: (
+              <ProtectedRoute>
+                <AccountPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'users',
+            element: (
+              <ProtectedRoute>
+                <UserManagementPage />
+              </ProtectedRoute>
+            ),
           },
         ],
       },

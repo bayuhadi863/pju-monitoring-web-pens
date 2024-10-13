@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+import { apiBaseUrl } from '../configs/api';
+import publicAxios from '../api/publicAxios';
+import { clearTokens, setAccessToken, setRefreshToken } from '../utils/storage';
+import refreshTokenAxios from '../api/refreshTokenAxios';
+import accessTokenAxios from '../api/accessTokenAxios';
 
 type AxiosConfig = {
   method: 'get' | 'post' | 'put' | 'delete';
@@ -11,18 +14,44 @@ type AxiosConfig = {
 };
 
 export const login = async (usernameEmail: string, password: string) => {
-  return await axios.post(`${apiBaseUrl}/login`, {
+  const response = await publicAxios.post('/login', {
     username_email: usernameEmail,
-    password: password,
+    password,
   });
+
+  const responseBody = response.data;
+  const { token } = responseBody.data;
+  const accessToken = token.access_token;
+  const refreshToken = token.refresh_token;
+
+  setAccessToken(accessToken);
+  setRefreshToken(refreshToken);
+
+  return response;
 };
 
-export const getCurrentUser = async (token: string | null) => {
-  return await axios.get(`${apiBaseUrl}/me`, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const refreshAccessToken = async () => {
+  const response = await refreshTokenAxios.post('/refresh-token');
+
+  const { access_token } = response.data.data;
+
+  setAccessToken(access_token);
+
+  return response;
+};
+
+export const getCurrentUser = async () => {
+  const response = await accessTokenAxios.get('/me');
+
+  return response;
+};
+
+export const logout = async () => {
+  const response = await accessTokenAxios.post('/logout');
+
+  clearTokens();
+
+  return response;
 };
 
 export const authenticated = async (token: string | null) => {

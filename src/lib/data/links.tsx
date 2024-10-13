@@ -1,8 +1,8 @@
 import { RiDashboardFill } from 'react-icons/ri';
 import { BiSolidCctv } from 'react-icons/bi';
 import { GiStreetLight } from 'react-icons/gi';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BsChatTextFill } from 'react-icons/bs';
+import { FaUserGroup } from "react-icons/fa6";
 import { SidebarLinkDataType } from '../types/sidebar-types';
 
 export const userSidebarLinks: SidebarLinkDataType[] = [
@@ -23,10 +23,18 @@ export const userSidebarLinks: SidebarLinkDataType[] = [
   },
 ];
 
-export const adminSidebarLinks: SidebarLinkDataType[] = [
+export const operatorSidebarLinks: SidebarLinkDataType[] = [
   {
     to: '/dashboard/pju',
     label: 'Device PJU',
     icon: <GiStreetLight />,
+  },
+];
+
+export const adminSidebarLinks: SidebarLinkDataType[] = [
+  {
+    to: '/dashboard/users',
+    label: 'Manajemen User',
+    icon: <FaUserGroup />,
   },
 ];

@@ -6,7 +6,7 @@ import MobileSidebar from '@/components/dashboard/mobile-sidebar';
 import DashboardFooter from '@/components/dashboard/dashboard-footer';
 import SidebarLinks from '@/components/dashboard/sidebar-links';
 import { Link } from 'react-router-dom';
-import { userSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
+import { userSidebarLinks, operatorSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
 
 const SidebarHeader = () => {
@@ -25,6 +25,8 @@ const SidebarContent = () => {
     <div>
       <SidebarLinks links={userSidebarLinks} />
       <hr className='my-4 border-t border-border' />
+      <SidebarLinks links={operatorSidebarLinks} />
+      <hr className='my-4 border-t border-border' />
       <SidebarLinks links={adminSidebarLinks} />
     </div>
   );
@@ -34,6 +36,8 @@ const MobileSidebarContent = () => {
   return (
     <div>
       <MobileSidebarLinks links={userSidebarLinks} />
+      <hr className='my-4 border-t border-border' />
+      <MobileSidebarLinks links={operatorSidebarLinks} />
       <hr className='my-4 border-t border-border' />
       <MobileSidebarLinks links={adminSidebarLinks} />
     </div>
@@ -47,18 +51,18 @@ const DashboardLayout: React.FC = () => {
         headerContent={<SidebarHeader />}
         content={<SidebarContent />}
       />
-      <div className='p-4 lg:ml-64 bg-muted dark:bg-muted/40 min-h-screen'>
-        <div className='flex items-center gap-3'>
+      <div className='lg:ml-64 bg-muted dark:bg-muted/40 min-h-screen'>
+        <div className='flex items-center gap-3 px-4 py-3 border-b-2 border-dashed'>
           <MobileSidebar
             headerContent={<SidebarHeader />}
             content={<MobileSidebarContent />}
           />
           <DashboardHeader />
         </div>
-        <main className='min-h-screen'>
+        <main className='min-h-screen p-4'>
           <Outlet />
         </main>
-        <DashboardFooter className='mt-4' />
+        <DashboardFooter />
       </div>
     </div>
   );

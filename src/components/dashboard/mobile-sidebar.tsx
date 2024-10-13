@@ -12,9 +12,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ headerContent, footerCont
   return (
     <Sheet>
       <SheetTrigger>
-        <button className='lg:hidden focus:border border-gray-800 rounded p-1 '>
-          <AiOutlineMenuUnfold className='text-xl' />
-        </button>
+        <AiOutlineMenuUnfold className='flex lg:hidden text-xl' />
       </SheetTrigger>
       <SheetContent
         side='left'

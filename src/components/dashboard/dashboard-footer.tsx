@@ -9,7 +9,7 @@ const DashboardFooter: React.FC<DashboardFooterProps> = ({ className }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`py-2 text-sm text-muted-foreground ${className ? className : ''}`}>
+    <footer className={`py-4 text-sm text-muted-foreground ${className ? className : ''}`}>
       <div className='container mx-auto px-4'>
         <div className='flex flex-col md:flex-row justify-center md:justify-between items-center gap-1'>
           <p>Tim Pengabdian Masyarakat PENS</p>
