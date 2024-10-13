@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base; */
 
 .spinner {
   position: absolute;
@@ -100,7 +100,7 @@
 }
 #loading-bubble:before {
   display: block;
-  content: " ";
+  content: ' ';
   width: 0;
   height: 0;
   border-style: solid;
@@ -148,7 +148,7 @@
     -webkit-transform: scale(0.9);
   }
 }
-
+/* 
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -204,4 +204,4 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
+} */
