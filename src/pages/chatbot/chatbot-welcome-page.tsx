@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { getUserId } from '@/lib/utils/storage';
 
 const ChatbotWelcomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const ChatbotWelcomePage: React.FC = () => {
 
   const handleSend = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && title) {
-      const userId = localStorage.getItem('userId');
+      const userId = getUserId();
   
       //buat conversation
       axios

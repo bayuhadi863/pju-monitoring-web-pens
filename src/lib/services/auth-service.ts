@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { apiBaseUrl } from '../configs/api';
 import publicAxios from '../api/publicAxios';
-import { clearTokens, setAccessToken, setRefreshToken } from '../utils/storage';
+import { clearTokens, setAccessToken, setRefreshToken, setUserId } from '../utils/storage';
 import refreshTokenAxios from '../api/refreshTokenAxios';
 import accessTokenAxios from '../api/accessTokenAxios';
 
@@ -20,10 +20,13 @@ export const login = async (usernameEmail: string, password: string) => {
   });
 
   const responseBody = response.data;
-  const { token } = responseBody.data;
+  console.log(responseBody);
+  const { token, user } = responseBody.data;
+  const userId = user.id;
   const accessToken = token.access_token;
   const refreshToken = token.refresh_token;
 
+  setUserId(userId);
   setAccessToken(accessToken);
   setRefreshToken(refreshToken);
 

@@ -9,6 +9,8 @@ import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
 import axios from 'axios';
 import { GoTrash } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/components/hooks/use-toast';
+import { getUserId } from '@/lib/utils/storage';
 
 const SidebarHeader = () => {
   return <h1 className='text-xl font-semibold'>Chatbot</h1>;
@@ -17,7 +19,7 @@ const SidebarHeader = () => {
 const ChatbotLayout: React.FC = () => {
   const { conversationId } = useParams();
   const navigate = useNavigate();
-  const userId = localStorage.getItem('userId');
+  const userId = getUserId();
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [sidebarLinks, setSidebarLinks] = useState<SidebarLinkDataType[]>([
     {
@@ -34,15 +36,26 @@ const ChatbotLayout: React.FC = () => {
           Authorization: userId,
         },
       })
-      .then((response) => {
-        console.log('Conversation deleted:', response);
+      .then(() => {
         setTriggerFetch(prev => !prev);
+        toast({
+          variant: 'success',
+          duration: 3000,
+          title: 'Chat telah dihapus!',
+          description: 'Anda berhasil menghapus chat ini.',
+        });
         if (conversationId === conversationIdDelete) {
           navigate('/chatbot');
         }
       })
       .catch((error) => {
         console.error('Error deleting conversation:', error);
+        toast({
+          variant: 'destructive',
+          duration: 3000,
+          title: 'Gagal menghapus chat!',
+          description: 'Silahkan coba lagi nanti.',
+        });
       });
   };
 

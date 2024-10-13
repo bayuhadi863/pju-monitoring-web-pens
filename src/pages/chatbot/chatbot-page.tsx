@@ -1,14 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { useParams } from 'react-router';
+import './styles.css';
+import ChatMessages from '@/components/chatbot/chatMessages';
+import { getUserId } from '@/lib/utils/storage';
+
+type Message = {
+  text: string;
+  sender: 'user' | 'bot';
+};
 
 const Chatbot: React.FC = () => {
   const { conversationId } = useParams();
-  const [inputValue, setInputValue] = useState<string>('');
-  const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
-  const userId = localStorage.getItem('userId'); 
+  const [text, setText] = useState<string>('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const userId = getUserId();
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef: RefObject<HTMLDivElement> = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/conversations/${conversationId}`, {
@@ -29,19 +43,25 @@ const Chatbot: React.FC = () => {
       })
       .catch((error) => {
         console.error('Error fetching messages:', error);
+      }).finally(() => {
+        scrollToBottom();
       });
   }, [conversationId]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend = async (event: any) => {
-    if ((event.type === 'click' || event.key === 'Enter') && inputValue.trim() !== '') {
-      const newMessages = [...messages, { text: inputValue, sender: 'user' }];
-      setMessages(newMessages);
+    if ((event.type === 'click' || event.key === 'Enter') && text.trim() !== '') {
+      const newMessage: Message = { text, sender: 'user' };
+      setMessages(prevMessages => [...prevMessages, newMessage]);
+
+      setText('');
+      setIsLoading(true);
+      scrollToBottom();
 
       // Send the message to the server
       axios
         .post(`http://localhost:5000/api/conversations/${conversationId}`,
-          { "user_input": inputValue },
+          { "user_input": text },
           {
             headers: {
               Accept: 'application/json',
@@ -54,49 +74,39 @@ const Chatbot: React.FC = () => {
 
           // Add bot's response
           const strippedResponse = data.response.replace(/<\/?[^>]+(>|$)/g, '');
-          setMessages([...newMessages, { text: strippedResponse, sender: 'bot' }]);
+          const newMessage: Message = { text: strippedResponse, sender: 'bot' };
+          setMessages(prevMessages => [...prevMessages, newMessage]);
         })
         .catch((error) => {
           console.error('Error:', error);
-          setMessages([...newMessages, { text: 'Mohon maaf terjadi kesalahan, Silahkan coba lagi nanti.', sender: 'bot' }]);
+          const newMessage: Message = { text: 'Mohon maaf terjadi kesalahan, Silahkan coba lagi nanti.', sender: 'bot' };
+          setMessages(prevMessages => [...prevMessages, newMessage]);
+        }).finally(() => {
+          setIsLoading(false);
+          scrollToBottom();
         });
-
-      setInputValue('');
     }
   };
 
   return (
     <div className='w-full h-full flex flex-col'>
-      <div className='flex-1 overflow-auto space-y-4 p-4 pt-20'>
-        {messages.length === 0 ? (
-          <div className='flex items-center justify-center text-center w-full h-[80%]'>
-            <div className='font-semibold text-lg'>
-              Selamat Datang!
-              <br />
-              Apa yang bisa Saya bantu Hari ini?
-            </div>
+      {messages.length === 0 ? (
+        <div className='flex items-center justify-center text-center w-full h-[80%]'>
+          <div className='font-semibold text-lg'>
+            Selamat Datang!
+            <br />
+            Apa yang bisa Saya bantu Hari ini?
           </div>
-        ) : (
-          messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`${message.sender === 'user' ? 'bg-primary text-white' : 'bg-background'} py-3 px-4 rounded-xl`}
-                key={index}
-              >
-                {message.text}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+        </div>
+      ) : (
+        <ChatMessages messages={messages} isLoading={isLoading}
+          messagesEndRef={messagesEndRef} />
+      )}
       <div className='p-4 mb-2'>
         <div className='relative'>
           <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             onKeyPress={handleSend}
             className='h-14 px-6 rounded-full shadow-md border '
             placeholder='Tulis Pertanyaan'
