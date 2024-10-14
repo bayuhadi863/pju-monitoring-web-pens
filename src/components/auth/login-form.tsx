@@ -57,7 +57,7 @@ export function LoginForm() {
         description: 'Anda berhasil login ke akun Anda.',
       });
 
-      navigate('/dashboard/pju');
+      navigate('/dashboard/pju1');
     } catch (error) {
       exceptionHandler(error, {
         onClientError: (message) => {
