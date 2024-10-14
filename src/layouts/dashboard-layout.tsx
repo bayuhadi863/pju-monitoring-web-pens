@@ -8,14 +8,20 @@ import SidebarLinks from '@/components/dashboard/sidebar-links';
 import { Link } from 'react-router-dom';
 import { userSidebarLinks, operatorSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
+import appLogo from '/public/assets/app-logo-light-blue.png';
 
 const SidebarHeader = () => {
   return (
     <Link
       to='/'
-      className='text-xl font-semibold'
+      className='flex items-center gap-2'
     >
-      Smart PJU Monitoring
+      <img
+        src={appLogo}
+        alt='App Logo'
+        className='w-8 h-8'
+      />
+      <span className='text-lg font-semibold text-primary uppercase'>Smart PJU Monitor</span>
     </Link>
   );
 };
@@ -59,7 +65,7 @@ const DashboardLayout: React.FC = () => {
           />
           <DashboardHeader />
         </div>
-        <main className='min-h-screen p-4'>
+        <main className='min-h-[85vh] p-4'>
           <Outlet />
         </main>
         <DashboardFooter />

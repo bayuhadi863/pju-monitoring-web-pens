@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import React, { useState } from 'react';
 import { thingspeakApiBaseUrl } from '@/lib/configs/api';
 import axios from 'axios';
+import { Power, PowerOff, Zap } from 'lucide-react';
 
 const PjuControlCardNew: React.FC = () => {
   const writeApiKey = import.meta.env.VITE_THINGSPEAK_WRITE_API_KEY;
@@ -12,7 +13,7 @@ const PjuControlCardNew: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [entryId, setEntryId] = useState<number>(0);
-  const [timer, setTimer] = useState<number>(0); 
+  const [timer, setTimer] = useState<number>(0);
 
   const sendLampValueToApi = async (lampValue: number) => {
     const response = await axios.post(`${thingspeakApiBaseUrl}/update`, {
@@ -41,7 +42,7 @@ const PjuControlCardNew: React.FC = () => {
 
       setTimeout(() => {
         setSendLoading(false);
-        clearInterval(countdown); 
+        clearInterval(countdown);
       }, 20000);
     } catch (error) {
       console.error('Error sending lamp value:', error);
@@ -61,22 +62,28 @@ const PjuControlCardNew: React.FC = () => {
           <Button
             onClick={() => handleClick(1)}
             disabled={sendLoading}
+            className='flex items-center gap-2'
           >
-            Nyalakan
+            <Power className='w-4 h-4' />
+            <span>Nyalakan</span>
           </Button>
           <Button
             variant='destructive'
             onClick={() => handleClick(0)}
             disabled={sendLoading}
+            className='flex items-center gap-2'
           >
-            Matikan
+            <PowerOff className='w-4 h-4' />
+            <span>Matikan</span>
           </Button>
           <Button
             variant='secondary'
             onClick={() => handleClick(2)}
             disabled={sendLoading}
+            className='flex items-center gap-2'
           >
-            Auto
+            <Zap className='w-4 h-4' />
+            <span>Auto</span>
           </Button>
         </div>
 
