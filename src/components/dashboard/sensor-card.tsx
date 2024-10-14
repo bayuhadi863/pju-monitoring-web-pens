@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from '../ui/card';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 type SensorCardProps = {
   title: string;
@@ -66,21 +65,12 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
 
             {valueExists && (
               <Popover>
-                <PopoverTrigger>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger className='mt-2'>
-                        {title === 'Kecepatan Angin' ? (
-                          <div className={`${generateIconBackgroundColor(color)} rounded-full p-1 text-base`}>{icon}</div>
-                        ) : (
-                          <div className={`${generateIconBackgroundColor(color)} rounded-full p-2 text-lg`}>{icon}</div>
-                        )}
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Lihat Detail</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+                <PopoverTrigger className='mt-2'>
+                  {title === 'Kecepatan Angin' ? (
+                    <div className={`${generateIconBackgroundColor(color)} rounded-full p-1 text-base`}>{icon}</div>
+                  ) : (
+                    <div className={`${generateIconBackgroundColor(color)} rounded-full p-2 text-lg`}>{icon}</div>
+                  )}
                 </PopoverTrigger>
 
                 <PopoverContent>{info}</PopoverContent>
