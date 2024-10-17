@@ -6,6 +6,7 @@ import PageTitle from '@/components/dashboard/page-title/page-title';
 import PageDescription from '@/components/dashboard/page-title/page-description';
 import { pju2Data } from '@/lib/data/pju-data';
 import CustomAlert from '@/components/dashboard/custom-alert';
+import AirQualityAlert from '@/components/dashboard/air-quality/air-quality-alert';
 
 const DashboardPage: React.FC = () => {
   return (
@@ -28,11 +29,7 @@ const DashboardPage: React.FC = () => {
           description='Kondisi cuaca saat ini tergolong baik untuk beraktivitas.'
           variant='success'
         />
-        <CustomAlert
-          title='Kualitas Udara Sangat Buruk'
-          description='Kualitas udara saat ini sangat buruk dan berbahaya bagi kesehatan'
-          variant='destructive'
-        />
+        <AirQualityAlert pjuId={2} />
       </div>
 
       <div className='flex flex-col gap-2'>
