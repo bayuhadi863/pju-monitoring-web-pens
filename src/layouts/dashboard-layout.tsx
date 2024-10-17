@@ -8,7 +8,7 @@ import SidebarLinks from '@/components/dashboard/sidebar-links';
 import { Link } from 'react-router-dom';
 import { userSidebarLinks, operatorSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
-import appLogo from '/public/assets/app-logo-light-blue.png';
+import appLogo from '@/assets/app-logo-light-blue.png';
 
 const SidebarHeader = () => {
   return (
