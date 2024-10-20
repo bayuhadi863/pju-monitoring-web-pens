@@ -1,19 +1,24 @@
-'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Settings, LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Settings, LogOut, Loader2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { exceptionHandler } from '@/lib/utils/exception-handler';
+import { useToast } from '@/components/hooks/use-toast';
+import { AxiosResponse } from 'axios';
 
 interface ProfileAvatarProps {
   username: string;
   avatarUrl?: string;
-  onLogout: () => void;
+  onLogout: () => Promise<AxiosResponse<unknown, unknown>>;
 }
 
 export default function ProfileAvatar({ username, avatarUrl, onLogout }: ProfileAvatarProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [logoutLoading, setLogoutLoading] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,9 +41,41 @@ export default function ProfileAvatar({ username, avatarUrl, onLogout }: Profile
     }
   };
 
-  const handleLogout = () => {
-    setIsOpen(false);
-    onLogout();
+  const handleLogout = async () => {
+    try {
+      setLogoutLoading(true);
+      await onLogout();
+      setIsOpen(false);
+      navigate('/login');
+      setLogoutLoading(false);
+    } catch (error) {
+      exceptionHandler(error, {
+        onClientError: (message) => {
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: 'Login Gagal!',
+            description: message,
+          });
+        },
+        onServerError: () => {
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: 'Terjadi Kesalahan!',
+            description: 'Internal server error. Coba lagi nanti.',
+          });
+        },
+        onUnexpectedError: () => {
+          toast({
+            variant: 'destructive',
+            duration: 3000,
+            title: 'Terjadi Kesalahan!',
+            description: 'Error tidak diketahui. Coba lagi nanti.',
+          });
+        },
+      });
+    }
   };
 
   return (
@@ -80,7 +117,7 @@ export default function ProfileAvatar({ username, avatarUrl, onLogout }: Profile
               onClick={handleLogout}
               className='flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-150 ease-in-out'
             >
-              <LogOut className='mr-2 h-4 w-4' />
+              {logoutLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <LogOut className='mr-2 h-4 w-4' />}
               Logout
             </button>
           </div>

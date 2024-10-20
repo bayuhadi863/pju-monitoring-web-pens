@@ -4,7 +4,7 @@ import DashboardPage from './pages/dashboard/dashboard-page';
 import RootLayout from './layouts/root-layout';
 import LoginPage from './pages/auth/login-page';
 import DashboardLayout from './layouts/dashboard-layout';
-import PjuPage from './pages/dashboard/pju-page';
+import PjuPage from './pages/dashboard/pju/pju-page';
 import CctvPage from './pages/dashboard/cctv-page';
 import ProtectedRoute from './layouts/protected-route';
 import NotFound from './pages/error/not-found';
@@ -13,6 +13,7 @@ import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
 import Chatbot from './pages/chatbot/chatbot-page';
 import AccountPage from './pages/dashboard/account-page';
 import UserManagementPage from './pages/dashboard/user-management/user-management-page';
+import Pju2Page from './pages/dashboard/pju/pju2-page';
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +34,18 @@ export const router = createBrowserRouter([
             element: <DashboardPage />,
           },
           {
-            path: 'pju',
+            path: 'pju1',
             element: (
               <ProtectedRoute>
                 <PjuPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'pju2',
+            element: (
+              <ProtectedRoute>
+                <Pju2Page />
               </ProtectedRoute>
             ),
           },

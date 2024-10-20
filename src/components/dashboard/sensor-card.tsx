@@ -65,13 +65,14 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
 
             {valueExists && (
               <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger className='mt-2'>
                   {title === 'Kecepatan Angin' ? (
                     <div className={`${generateIconBackgroundColor(color)} rounded-full p-1 text-base`}>{icon}</div>
                   ) : (
                     <div className={`${generateIconBackgroundColor(color)} rounded-full p-2 text-lg`}>{icon}</div>
                   )}
                 </PopoverTrigger>
+
                 <PopoverContent>{info}</PopoverContent>
               </Popover>
             )}

@@ -34,7 +34,13 @@ export default function DataTable<TData, TValue>({ columnsData, data, enableRowS
     cell: ({ row, table }) => {
       const { pageIndex, pageSize } = table.getState().pagination;
       const globalIndex = pageIndex * pageSize + row.index + 1;
-      return <div>{globalIndex}</div>;
+
+      console.log('paeIndex', pageIndex);
+      console.log('pageSize', pageSize);
+      console.log('row.index', row.index);
+      console.log('globalIndex', globalIndex);
+
+      return <div>{row.index + 1}</div>;
     },
   };
 

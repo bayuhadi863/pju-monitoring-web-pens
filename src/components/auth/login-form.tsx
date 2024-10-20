@@ -15,7 +15,7 @@ import { exceptionHandler } from '@/lib/utils/exception-handler';
 
 const formSchema = z
   .object({
-    username_email: z.string().min(1, { message: "Username atau email wajib diisi" }),
+    username_email: z.string().min(1, { message: 'Username atau email wajib diisi' }),
     password: z.string().min(4, { message: 'Password minimal 4 karakter' }),
   })
   .required({
@@ -57,14 +57,14 @@ export function LoginForm() {
         description: 'Anda berhasil login ke akun Anda.',
       });
 
-      navigate('/dashboard/pju');
+      navigate('/dashboard/pju1');
     } catch (error) {
       exceptionHandler(error, {
-        onClientError: (status, message) => {
+        onClientError: (message) => {
           toast({
             variant: 'destructive',
             duration: 3000,
-            title: `Login Gagal (Status: ${status})`,
+            title: 'Login Gagal!',
             description: message,
           });
         },
@@ -77,7 +77,6 @@ export function LoginForm() {
           });
         },
         onUnexpectedError: () => {
-          console.error('Unexpected error:', error);
           toast({
             variant: 'destructive',
             duration: 3000,

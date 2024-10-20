@@ -25,11 +25,11 @@ const ChatbotLayout: React.FC = () => {
   const [sidebarLinks, setSidebarLinks] = useState<SidebarLinkDataType[]>([
     {
       to: '/chatbot',
-      label: 'Welcome'
+      label: 'Welcome',
     },
   ]);
 
-  const handleDeleteConversation = (conversationIdDelete: string) => {    
+  const handleDeleteConversation = (conversationIdDelete: string) => {
     axios
       .delete(`${apiBaseUrl}/conversations/${conversationIdDelete}`, {
         headers: {
@@ -38,7 +38,7 @@ const ChatbotLayout: React.FC = () => {
         },
       })
       .then(() => {
-        setTriggerFetch(prev => !prev);
+        setTriggerFetch((prev) => !prev);
         toast({
           variant: 'success',
           duration: 3000,
@@ -60,7 +60,7 @@ const ChatbotLayout: React.FC = () => {
       });
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     axios
       .get(`${apiBaseUrl}/api/conversations`, {
         headers: {
@@ -79,12 +79,8 @@ const ChatbotLayout: React.FC = () => {
 
         setSidebarLinks((prevLinks) => {
           const firstLink = prevLinks[0];
-          const filteredLinks = prevLinks.slice(1).filter(link => 
-            data.some((conversation: { id: any; }) => `/chatbot/${conversation.id}` === link.to)
-          );
-          const uniqueNewLinks = newLinks.filter((newLink: { to: string; }) => 
-            !filteredLinks.some(prevLink => prevLink.to === newLink.to)
-          );
+          const filteredLinks = prevLinks.slice(1).filter((link) => data.some((conversation: { id: any }) => `/chatbot/${conversation.id}` === link.to));
+          const uniqueNewLinks = newLinks.filter((newLink: { to: string }) => !filteredLinks.some((prevLink) => prevLink.to === newLink.to));
           return [firstLink, ...filteredLinks, ...uniqueNewLinks];
         });
       })
@@ -104,8 +100,8 @@ const ChatbotLayout: React.FC = () => {
           />
         }
       />
-      <div className='lg:ml-64 bg-muted dark:bg-muted/40 h-screen flex flex-col relative'>
-        <div className='flex items-center gap-3 absolute inset-x-0 px-4'>
+      <div className='lg:ml-64 bg-muted dark:bg-slate-900 h-screen flex flex-col relative'>
+        <div className='flex items-center gap-3 absolute inset-x-0 px-4 bg-muted dark:bg-slate-900 border-b-2 border-dashed'>
           <MobileSidebar
             headerContent={<SidebarHeader />}
             content={

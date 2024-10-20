@@ -5,7 +5,11 @@ import { socket } from '@/lib/configs/socket';
 import { apiBaseUrl } from '@/lib/configs/api';
 import { pjuMonitorStaticData, PjuMonitorStaticDataType } from '@/lib/data/pju-monitor-data';
 
-const PjuMonitorGrid: React.FC = () => {
+type PjuMonitorGridProps = {
+  pjuId: number;
+};
+
+const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
   const [data] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
   const [, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);
@@ -13,7 +17,7 @@ const PjuMonitorGrid: React.FC = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${apiBaseUrl}/monitor`);
+      const response = await axios.get(`${apiBaseUrl}/monitor/${pjuId}`);
       const responseData = response.data.data;
 
       responseData.forEach((monitorData: PjuMonitorStaticDataType) => {
@@ -42,7 +46,7 @@ const PjuMonitorGrid: React.FC = () => {
   }, []);
 
   return (
-    <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+    <div className='grid gap-6 sm:grid-cols-2 xl:grid-cols-3'>
       {data.map((item, i) => (
         <PjuMonitorCard
           key={i}
