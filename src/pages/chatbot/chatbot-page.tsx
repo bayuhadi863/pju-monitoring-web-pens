@@ -13,7 +13,7 @@ type Message = {
 };
 
 const Chatbot: React.FC = () => {
-  const apiBaseUrl = import.meta.env.VITE_CHATBOT_API_BASE_URL || 'http://localhost:5000';
+  // const apiBaseUrl = import.meta.env.VITE_CHATBOT_API_BASE_URL || 'http://localhost:5000';
   const { conversationId } = useParams();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
