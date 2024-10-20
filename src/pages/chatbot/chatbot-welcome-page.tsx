@@ -6,6 +6,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { getUserId } from '@/lib/utils/storage';
 
 const ChatbotWelcomePage: React.FC = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const navigate = useNavigate();
   const { setTriggerFetch } = useOutletContext() as any;
   const [chatStarted, setChatStarted] = useState(false);
@@ -22,7 +23,7 @@ const ChatbotWelcomePage: React.FC = () => {
   
       //buat conversation
       axios
-        .post('http://localhost:5000/api/conversations',
+        .post(`${apiBaseUrl}/api/conversations`,
           { title: title },
           {
           headers: {
@@ -35,7 +36,7 @@ const ChatbotWelcomePage: React.FC = () => {
           const data = response.data.id;
           
           //kirim pesan user
-          axios.post(`http://localhost:5000/api/conversations/${data}`,
+          axios.post(`${apiBaseUrl}/api/conversations/${data}`,
             { "user_input": title },
             {
               headers: {

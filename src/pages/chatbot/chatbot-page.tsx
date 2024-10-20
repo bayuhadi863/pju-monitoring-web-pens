@@ -13,6 +13,7 @@ type Message = {
 };
 
 const Chatbot: React.FC = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const { conversationId } = useParams();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -25,7 +26,7 @@ const Chatbot: React.FC = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/conversations/${conversationId}`, {
+    axios.get(`${apiBaseUrl}/api/conversations/${conversationId}`, {
       headers: {
         Accept: 'application/json',
         Authorization: userId,
@@ -60,7 +61,7 @@ const Chatbot: React.FC = () => {
 
       // Send the message to the server
       axios
-        .post(`http://localhost:5000/api/conversations/${conversationId}`,
+        .post(`${apiBaseUrl}/api/conversations/${conversationId}`,
           { "user_input": text },
           {
             headers: {

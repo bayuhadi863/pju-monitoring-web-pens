@@ -17,6 +17,7 @@ const SidebarHeader = () => {
 };
 
 const ChatbotLayout: React.FC = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const { conversationId } = useParams();
   const navigate = useNavigate();
   const userId = getUserId();
@@ -30,7 +31,7 @@ const ChatbotLayout: React.FC = () => {
 
   const handleDeleteConversation = (conversationIdDelete: string) => {    
     axios
-      .delete(`http://localhost:5000/api/conversations/${conversationIdDelete}`, {
+      .delete(`${apiBaseUrl}/conversations/${conversationIdDelete}`, {
         headers: {
           Accept: 'application/json',
           Authorization: userId,
@@ -61,7 +62,7 @@ const ChatbotLayout: React.FC = () => {
 
   useEffect(() => {  
     axios
-      .get('http://localhost:5000/api/conversations', {
+      .get(`${apiBaseUrl}/api/conversations`, {
         headers: {
           Accept: 'application/json',
           Authorization: userId,
