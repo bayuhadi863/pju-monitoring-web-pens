@@ -26,7 +26,7 @@ const ChatbotLayout: React.FC = () => {
   const [sidebarLinks, setSidebarLinks] = useState<SidebarLinkDataType[]>([
     {
       to: '/chatbot',
-      label: 'Welcome',
+      label: 'Buat obrolan baru',
     },
   ]);
 
