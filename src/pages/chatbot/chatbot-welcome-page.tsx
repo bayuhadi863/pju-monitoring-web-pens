@@ -6,7 +6,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { getUserId } from '@/lib/utils/storage';
 
 const ChatbotWelcomePage: React.FC = () => {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+  const apiBaseUrl = import.meta.env.VITE_CHATBOT_API_BASE_URL || 'http://localhost:5000';
   const navigate = useNavigate();
   const { setTriggerFetch } = useOutletContext() as any;
   const [chatStarted, setChatStarted] = useState(false);
