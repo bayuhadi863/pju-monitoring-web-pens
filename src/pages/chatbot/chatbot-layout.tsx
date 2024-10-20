@@ -18,6 +18,7 @@ const SidebarHeader = () => {
 
 const ChatbotLayout: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_CHATBOT_API_BASE_URL || 'http://localhost:5000';
+  console.log(apiBaseUrl);
   const { conversationId } = useParams();
   const navigate = useNavigate();
   const userId = getUserId();
