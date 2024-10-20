@@ -32,7 +32,7 @@ const ChatbotLayout: React.FC = () => {
 
   const handleDeleteConversation = (conversationIdDelete: string) => {
     axios
-      .delete(`${apiBaseUrl}/conversations/${conversationIdDelete}`, {
+      .delete(`https://bambubot.up.railway.app/conversations/${conversationIdDelete}`, {
         headers: {
           Accept: 'application/json',
           Authorization: userId,
@@ -63,7 +63,7 @@ const ChatbotLayout: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiBaseUrl}/api/conversations`, {
+      .get(`https://bambubot.up.railway.app/api/conversations`, {
         headers: {
           Accept: 'application/json',
           Authorization: userId,

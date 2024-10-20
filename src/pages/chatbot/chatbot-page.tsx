@@ -26,7 +26,7 @@ const Chatbot: React.FC = () => {
   };
 
   useEffect(() => {
-    axios.get(`${apiBaseUrl}/api/conversations/${conversationId}`, {
+    axios.get(`https://bambubot.up.railway.app/api/conversations/${conversationId}`, {
       headers: {
         Accept: 'application/json',
         Authorization: userId,
@@ -61,7 +61,7 @@ const Chatbot: React.FC = () => {
 
       // Send the message to the server
       axios
-        .post(`${apiBaseUrl}/api/conversations/${conversationId}`,
+        .post(`https://bambubot.up.railway.app/api/conversations/${conversationId}`,
           { "user_input": text },
           {
             headers: {

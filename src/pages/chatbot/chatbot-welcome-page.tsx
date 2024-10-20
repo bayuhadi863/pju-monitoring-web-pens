@@ -23,7 +23,7 @@ const ChatbotWelcomePage: React.FC = () => {
   
       //buat conversation
       axios
-        .post(`${apiBaseUrl}/api/conversations`,
+        .post(`https://bambubot.up.railway.app/api/conversations`,
           { title: title },
           {
           headers: {
@@ -36,7 +36,7 @@ const ChatbotWelcomePage: React.FC = () => {
           const data = response.data.id;
           
           //kirim pesan user
-          axios.post(`${apiBaseUrl}/api/conversations/${data}`,
+          axios.post(`https://bambubot.up.railway.app/api/conversations/${data}`,
             { "user_input": title },
             {
               headers: {
