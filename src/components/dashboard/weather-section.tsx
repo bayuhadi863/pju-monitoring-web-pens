@@ -11,12 +11,17 @@ import { rainfall } from '@/lib/data/sensor-data/weather/rainfall-level';
 import { windSpeed } from '@/lib/data/sensor-data/weather/wind-speed';
 import { windDirection } from '@/lib/data/sensor-data/weather/wind-direction';
 import { airPressure } from '@/lib/data/sensor-data/weather/air-pressure';
+import { format } from 'date-fns';
+import HumidityChart from './chart/humidity-chart';
 
 const WeatherSection: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const [data, setData] = useState<SensorData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);
+
+  const dateNow = new Date();
+  const formattedDate = format(dateNow, 'dd-MM-yyyy');
 
   const fetchData = async () => {
     try {
@@ -70,6 +75,9 @@ const WeatherSection: React.FC = () => {
           icon={humiditySensor ? humidity.generateIcon(humiditySensor.value) : ''}
           info={humidity.info}
           isLoading={isLoading}
+          chartTitle='Grafik Kelembaban Udara'
+          chartDescription={`Grafik kelembaban udara pada hari ini tanggal ${formattedDate}`}
+          chart={<HumidityChart />}
         />
 
         <SensorCard

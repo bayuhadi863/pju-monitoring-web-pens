@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card } from '../ui/card';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
+import { FaChartLine } from 'react-icons/fa6';
 
 type SensorCardProps = {
   title: string;
@@ -11,9 +13,12 @@ type SensorCardProps = {
   icon?: React.ReactNode;
   info?: React.ReactNode;
   isLoading: boolean;
+  chart?: React.ReactNode;
+  chartTitle?: string;
+  chartDescription?: string;
 };
 
-const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, color, icon, info, isLoading }) => {
+const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, color, icon, info, isLoading, chartTitle, chartDescription, chart }) => {
   const roundedValue = Math.round(Number(value) * 10) / 10;
   const valueExists = value !== null && value !== undefined;
 
@@ -51,11 +56,30 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
     <Card className='px-5 py-4 shadow-md'>
       <div className='flex h-full gap-3 w-full'>
         <div className='h-full flex flex-col justify-between gap-3 w-full'>
-          <div>
-            <div className='flex items-center gap-1'>
-              <h3 className='text-lg font-semibold'>{title}</h3>
+          <div className='flex justify-between items-start'>
+            <div>
+              <div className='flex items-center gap-1'>
+                <h3 className='text-lg font-semibold'>{title}</h3>
+              </div>
+              <p className='text-xs text-muted-foreground'>{subTitle}</p>
             </div>
-            <p className='text-xs text-muted-foreground'>{subTitle}</p>
+
+            <Drawer>
+              <DrawerTrigger>
+                <div className='rounded-full p-2 d-flex justify-center items-center text-base text-primary hover:bg-primary/10 '>
+                  <FaChartLine className='text-primary' />
+                </div>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className='mx-auto w-full max-w-2xl'>
+                  <DrawerHeader>
+                    <DrawerTitle>{chartTitle}</DrawerTitle>
+                    <DrawerDescription>{chartDescription}</DrawerDescription>
+                  </DrawerHeader>
+                  <div className='py-8'>{chart}</div>
+                </div>
+              </DrawerContent>
+            </Drawer>
           </div>
           <div className='flex justify-between items-center w-full'>
             <div className={`flex items-baseline gap-1 ${generateTextColor(color)}`}>
@@ -63,19 +87,21 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
               <p className='font-semibold'>{unit}</p>
             </div>
 
-            {valueExists && (
-              <Popover>
-                <PopoverTrigger className='mt-2'>
-                  {title === 'Kecepatan Angin' ? (
-                    <div className={`${generateIconBackgroundColor(color)} rounded-full p-1 text-base`}>{icon}</div>
-                  ) : (
-                    <div className={`${generateIconBackgroundColor(color)} rounded-full p-2 text-lg`}>{icon}</div>
-                  )}
-                </PopoverTrigger>
+            <div>
+              {valueExists && (
+                <Popover>
+                  <PopoverTrigger className='mt-2'>
+                    {title === 'Kecepatan Angin' ? (
+                      <div className={`${generateIconBackgroundColor(color)} rounded-full p-1 text-base`}>{icon}</div>
+                    ) : (
+                      <div className={`${generateIconBackgroundColor(color)} rounded-full p-2 text-lg`}>{icon}</div>
+                    )}
+                  </PopoverTrigger>
 
-                <PopoverContent>{info}</PopoverContent>
-              </Popover>
-            )}
+                  <PopoverContent>{info}</PopoverContent>
+                </Popover>
+              )}
+            </div>
           </div>
         </div>
       </div>

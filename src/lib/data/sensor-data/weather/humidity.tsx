@@ -4,8 +4,8 @@ import { GoCheckCircleFill } from 'react-icons/go';
 import { SensorStaticData } from '@/lib/types/sensor-data-type';
 
 const humiditySensorTypeCode = 'HUM';
-const humidityTitle = 'Kelembapan Udara';
-const humiditySubtitle = 'Tingkat Kelembapan Udara Area';
+const humidityTitle = 'Kelembaban Udara';
+const humiditySubtitle = 'Tingkat Kelembaban Udara Area';
 const humidityUnit = '%';
 
 const humidityGenerateColor = (value?: number) => {
@@ -24,11 +24,11 @@ const humidityGenerateIcon = (value?: number) => {
 
 const humidityInfo = (
   <div className='text-xs flex flex-col gap-1'>
-    <p>Kelembapan udara adalah jumlah uap air yang terkandung dalam udara.</p>
+    <p>Kelembaban udara adalah jumlah uap air yang terkandung dalam udara.</p>
     <p>
-      Kelembapan udara yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600 font-semibold'>40% - 60%</span>.
+      Kelembaban udara yang ideal untuk kesehatan manusia adalah antara <span className='text-green-600 font-semibold'>40% - 60%</span>.
     </p>
-    <p>Kelembapan udara yang terlalu rendah atau terlalu tinggi dapat menyebabkan masalah kesehatan dan kerusakan pada barang.</p>
+    <p>Kelembaban udara yang terlalu rendah atau terlalu tinggi dapat menyebabkan masalah kesehatan dan kerusakan pada barang.</p>
   </div>
 );
 
