@@ -13,6 +13,10 @@ import { windDirection } from '@/lib/data/sensor-data/weather/wind-direction';
 import { airPressure } from '@/lib/data/sensor-data/weather/air-pressure';
 import { format } from 'date-fns';
 import HumidityChart from './chart/humidity-chart';
+import TemperatureChart from './chart/temperature-chart';
+import SolarRadiationChart from './chart/solar-radiation-chart';
+import AirPressureChart from './chart/air-pressure-chart';
+import RainfallLevelChart from './chart/rainfall-level-chart';
 
 const WeatherSection: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
@@ -76,7 +80,7 @@ const WeatherSection: React.FC = () => {
           info={humidity.info}
           isLoading={isLoading}
           chartTitle='Grafik Kelembaban Udara'
-          chartDescription={`Grafik kelembaban udara pada hari ini tanggal ${formattedDate}`}
+          chartDescription={`Grafik nilai kelembaban udara pada hari ini tanggal ${formattedDate}`}
           chart={<HumidityChart />}
         />
 
@@ -89,6 +93,9 @@ const WeatherSection: React.FC = () => {
           icon={temperatureSensor ? temperature.generateIcon(temperatureSensor.value) : ''}
           info={temperature.info}
           isLoading={isLoading}
+          chartTitle='Grafik Suhu'
+          chartDescription={`Grafik nilai suhu pada hari ini tanggal ${formattedDate}`}
+          chart={<TemperatureChart />}
         />
 
         <SensorCard
@@ -100,6 +107,9 @@ const WeatherSection: React.FC = () => {
           icon={solarSensor ? solar.generateIcon(solarSensor.value) : ''}
           info={solar.info}
           isLoading={isLoading}
+          chartTitle='Grafik Radiasi Matahari'
+          chartDescription={`Grafik kadar radiasi matahari pada hari ini tanggal ${formattedDate}`}
+          chart={<SolarRadiationChart />}
         />
 
         <SensorCard
@@ -111,6 +121,9 @@ const WeatherSection: React.FC = () => {
           icon={airPressureSensor ? airPressure.generateIcon(airPressureSensor.value) : ''}
           info={airPressure.info}
           isLoading={isLoading}
+          chartTitle='Grafik Tekanan Udara'
+          chartDescription={`Grafik nilai tekanan udara pada hari ini tanggal ${formattedDate}`}
+          chart={<AirPressureChart />}
         />
 
         <SensorCard
@@ -122,6 +135,9 @@ const WeatherSection: React.FC = () => {
           icon={rainfallSensor ? rainfall.generateIcon(rainfallSensor.value) : ''}
           info={rainfall.info}
           isLoading={isLoading}
+          chartTitle='Grafik Curah Hujan'
+          chartDescription={`Grafik nilai curah hujan pada hari ini tanggal ${formattedDate}`}
+          chart={<RainfallLevelChart />}
         />
 
         <SensorCard

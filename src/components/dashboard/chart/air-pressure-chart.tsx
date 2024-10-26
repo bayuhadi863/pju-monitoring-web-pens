@@ -3,9 +3,9 @@ import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { SensorChartResponse } from '@/lib/types/response/chart/sensor-chart-response';
 import { getSensorChartData } from '@/lib/services/chart-service';
-import { humidity } from '@/lib/data/sensor-data/weather/humidity';
+import { airPressure } from '@/lib/data/sensor-data/weather/air-pressure';
 
-const HumidityChart: React.FC = () => {
+const AirPressureChart: React.FC = () => {
   const [chartData, setChartData] = React.useState<SensorChartResponse[]>([]);
   const [error, setError] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -13,7 +13,7 @@ const HumidityChart: React.FC = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await getSensorChartData(humidity.sensorTypeCode, 2);
+      const response = await getSensorChartData(airPressure.sensorTypeCode, 2);
       setChartData(response.data.data);
     } catch (error: unknown) {
       setError('Error fetching data');
@@ -29,7 +29,7 @@ const HumidityChart: React.FC = () => {
 
   const chartConfig = {
     averageValue: {
-      label: 'Kelembaban Rata-rata',
+      label: `${airPressure.title} Rata-rata`,
       color: 'hsl(var(--chart-1))',
     },
   } satisfies ChartConfig;
@@ -71,7 +71,7 @@ const HumidityChart: React.FC = () => {
                   {chartConfig[name as keyof typeof chartConfig]?.label || name}
                   <div className='ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground'>
                     {value}
-                    <span className='font-medium text-muted-foreground'>{humidity.unit}</span>
+                    <span className='font-medium text-muted-foreground'>{airPressure.unit}</span>
                   </div>
                 </div>
               )}
@@ -101,4 +101,4 @@ const HumidityChart: React.FC = () => {
   return <div>{isLoading ? loadingComponent : error ? errorComponent : chart}</div>;
 };
 
-export default HumidityChart;
+export default AirPressureChart;
