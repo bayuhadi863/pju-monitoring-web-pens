@@ -5,7 +5,7 @@ const VideoPlayer: React.FC = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.src = `https://bambubot.up.railway.app/api/cctv-strean`;
+      videoRef.current.src = `https://bambubot.up.railway.app/api/cctv-stream`;
     }
   }, []);
 
