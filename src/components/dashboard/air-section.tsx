@@ -11,12 +11,23 @@ import { nitrogenDioxide } from '@/lib/data/sensor-data/air-quality/nitrogen-dio
 import { sulfurDioxide } from '@/lib/data/sensor-data/air-quality/sulfur-dioxide';
 import { particulateMatter25 } from '@/lib/data/sensor-data/air-quality/particulate-matter-25';
 import { particulateMatter10 } from '@/lib/data/sensor-data/air-quality/particulate-matter-10';
+import { format } from 'date-fns';
+import CarbonDioxideChart from './chart/carbon-dioxide-chart';
+import OxygenChart from './chart/oxygen-chart';
+import OzoneChart from './chart/ozone';
+import NitrogenDioxideChart from './chart/nitrogen-dioxide-chart';
+import SulfurDioxideChart from './chart/sulfur-dioxide-chart';
+import PM25Chart from './chart/pm25-chart';
+import PM10Chart from './chart/pm10-chart';
 
 const AirSection: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const [data, setData] = useState<SensorData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);
+
+  const dateNow = new Date();
+  const formattedDate = format(dateNow, 'dd-MM-yyyy');
 
   const fetchData = async () => {
     try {
@@ -70,6 +81,9 @@ const AirSection: React.FC = () => {
           icon={carbonDioxideSensor ? carbonDioxide.generateIcon(carbonDioxideSensor.value) : ''}
           info={carbonDioxide.info}
           isLoading={isLoading}
+          chartTitle='Grafik Karbon Dioksida'
+          chartDescription={`Grafik nilai kadar karbon dioksida pada hari ini tanggal ${formattedDate}`}
+          chart={<CarbonDioxideChart />}
         />
 
         <SensorCard
@@ -81,6 +95,9 @@ const AirSection: React.FC = () => {
           icon={oxygenSensor ? oxygen.generateIcon(oxygenSensor.value) : ''}
           info={oxygen.info}
           isLoading={isLoading}
+          chartTitle='Grafik Oksigen'
+          chartDescription={`Grafik nilai kadar oksigen pada hari ini tanggal ${formattedDate}`}
+          chart={<OxygenChart />}
         />
 
         <SensorCard
@@ -92,6 +109,9 @@ const AirSection: React.FC = () => {
           icon={ozoneSensor ? ozone.generateIcon(ozoneSensor.value) : ''}
           info={ozone.info}
           isLoading={isLoading}
+          chartTitle='Grafik Gas Ozon'
+          chartDescription={`Grafik nilai kadar gas ozon pada hari ini tanggal ${formattedDate}`}
+          chart={<OzoneChart />}
         />
 
         <SensorCard
@@ -103,6 +123,9 @@ const AirSection: React.FC = () => {
           icon={nitrogenDioxideSensor ? nitrogenDioxide.generateIcon(nitrogenDioxideSensor.value) : ''}
           info={nitrogenDioxide.info}
           isLoading={isLoading}
+          chartTitle='Grafik Nitrogen Dioksida'
+          chartDescription={`Grafik nilai kadar nitrogen dioksida pada hari ini tanggal ${formattedDate}`}
+          chart={<NitrogenDioxideChart />}
         />
 
         <SensorCard
@@ -114,6 +137,9 @@ const AirSection: React.FC = () => {
           icon={sulfurDioxideSensor ? sulfurDioxide.generateIcon(sulfurDioxideSensor.value) : ''}
           info={sulfurDioxide.info}
           isLoading={isLoading}
+          chartTitle='Grafik Sulfur Dioksida'
+          chartDescription={`Grafik nilai kadar sulfur dioksida pada hari ini tanggal ${formattedDate}`}
+          chart={<SulfurDioxideChart />}
         />
 
         <SensorCard
@@ -125,6 +151,9 @@ const AirSection: React.FC = () => {
           icon={particulateMatter25Sensor ? particulateMatter25.generateIcon(particulateMatter25Sensor.value) : ''}
           info={particulateMatter25.info}
           isLoading={isLoading}
+          chartTitle='Grafik Partikulat Materi 2.5'
+          chartDescription={`Grafik nilai kadar partikulat materi 2.5 pada hari ini tanggal ${formattedDate}`}
+          chart={<PM25Chart />}
         />
 
         <SensorCard
@@ -136,6 +165,9 @@ const AirSection: React.FC = () => {
           icon={particulateMatter10Sensor ? particulateMatter10.generateIcon(particulateMatter10Sensor.value) : ''}
           info={particulateMatter10.info}
           isLoading={isLoading}
+          chartTitle='Grafik Partikulat Materi 10'
+          chartDescription={`Grafik nilai kadar partikulat materi 10 pada hari ini tanggal ${formattedDate}`}
+          chart={<PM10Chart />}
         />
       </div>
     </section>

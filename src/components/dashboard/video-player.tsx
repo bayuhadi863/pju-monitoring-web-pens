@@ -27,7 +27,7 @@ const VideoPlayer: React.FC = () => {
       <img
         ref={videoRef}
         alt='live-cctv'
-        className='rounded-md w-full aspect-video absolute inset-0 z-50'
+        className='rounded-md w-full aspect-video absolute inset-0 z-40'
       />
       <div className='flex gap-2 items-center'>
         <Spinner />

@@ -99,7 +99,7 @@ export default function ProfileAvatar({ username, avatarUrl, onLogout }: Profile
         </Avatar>
       </button>
       {isOpen && (
-        <div className='absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-background border border-border'>
+        <div className='absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-background border border-border z-50'>
           <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1'>
             <div className='px-4 py-2 text-sm text-muted-foreground border-b border-border'>
               <p className='font-medium text-foreground'>{username}</p>

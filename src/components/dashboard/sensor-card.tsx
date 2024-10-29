@@ -71,7 +71,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ title, subTitle, value, unit, c
                 </div>
               </DrawerTrigger>
               <DrawerContent>
-                <div className='mx-auto w-full max-w-2xl'>
+                <div className='mx-auto w-full max-w-3xl'>
                   <DrawerHeader>
                     <DrawerTitle>{chartTitle}</DrawerTitle>
                     <DrawerDescription>{chartDescription}</DrawerDescription>

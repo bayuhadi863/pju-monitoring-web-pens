@@ -17,6 +17,8 @@ import TemperatureChart from './chart/temperature-chart';
 import SolarRadiationChart from './chart/solar-radiation-chart';
 import AirPressureChart from './chart/air-pressure-chart';
 import RainfallLevelChart from './chart/rainfall-level-chart';
+import WindSpeedChart from './chart/wind-speed-chart';
+import WindDirectionChart from './chart/wind-direction-chart';
 
 const WeatherSection: React.FC = () => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
@@ -149,6 +151,9 @@ const WeatherSection: React.FC = () => {
           icon={windSpeedSensor ? windSpeed.generateIcon(windSpeedSensor.value) : ''}
           info={windSpeed.info}
           isLoading={isLoading}
+          chartTitle='Grafik Kecepatan Angin'
+          chartDescription={`Grafik nilai kecepatan angin pada hari ini tanggal ${formattedDate}`}
+          chart={<WindSpeedChart />}
         />
 
         <SensorCard
@@ -160,6 +165,9 @@ const WeatherSection: React.FC = () => {
           icon={windDirectionSensor ? windDirection.generateIcon(windDirectionSensor.value) : ''}
           info={windDirection.info}
           isLoading={isLoading}
+          chartTitle='Grafik Arah Angin'
+          chartDescription={`Grafik nilai derajat arah angin pada hari ini tanggal ${formattedDate}`}
+          chart={<WindDirectionChart />}
         />
       </div>
     </section>
