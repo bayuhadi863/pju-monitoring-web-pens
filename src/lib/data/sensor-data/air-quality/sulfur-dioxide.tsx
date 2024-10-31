@@ -11,40 +11,40 @@ const sulfurDioxideUnit = 'ppm';
 
 const sulfurDioxideGenerateColor = (value?: number) => {
   if (value === null || value === undefined) return 'blue';
-  if (value >= 0 && value <= 7.99) return 'green';
-  if (value >= 8 && value <= 40.99) return 'yellow';
-  if (value >= 50) return 'red';
+  if (value >= 0 && value <= 0.03) return 'green';
+  if (value >= 0.031 && value <= 0.2) return 'yellow';
+  if (value >= 0.201) return 'red';
   return 'blue';
 };
 
 const sulfurDioxideGenerateIcon = (value?: number) => {
   if (value === null || value === undefined) return <div></div>;
-  if (value >= 0 && value <= 7.99) return <GoCheckCircleFill className='text-green-600' />;
-  if (value >= 8 && value <= 40.99) return <IoIosWarning className='text-yellow-400' />;
-  if (value >= 50) return <RiErrorWarningFill className='text-red-600' />;
+  if (value >= 0 && value <= 0.03) return <GoCheckCircleFill className='text-green-600' />;
+  if (value >= 0.031 && value <= 0.2) return <IoIosWarning className='text-yellow-400' />;
+  if (value >= 0.201) return <RiErrorWarningFill className='text-red-600' />;
   return <div></div>;
 };
 
 const sulfurDioxideInfo = (
   <div className='text-xs flex flex-col gap-1'>
-    <p>Radiasi matahari adalah energi yang dipancarkan oleh matahari dalam bentuk gelombang elektromagnetik.</p>
+    <p>Sulfur dioksida (SO₂) adalah gas berbau tajam yang dihasilkan dari pembakaran bahan bakar fosil dan dapat menyebabkan iritasi saluran pernapasan serta berkontribusi pada polusi udara.</p>
     <p>
-      Radiasi matahari <span className='text-red-600 font-semibold'>0 - 49 {sulfurDioxideUnit}</span> adalah Buruk.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>lebih dari 1.0 {sulfurDioxideUnit}</span> adalah Buruk.
     </p>
     <p>
-      Radiasi matahari <span className='text-red-600 font-semibold'>50 - 199 {sulfurDioxideUnit}</span> adalah Sangat Rendah.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.501 - 1.0 {sulfurDioxideUnit}</span> adalah Sangat Rendah.
     </p>
     <p>
-      Radiasi matahari <span className='text-red-600 font-semibold'>200 - 399 {sulfurDioxideUnit}</span> adalah Rendah.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.201 - 0.5 {sulfurDioxideUnit}</span> adalah Rendah.
     </p>
     <p>
-      Radiasi matahari <span className='text-yellow-400 font-semibold'>400 - 599 {sulfurDioxideUnit}</span> adalah Sedang.
+      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.101 - 0.2 {sulfurDioxideUnit}</span> adalah Sedang.
     </p>
     <p>
-      Radiasi matahari <span className='text-green-600 font-semibold'>600 - 799 {sulfurDioxideUnit}</span> adalah Baik.
+      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.031 - 0.1 {sulfurDioxideUnit}</span> adalah Baik.
     </p>
     <p>
-      Radiasi matahari <span className='text-green-600 font-semibold'>800 - 1000+ {sulfurDioxideUnit}</span> adalah Sangat Baik.
+      Sulfur Dioksida <span className='text-green-600 font-semibold'>kurang dari 0.031 {sulfurDioxideUnit}</span> adalah Sangat Baik.
     </p>
   </div>
 );
