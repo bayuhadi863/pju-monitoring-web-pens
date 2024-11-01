@@ -11,17 +11,17 @@ const particulateMatter10Unit = 'µg/m³';
 
 const particulateMatter10GenerateColor = (value?: number) => {
   if (value === null || value === undefined) return 'blue';
-  if (value >= 0 && value <= 60.99) return 'green';
-  if (value >= 61 && value <= 120.99) return 'yellow';
-  if (value >= 121) return 'red';
+  if (value >= 0 && value <= 50.999) return 'green';
+  if (value >= 51 && value <= 150.999) return 'yellow';
+  if (value >= 151) return 'red';
   return 'blue';
 };
 
 const particulateMatter10GenerateIcon = (value?: number) => {
   if (value === null || value === undefined) return <div></div>;
-  if (value >= 0 && value <= 60.99) return <GoCheckCircleFill className='text-green-600' />;
-  if (value >= 61 && value <= 120.99) return <IoIosWarning className='text-yellow-400' />;
-  if (value >= 121) return <RiErrorWarningFill className='text-red-600' />;
+  if (value >= 0 && value <= 50.999) return <GoCheckCircleFill className='text-green-600' />;
+  if (value >= 51 && value <= 150.999) return <IoIosWarning className='text-yellow-400' />;
+  if (value >= 151) return <RiErrorWarningFill className='text-red-600' />;
   return <div></div>;
 };
 
@@ -31,22 +31,22 @@ const particulateMatter10Info = (
       Partikulat Materi 10 (PM10) adalah partikel-partikel udara dengan diameter kurang dari 10 mikrometer yang dapat terhirup dan menyebabkan masalah kesehatan seperti gangguan pernapasan dan penyakit jantung, serta berkontribusi pada polusi udara.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-red-600 font-semibold'>0 - 49 {particulateMatter10Unit}</span> adalah Buruk.
+      Partikulat Materi 10 <span className='text-red-600 font-semibold'>lebih dari 350 {particulateMatter10Unit}</span> adalah Berbahaya.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-red-600 font-semibold'>50 - 199 {particulateMatter10Unit}</span> adalah Sangat Rendah.
+      Partikulat Materi 10 <span className='text-red-600 font-semibold'>251 - 350 {particulateMatter10Unit}</span> adalah Sangat Tidak Sehat.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-red-600 font-semibold'>200 - 399 {particulateMatter10Unit}</span> adalah Rendah.
+      Partikulat Materi 10 <span className='text-red-600 font-semibold'>151 - 250 {particulateMatter10Unit}</span> adalah Tidak Sehat.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-yellow-400 font-semibold'>400 - 599 {particulateMatter10Unit}</span> adalah Sedang.
+      Partikulat Materi 10 <span className='text-yellow-400 font-semibold'>101 - 150 {particulateMatter10Unit}</span> adalah Tidak Sehat bagi Sensitif.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-green-600 font-semibold'>600 - 799 {particulateMatter10Unit}</span> adalah Baik.
+      Partikulat Materi 10 <span className='text-yellow-400 font-semibold'>51 - 100 {particulateMatter10Unit}</span> adalah Sedikit Tercemar.
     </p>
     <p>
-      Partikulat Materi 10 <span className='text-green-600 font-semibold'>800 - 1000+ {particulateMatter10Unit}</span> adalah Sangat Baik.
+      Partikulat Materi 10 <span className='text-green-600 font-semibold'>kurang dari 51 {particulateMatter10Unit}</span> adalah Baik.
     </p>
   </div>
 );

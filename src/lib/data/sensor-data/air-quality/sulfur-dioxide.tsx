@@ -29,22 +29,22 @@ const sulfurDioxideInfo = (
   <div className='text-xs flex flex-col gap-1'>
     <p>Sulfur dioksida (SO₂) adalah gas berbau tajam yang dihasilkan dari pembakaran bahan bakar fosil dan dapat menyebabkan iritasi saluran pernapasan serta berkontribusi pada polusi udara.</p>
     <p>
-      Sulfur Dioksida <span className='text-red-600 font-semibold'>lebih dari 1.0 {sulfurDioxideUnit}</span> adalah Buruk.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>lebih dari 1.0 {sulfurDioxideUnit}</span> adalah Berbahaya.
     </p>
     <p>
-      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.501 - 1.0 {sulfurDioxideUnit}</span> adalah Sangat Rendah.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.501 - 1.0 {sulfurDioxideUnit}</span> adalah Sangat Tidak Sehat.
     </p>
     <p>
-      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.201 - 0.5 {sulfurDioxideUnit}</span> adalah Rendah.
+      Sulfur Dioksida <span className='text-red-600 font-semibold'>0.201 - 0.5 {sulfurDioxideUnit}</span> adalah Tidak Sehat.
     </p>
     <p>
-      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.101 - 0.2 {sulfurDioxideUnit}</span> adalah Sedang.
+      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.101 - 0.2 {sulfurDioxideUnit}</span> adalah Tidak Sehat Bagi Sensitif.
     </p>
     <p>
-      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.031 - 0.1 {sulfurDioxideUnit}</span> adalah Baik.
+      Sulfur Dioksida <span className='text-yellow-400 font-semibold'>0.031 - 0.1 {sulfurDioxideUnit}</span> adalah Sedikit Tercemar.
     </p>
     <p>
-      Sulfur Dioksida <span className='text-green-600 font-semibold'>kurang dari 0.031 {sulfurDioxideUnit}</span> adalah Sangat Baik.
+      Sulfur Dioksida <span className='text-green-600 font-semibold'>kurang dari 0.031 {sulfurDioxideUnit}</span> adalah Baik.
     </p>
   </div>
 );

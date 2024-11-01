@@ -17,7 +17,7 @@ export const userSidebarLinks: SidebarLinkDataType[] = [
     icon: <BiSolidCctv />,
   },
   {
-    to: '/chatbot',
+    to: '/dashboard/select-chatbot',
     label: 'Chatbot AI',
     icon: <BsChatTextFill />,
   },

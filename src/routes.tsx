@@ -14,6 +14,7 @@ import Chatbot from './pages/chatbot/chatbot-page';
 import AccountPage from './pages/dashboard/account-page';
 import UserManagementPage from './pages/dashboard/user-management/user-management-page';
 import Pju2Page from './pages/dashboard/pju/pju2-page';
+import SelectChatbotPage from './pages/dashboard/select-chatbot/select-chatbot-page';
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
                 <UserManagementPage />
               </ProtectedRoute>
             ),
+          },
+          {
+            path: 'select-chatbot',
+            element: <SelectChatbotPage />,
           },
         ],
       },
