@@ -5,7 +5,11 @@ import { thingspeakApiBaseUrl } from '@/lib/configs/api';
 import axios from 'axios';
 import { Power, PowerOff, Zap } from 'lucide-react';
 
-const PjuControlCardNew: React.FC = () => {
+type PjuControlCardNewProps = {
+  pjuId: number;
+};
+
+const PjuControlCardNew: React.FC<PjuControlCardNewProps> = ({ pjuId }) => {
   const writeApiKey = import.meta.env.VITE_THINGSPEAK_WRITE_API_KEY;
 
   const [lampValueState, setLampValueState] = useState<number>(0);
@@ -54,7 +58,7 @@ const PjuControlCardNew: React.FC = () => {
   return (
     <Card className='overflow-hidden shadow-md w-full lg:w-1/2'>
       <CardHeader>
-        <CardTitle className='flex items-center gap-2'>Kontrol Lampu PJU</CardTitle>
+        <CardTitle className='flex items-center gap-2'>Kontrol Lampu PJU {pjuId}</CardTitle>
         <CardDescription className='text-zinc-400'>Nyalakan, matikan, atau aktifkan mode otomatis pada lampu PJU.</CardDescription>
       </CardHeader>
       <CardContent>

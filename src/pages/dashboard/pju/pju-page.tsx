@@ -6,6 +6,7 @@ import PjuMonitorGrid from '@/components/dashboard/pju-monitor-grid';
 import PageTitle from '@/components/dashboard/page-title/page-title';
 import PageDescription from '@/components/dashboard/page-title/page-description';
 import { pju1Data } from '@/lib/data/pju-data';
+import PjuControlCardNew from '@/components/dashboard/pju/pju-control-card-new';
 
 const PjuPage: React.FC = () => {
   return (
@@ -15,13 +16,24 @@ const PjuPage: React.FC = () => {
           <PageTitle className='mb-1'>Device PJU 1</PageTitle>
           <PageDescription>Monitor kondisi device Penerangan Jalan Umum 1 (PJU 1) dan kontrol lampu PJU 1</PageDescription>
         </div>
-        <Location location={pju1Data.address} lat={pju1Data.lat} long={pju1Data.long} />
+        <Location
+          location={pju1Data.address}
+          lat={pju1Data.lat}
+          long={pju1Data.long}
+        />
       </div>
 
       <div className='mt-4'>
         <BlockTitle>Data Device PJU 1</BlockTitle>
         <div className='mt-4'>
           <PjuMonitorGrid pjuId={1} />
+        </div>
+      </div>
+
+      <div className='mt-4'>
+        <BlockTitle>Kontrol PJU</BlockTitle>
+        <div className='mt-4'>
+          <PjuControlCardNew pjuId={1} />
         </div>
       </div>
     </div>

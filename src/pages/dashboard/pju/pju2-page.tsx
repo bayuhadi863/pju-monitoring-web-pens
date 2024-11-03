@@ -32,7 +32,7 @@ const Pju2Page: FC = () => {
       <div className='mt-4'>
         <BlockTitle>Kontrol PJU</BlockTitle>
         <div className='mt-4'>
-          <PjuControlCardNew />
+          <PjuControlCardNew pjuId={2} />
         </div>
       </div>
     </div>
