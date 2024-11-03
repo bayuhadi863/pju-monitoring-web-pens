@@ -7,6 +7,8 @@ const VideoPlayer2: React.FC = () => {
         title='live-cctv'
         src='https://rtsp.me/embed/2zES6Z3D/'
         className='rounded-md w-full aspect-video'
+        allow='fullscreen'
+        allowFullScreen
       />
     </div>
   );
