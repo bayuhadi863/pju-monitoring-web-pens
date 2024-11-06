@@ -11,14 +11,20 @@ type PjuMonitorGridProps = {
 
 const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
   const [data] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
-  const [, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [, setIsUpdating] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
   const fetchData = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${apiBaseUrl}/monitor/${pjuId}`);
       const responseData = response.data.data;
+
+      if (responseData.length === 0) {
+        setIsEmpty(true);
+        return;
+      }
 
       responseData.forEach((monitorData: PjuMonitorStaticDataType) => {
         const index = data.findIndex((data) => data.code === monitorData.code);
@@ -52,9 +58,11 @@ const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
           key={i}
           subTitle={item.subTitle}
           title={item.title}
-          value={item.value}
+          value={isLoading ? 0 : item.value}
           unit={item.unit}
           icon={item.icon}
+          isLoading={isLoading}
+          isEmpty={isEmpty}
         />
       ))}
     </div>
