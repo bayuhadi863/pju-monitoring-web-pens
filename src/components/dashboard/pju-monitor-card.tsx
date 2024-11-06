@@ -24,7 +24,7 @@ export default function PjuMonitorCard({ value, title, subTitle, unit, icon, isL
           <div className='bg-primary/10 p-3 rounded-full'>{icon}</div>
         </div>
         <div className='mt-4 flex items-baseline space-x-2'>
-          <span className='text-4xl font-bold tracking-tighter'>{isLoading || isEmpty ? '--' : roundedValue}</span>
+          <span className='text-4xl font-bold tracking-tighter'>{isLoading || isEmpty ? '---' : roundedValue}</span>
           <span className='text-sm font-medium text-muted-foreground'>{unit}</span>
         </div>
       </CardContent>
