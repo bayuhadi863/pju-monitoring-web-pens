@@ -1,4 +1,4 @@
 export type SensorChartResponse = {
-  hour: string;
-  averageValue: number;
+    hour: string;
+    averageValue: number;
 };

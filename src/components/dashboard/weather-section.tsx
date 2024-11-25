@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import BlockTitle from './block-title';
-import SensorCard from './sensor-card';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
 import { socket } from '@/lib/configs/socket';
@@ -11,167 +9,125 @@ import { rainfall } from '@/lib/data/sensor-data/weather/rainfall-level';
 import { windSpeed } from '@/lib/data/sensor-data/weather/wind-speed';
 import { windDirection } from '@/lib/data/sensor-data/weather/wind-direction';
 import { airPressure } from '@/lib/data/sensor-data/weather/air-pressure';
-import { format } from 'date-fns';
-import HumidityChart from './chart/humidity-chart';
-import TemperatureChart from './chart/temperature-chart';
-import SolarRadiationChart from './chart/solar-radiation-chart';
-import AirPressureChart from './chart/air-pressure-chart';
-import RainfallLevelChart from './chart/rainfall-level-chart';
-import WindSpeedChart from './chart/wind-speed-chart';
-import WindDirectionChart from './chart/wind-direction-chart';
+import HumidityCard from './card/humidity-card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Clock } from 'lucide-react';
+import TemperatureCard from './card/temperature-card';
+import AirPressureCard from './card/air-pressure-card';
+import RainfallLevelCard from './card/rainfall-level-card';
+import WindDirectionCard from './card/wind-direction-card';
+import WindSpeedCard from './card/wind-speed-card';
+import SolarRadiationCard from './card/solar-radiation-card';
 
 const WeatherSection: React.FC = () => {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-  const [data, setData] = useState<SensorData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [, setIsUpdating] = useState<boolean>(false);
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+    const [data, setData] = useState<SensorData[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [, setIsUpdating] = useState<boolean>(false);
 
-  const dateNow = new Date();
-  const formattedDate = format(dateNow, 'dd-MM-yyyy');
-
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`${apiBaseUrl}/weather`);
-      setData(response.data.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleWeatherUpdate = async () => {
-    setIsUpdating(true);
-    await fetchData();
-    setIsUpdating(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-    socket.on('weatherUpdate', handleWeatherUpdate);
-    return () => {
-      socket.off('weatherUpdate');
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(`${apiBaseUrl}/weather`);
+            setData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
-  }, []);
 
-  const getSensorDataBySensorTypeCode = (code: string): SensorData | undefined => {
-    return data.find((sensorData) => sensorData.code === code);
-  };
+    const handleWeatherUpdate = async () => {
+        setIsUpdating(true);
+        await fetchData();
+        setIsUpdating(false);
+    };
 
-  const humiditySensor = getSensorDataBySensorTypeCode(humidity.sensorTypeCode);
-  const temperatureSensor = getSensorDataBySensorTypeCode(temperature.sensorTypeCode);
-  const solarSensor = getSensorDataBySensorTypeCode(solar.sensorTypeCode);
-  const rainfallSensor = getSensorDataBySensorTypeCode(rainfall.sensorTypeCode);
-  const windSpeedSensor = getSensorDataBySensorTypeCode(windSpeed.sensorTypeCode);
-  const windDirectionSensor = getSensorDataBySensorTypeCode(windDirection.sensorTypeCode);
-  const airPressureSensor = getSensorDataBySensorTypeCode(airPressure.sensorTypeCode);
+    useEffect(() => {
+        fetchData();
+        socket.on('weatherUpdate', handleWeatherUpdate);
+        return () => {
+            socket.off('weatherUpdate');
+        };
+    }, []);
 
-  return (
-    <section className='mt-4'>
-      <BlockTitle>Data Sensor Cuaca Terbaru</BlockTitle>
+    const getSensorDataBySensorTypeCode = (code: string): SensorData | undefined => {
+        return data.find((sensorData) => sensorData.code === code);
+    };
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-3'>
-        <SensorCard
-          title={humidity.title}
-          subTitle={humidity.subtitle}
-          value={humiditySensor?.value}
-          unit={humidity.unit}
-          color={humiditySensor ? humidity.generateColor(humiditySensor.value) : ''}
-          icon={humiditySensor ? humidity.generateIcon(humiditySensor.value) : ''}
-          info={humidity.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Kelembaban Udara'
-          chartDescription={`Grafik nilai kelembaban udara pada hari ini tanggal ${formattedDate}`}
-          chart={<HumidityChart />}
-        />
+    const humiditySensor = getSensorDataBySensorTypeCode(humidity.sensorTypeCode);
+    const temperatureSensor = getSensorDataBySensorTypeCode(temperature.sensorTypeCode);
+    const solarSensor = getSensorDataBySensorTypeCode(solar.sensorTypeCode);
+    const rainfallSensor = getSensorDataBySensorTypeCode(rainfall.sensorTypeCode);
+    const windSpeedSensor = getSensorDataBySensorTypeCode(windSpeed.sensorTypeCode);
+    const windDirectionSensor = getSensorDataBySensorTypeCode(windDirection.sensorTypeCode);
+    const airPressureSensor = getSensorDataBySensorTypeCode(airPressure.sensorTypeCode);
 
-        <SensorCard
-          title={temperature.title}
-          subTitle={temperature.subtitle}
-          value={temperatureSensor?.value}
-          unit={temperature.unit}
-          color={temperatureSensor ? temperature.generateColor(temperatureSensor.value) : ''}
-          icon={temperatureSensor ? temperature.generateIcon(temperatureSensor.value) : ''}
-          info={temperature.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Suhu'
-          chartDescription={`Grafik nilai suhu pada hari ini tanggal ${formattedDate}`}
-          chart={<TemperatureChart />}
-        />
+    const formatLastUpdated = (date: Date) => {
+        return new Intl.DateTimeFormat('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+        }).format(date);
+    };
 
-        <SensorCard
-          title={solar.title}
-          subTitle={solar.subtitle}
-          value={solarSensor?.value}
-          unit={solar.unit}
-          color={solarSensor ? solar.generateColor(solarSensor.value) : ''}
-          icon={solarSensor ? solar.generateIcon(solarSensor.value) : ''}
-          info={solar.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Radiasi Matahari'
-          chartDescription={`Grafik kadar radiasi matahari pada hari ini tanggal ${formattedDate}`}
-          chart={<SolarRadiationChart />}
-        />
+    const timestamp: string | undefined = temperatureSensor?.timestamp;
 
-        <SensorCard
-          title={airPressure.title}
-          subTitle={airPressure.subtitle}
-          value={airPressureSensor?.value}
-          unit={airPressure.unit}
-          color={airPressureSensor ? airPressure.generateColor(airPressureSensor.value) : ''}
-          icon={airPressureSensor ? airPressure.generateIcon(airPressureSensor.value) : ''}
-          info={airPressure.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Tekanan Udara'
-          chartDescription={`Grafik nilai tekanan udara pada hari ini tanggal ${formattedDate}`}
-          chart={<AirPressureChart />}
-        />
-
-        <SensorCard
-          title={rainfall.title}
-          subTitle={rainfall.subtitle}
-          value={rainfallSensor?.value}
-          unit={rainfall.unit}
-          color={rainfallSensor ? rainfall.generateColor(rainfallSensor.value) : ''}
-          icon={rainfallSensor ? rainfall.generateIcon(rainfallSensor.value) : ''}
-          info={rainfall.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Curah Hujan'
-          chartDescription={`Grafik nilai curah hujan pada hari ini tanggal ${formattedDate}`}
-          chart={<RainfallLevelChart />}
-        />
-
-        <SensorCard
-          title={windSpeed.title}
-          subTitle={windSpeed.subtitle}
-          value={windSpeedSensor?.value}
-          unit={windSpeed.unit}
-          color={windSpeedSensor ? windSpeed.generateColor(windSpeedSensor.value) : ''}
-          icon={windSpeedSensor ? windSpeed.generateIcon(windSpeedSensor.value) : ''}
-          info={windSpeed.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Kecepatan Angin'
-          chartDescription={`Grafik nilai kecepatan angin pada hari ini tanggal ${formattedDate}`}
-          chart={<WindSpeedChart />}
-        />
-
-        <SensorCard
-          title={windDirection.title}
-          subTitle={windDirection.subtitle}
-          value={windDirectionSensor?.value}
-          unit={windDirection.unit}
-          color={windDirectionSensor ? windDirection.generateColor(windDirectionSensor.value) : ''}
-          icon={windDirectionSensor ? windDirection.generateIcon(windDirectionSensor.value) : ''}
-          info={windDirection.info}
-          isLoading={isLoading}
-          chartTitle='Grafik Arah Angin'
-          chartDescription={`Grafik nilai derajat arah angin pada hari ini tanggal ${formattedDate}`}
-          chart={<WindDirectionChart />}
-        />
-      </div>
-    </section>
-  );
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>Informasi Cuaca</CardTitle>
+                <CardDescription>
+                    <div className='flex items-center space-x-2'>
+                        <Clock className='h-5 w-5 text-slate-500' />
+                        <span className='text-sm text-muted-foreground'>Terakhir diupdate: {timestamp ? formatLastUpdated(new Date(timestamp)) : '---'}</span>
+                    </div>
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className='flex flex-col lg:flex-row gap-4'>
+                    <div className='lg:basis-2/5 xl:basis-1/2 flex items-center'>
+                        <TemperatureCard
+                            className='w-full'
+                            isLoading={isLoading}
+                            value={temperatureSensor?.value}
+                        />
+                    </div>
+                    <div className='lg:basis-3/5 xl:basis-1/2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4'>
+                        <AirPressureCard
+                            isLoading={isLoading}
+                            value={airPressureSensor?.value}
+                        />
+                        <RainfallLevelCard
+                            isLoading={isLoading}
+                            value={rainfallSensor?.value}
+                        />
+                        <WindDirectionCard
+                            isLoading={isLoading}
+                            value={windDirectionSensor?.value}
+                        />
+                    </div>
+                </div>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
+                    <HumidityCard
+                        isLoading={isLoading}
+                        value={humiditySensor?.value}
+                    />
+                    <WindSpeedCard
+                        isLoading={isLoading}
+                        value={windSpeedSensor?.value}
+                    />
+                    <SolarRadiationCard
+                        isLoading={isLoading}
+                        value={solarSensor?.value}
+                    />
+                </div>
+            </CardContent>
+        </Card>
+    );
 };
 
 export default WeatherSection;
