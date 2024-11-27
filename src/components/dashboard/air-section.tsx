@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SensorCard from './sensor-card';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
 import { socket } from '@/lib/configs/socket';
@@ -10,25 +9,21 @@ import { nitrogenDioxide } from '@/lib/data/sensor-data/air-quality/nitrogen-dio
 import { sulfurDioxide } from '@/lib/data/sensor-data/air-quality/sulfur-dioxide';
 import { particulateMatter25 } from '@/lib/data/sensor-data/air-quality/particulate-matter-25';
 import { particulateMatter10 } from '@/lib/data/sensor-data/air-quality/particulate-matter-10';
-import { format } from 'date-fns';
-import CarbonDioxideChart from './chart/carbon-dioxide-chart';
-import OxygenChart from './chart/oxygen-chart';
-import OzoneChart from './chart/ozone';
-import NitrogenDioxideChart from './chart/nitrogen-dioxide-chart';
-import SulfurDioxideChart from './chart/sulfur-dioxide-chart';
-import PM25Chart from './chart/pm25-chart';
-import PM10Chart from './chart/pm10-chart';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Clock } from 'lucide-react';
+import CarbonDioxideCard from './card/carbon-dioxide-card';
+import OxygenCard from './card/oxygen-card';
+import OzoneCard from './card/ozone-card';
+import NitrogenDioxideCard from './card/nitrogen-dioxide';
+import SulfurDioxideCard from './card/sulfur-dioxide';
+import PM25Card from './card/pm25-card';
+import PM10Card from './card/pm10-card';
 
 const AirSection: React.FC = () => {
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
     const [data, setData] = useState<SensorData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [, setIsUpdating] = useState<boolean>(false);
-
-    const dateNow = new Date();
-    const formattedDate = format(dateNow, 'dd-MM-yyyy');
 
     const fetchData = async () => {
         try {
@@ -93,103 +88,40 @@ const AirSection: React.FC = () => {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-3'>
-                    <SensorCard
-                        title={carbonDioxide.title}
-                        subTitle={carbonDioxide.subtitle}
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                    <CarbonDioxideCard
+                        isLoading={isLoading}
                         value={carbonDioxideSensor?.value}
-                        unit={carbonDioxide.unit}
-                        color={carbonDioxideSensor ? carbonDioxide.generateColor(carbonDioxideSensor.value) : ''}
-                        icon={carbonDioxideSensor ? carbonDioxide.generateIcon(carbonDioxideSensor.value) : ''}
-                        info={carbonDioxide.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Karbon Dioksida'
-                        chartDescription={`Grafik nilai kadar karbon dioksida pada hari ini tanggal ${formattedDate}`}
-                        chart={<CarbonDioxideChart />}
                     />
 
-                    <SensorCard
-                        title={oxygen.title}
-                        subTitle={oxygen.subtitle}
+                    <OxygenCard
+                        isLoading={isLoading}
                         value={oxygenSensor?.value}
-                        unit={oxygen.unit}
-                        color={oxygenSensor ? oxygen.generateColor(oxygenSensor.value) : ''}
-                        icon={oxygenSensor ? oxygen.generateIcon(oxygenSensor.value) : ''}
-                        info={oxygen.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Oksigen'
-                        chartDescription={`Grafik nilai kadar oksigen pada hari ini tanggal ${formattedDate}`}
-                        chart={<OxygenChart />}
                     />
 
-                    <SensorCard
-                        title={ozone.title}
-                        subTitle={ozone.subtitle}
+                    <OzoneCard
+                        isLoading={isLoading}
                         value={ozoneSensor?.value}
-                        unit={ozone.unit}
-                        color={ozoneSensor ? ozone.generateColor(ozoneSensor.value) : ''}
-                        icon={ozoneSensor ? ozone.generateIcon(ozoneSensor.value) : ''}
-                        info={ozone.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Gas Ozon'
-                        chartDescription={`Grafik nilai kadar gas ozon pada hari ini tanggal ${formattedDate}`}
-                        chart={<OzoneChart />}
                     />
 
-                    <SensorCard
-                        title={nitrogenDioxide.title}
-                        subTitle={nitrogenDioxide.subtitle}
+                    <NitrogenDioxideCard
+                        isLoading={isLoading}
                         value={nitrogenDioxideSensor?.value}
-                        unit={nitrogenDioxide.unit}
-                        color={nitrogenDioxideSensor ? nitrogenDioxide.generateColor(nitrogenDioxideSensor.value) : ''}
-                        icon={nitrogenDioxideSensor ? nitrogenDioxide.generateIcon(nitrogenDioxideSensor.value) : ''}
-                        info={nitrogenDioxide.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Nitrogen Dioksida'
-                        chartDescription={`Grafik nilai kadar nitrogen dioksida pada hari ini tanggal ${formattedDate}`}
-                        chart={<NitrogenDioxideChart />}
                     />
 
-                    <SensorCard
-                        title={sulfurDioxide.title}
-                        subTitle={sulfurDioxide.subtitle}
+                    <SulfurDioxideCard
+                        isLoading={isLoading}
                         value={sulfurDioxideSensor?.value}
-                        unit={sulfurDioxide.unit}
-                        color={sulfurDioxideSensor ? sulfurDioxide.generateColor(sulfurDioxideSensor.value) : ''}
-                        icon={sulfurDioxideSensor ? sulfurDioxide.generateIcon(sulfurDioxideSensor.value) : ''}
-                        info={sulfurDioxide.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Sulfur Dioksida'
-                        chartDescription={`Grafik nilai kadar sulfur dioksida pada hari ini tanggal ${formattedDate}`}
-                        chart={<SulfurDioxideChart />}
                     />
 
-                    <SensorCard
-                        title={particulateMatter25.title}
-                        subTitle={particulateMatter25.subtitle}
+                    <PM25Card
+                        isLoading={isLoading}
                         value={particulateMatter25Sensor?.value}
-                        unit={particulateMatter25.unit}
-                        color={particulateMatter25Sensor ? particulateMatter25.generateColor(particulateMatter25Sensor.value) : ''}
-                        icon={particulateMatter25Sensor ? particulateMatter25.generateIcon(particulateMatter25Sensor.value) : ''}
-                        info={particulateMatter25.info}
-                        isLoading={isLoading}
-                        chartTitle='Grafik Partikulat Materi 2.5'
-                        chartDescription={`Grafik nilai kadar partikulat materi 2.5 pada hari ini tanggal ${formattedDate}`}
-                        chart={<PM25Chart />}
                     />
 
-                    <SensorCard
-                        title={particulateMatter10.title}
-                        subTitle={particulateMatter10.subtitle}
-                        value={particulateMatter10Sensor?.value}
-                        unit={particulateMatter10.unit}
-                        color={particulateMatter10Sensor ? particulateMatter10.generateColor(particulateMatter10Sensor.value) : ''}
-                        icon={particulateMatter10Sensor ? particulateMatter10.generateIcon(particulateMatter10Sensor.value) : ''}
-                        info={particulateMatter10.info}
+                    <PM10Card
                         isLoading={isLoading}
-                        chartTitle='Grafik Partikulat Materi 10'
-                        chartDescription={`Grafik nilai kadar partikulat materi 10 pada hari ini tanggal ${formattedDate}`}
-                        chart={<PM10Chart />}
+                        value={particulateMatter10Sensor?.value}
                     />
                 </div>
             </CardContent>

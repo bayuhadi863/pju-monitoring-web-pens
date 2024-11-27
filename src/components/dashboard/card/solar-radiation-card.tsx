@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { roundValue } from '@/lib/utils/roundValue';
@@ -23,7 +21,7 @@ const SolarRadiationCard: FC<SolarRadiationCardProps> = ({ value, isLoading, cla
                     <img
                         src={solarIcon}
                         alt='App Logo'
-                        className='w-5 mt-1'
+                        className='w-6 mt-0'
                     />
                     <div className='flex gap-1 items-center flex-wrap'>
                         <h5 className='font-semibold'>Radiasi Matahari</h5>

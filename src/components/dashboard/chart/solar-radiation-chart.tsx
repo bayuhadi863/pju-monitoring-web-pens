@@ -54,7 +54,7 @@ const SolarRadiationChart: React.FC = () => {
                 />
                 <ChartTooltip
                     cursor={true}
-                    defaultIndex={1}
+                    defaultIndex={chartData.length - 1}
                     content={
                         <ChartTooltipContent
                             hideLabel
