@@ -13,7 +13,7 @@ const HomeNavbar: React.FC = () => {
     return (
         <CustomContainer>
             <nav className='flex justify-between items-center h-20'>
-                <div className='flex gap-4 sm:gap-8'>
+                <div className='flex gap-6 sm:gap-8'>
                     <Link
                         to='/'
                         className='flex items-center gap-2'
@@ -23,7 +23,7 @@ const HomeNavbar: React.FC = () => {
                             alt='App Logo'
                             className='w-8 h-8'
                         />
-                        <span className='text-lg font-semibold text-primary uppercase'>Smart PJU Monitor</span>
+                        <span className='hidden sm:block text-lg font-semibold text-primary uppercase'>Smart PJU Monitor</span>
                     </Link>
 
                     <div className='flex gap-1 items-center'>
@@ -39,7 +39,7 @@ const HomeNavbar: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <ul className='flex gap-4 items-center'>
                         <li>
                             <a href='#'>Home</a>
@@ -51,7 +51,7 @@ const HomeNavbar: React.FC = () => {
                             <a href='#'>Features</a>
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 <div>
                     {user ? (
                         <Button>
