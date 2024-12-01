@@ -3,8 +3,9 @@ import useUserManagementStore from '@/stores/user-management-store';
 import { deleteUser } from '@/lib/services/user-service';
 import { toast } from '@/components/hooks/use-toast';
 import { exceptionHandler } from '@/lib/utils/exception-handler';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const ConfirmDeleteDialog: React.FC = () => {
     const fetchUsers = useUserManagementStore((state) => state.fetchUsers);
@@ -71,9 +72,11 @@ const ConfirmDeleteDialog: React.FC = () => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel onClick={() => setConfirmDeleteUserDialogOpen(false)}>Batal</AlertDialogCancel>
-                    <AlertDialogAction
+
+                    <Button
                         onClick={handleDeleteUser}
                         disabled={submitting}
+                        variant='destructive'
                     >
                         {submitting ? (
                             <div className='flex items-center gap-1'>
@@ -83,7 +86,7 @@ const ConfirmDeleteDialog: React.FC = () => {
                         ) : (
                             'Hapus'
                         )}
-                    </AlertDialogAction>
+                    </Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
