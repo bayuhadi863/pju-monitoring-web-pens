@@ -24,7 +24,7 @@ const ConfirmDeleteDialog: React.FC = () => {
                 variant: 'success',
                 duration: 3000,
                 title: 'Berhasil!',
-                description: 'User baru berhasil ditambahkan.',
+                description: 'User berhasil dihapus.',
             });
 
             setConfirmDeleteUserDialogOpen(false);
