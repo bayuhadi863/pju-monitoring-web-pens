@@ -4,69 +4,90 @@ import axios from 'axios';
 import { socket } from '@/lib/configs/socket';
 import { apiBaseUrl } from '@/lib/configs/api';
 import { pjuMonitorStaticData, PjuMonitorStaticDataType } from '@/lib/data/pju-monitor-data';
+import { Clock } from 'lucide-react';
 
 type PjuMonitorGridProps = {
-  pjuId: number;
+    pjuId: number;
 };
 
 const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
-  const [data] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [, setIsUpdating] = useState<boolean>(false);
-  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+    const [data] = useState<PjuMonitorStaticDataType[]>(pjuMonitorStaticData);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [, setIsUpdating] = useState<boolean>(false);
+    const [isEmpty, setIsEmpty] = useState<boolean>(false);
+    const [timestamp, setTimestamp] = useState<string>('');
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`${apiBaseUrl}/monitor/${pjuId}`);
-      const responseData = response.data.data;
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(`${apiBaseUrl}/monitor/${pjuId}`);
+            const responseData = response.data.data;
 
-      if (responseData.length === 0) {
-        setIsEmpty(true);
-        return;
-      }
+            if (responseData.length === 0) {
+                setIsEmpty(true);
+                return;
+            }
 
-      responseData.forEach((monitorData: PjuMonitorStaticDataType) => {
-        const index = data.findIndex((data) => data.code === monitorData.code);
-        data[index].value = monitorData.value;
-      });
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+            responseData.forEach((monitorData: PjuMonitorStaticDataType) => {
+                const index = data.findIndex((data) => data.code === monitorData.code);
+                data[index].value = monitorData.value;
+            });
 
-  const handleMonitorUpdate = async () => {
-    setIsUpdating(true);
-    await fetchData();
-    setIsUpdating(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-    socket.on('monitorUpdate', handleMonitorUpdate);
-    return () => {
-      socket.off('monitorUpdate');
+            setTimestamp(responseData[0].timestamp);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
-  }, []);
 
-  return (
-    <div className='grid gap-6 sm:grid-cols-2 xl:grid-cols-3'>
-      {data.map((item, i) => (
-        <PjuMonitorCard
-          key={i}
-          subTitle={item.subTitle}
-          title={item.title}
-          value={isLoading ? 0 : item.value}
-          unit={item.unit}
-          icon={item.icon}
-          isLoading={isLoading}
-          isEmpty={isEmpty}
-        />
-      ))}
-    </div>
-  );
+    const handleMonitorUpdate = async () => {
+        setIsUpdating(true);
+        await fetchData();
+        setIsUpdating(false);
+    };
+
+    useEffect(() => {
+        fetchData();
+        socket.on('monitorUpdate', handleMonitorUpdate);
+        return () => {
+            socket.off('monitorUpdate');
+        };
+    }, []);
+
+    const formatLastUpdated = (date: Date) => {
+        return new Intl.DateTimeFormat('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+        }).format(date);
+    };
+
+    return (
+        <>
+            <div className='flex items-center space-x-2 mb-4'>
+                <Clock className='h-5 w-5 text-slate-500' />
+                <span className='text-sm text-muted-foreground'>Terakhir diupdate: {timestamp ? formatLastUpdated(new Date(timestamp)) : '---'}</span>
+            </div>
+            <div className='grid gap-6 sm:grid-cols-2 xl:grid-cols-3'>
+                {data.map((item, i) => (
+                    <PjuMonitorCard
+                        key={i}
+                        subTitle={item.subTitle}
+                        title={item.title}
+                        value={isLoading ? 0 : item.value}
+                        unit={item.unit}
+                        icon={item.icon}
+                        isLoading={isLoading}
+                        isEmpty={isEmpty}
+                    />
+                ))}
+            </div>
+        </>
+    );
 };
 
 export default PjuMonitorGrid;

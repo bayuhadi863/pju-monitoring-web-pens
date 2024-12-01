@@ -7,15 +7,15 @@ import { useAuth } from '@/context/auth-context';
 type ProtectedRouteProps = PropsWithChildren;
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, loading } = useAuth();
+    const { user, loading } = useAuth();
 
-  if (loading) {
-    return <PageLoading />;
-  }
+    if (loading) {
+        return <PageLoading />;
+    }
 
-  if (!user) {
-    return <Navigate to='/login' />;
-  }
+    if (!user) {
+        return <Navigate to='/login' />;
+    }
 
-  return children;
+    return children;
 }

@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { userSidebarLinks, operatorSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
 import appLogo from '@/assets/app-logo-light-blue.png';
+import { useAuth } from '@/context/auth-context';
+import { checkIsAdmin } from '@/lib/utils/check-role';
 
 const SidebarHeader = () => {
     return (
@@ -27,25 +29,40 @@ const SidebarHeader = () => {
 };
 
 const SidebarContent = () => {
+    const { user, loading } = useAuth();
+    const isAdmin = checkIsAdmin(user?.role_code || '');
+
     return (
         <div>
             <SidebarLinks links={userSidebarLinks} />
             <hr className='my-4 border-t border-border' />
             <SidebarLinks links={operatorSidebarLinks} />
-            <hr className='my-4 border-t border-border' />
-            <SidebarLinks links={adminSidebarLinks} />
+            {!loading && isAdmin && (
+                <>
+                    <hr className='my-4 border-t border-border' />
+                    <SidebarLinks links={adminSidebarLinks} />
+                </>
+            )}
         </div>
     );
 };
 
 const MobileSidebarContent = () => {
+    const { user, loading } = useAuth();
+    const isAdmin = checkIsAdmin(user?.role_code || '');
+
     return (
         <div>
             <MobileSidebarLinks links={userSidebarLinks} />
             <hr className='my-4 border-t border-border' />
             <MobileSidebarLinks links={operatorSidebarLinks} />
-            <hr className='my-4 border-t border-border' />
-            <MobileSidebarLinks links={adminSidebarLinks} />
+
+            {!loading && isAdmin && (
+                <>
+                    <hr className='my-4 border-t border-border' />
+                    <MobileSidebarLinks links={adminSidebarLinks} />
+                </>
+            )}
         </div>
     );
 };

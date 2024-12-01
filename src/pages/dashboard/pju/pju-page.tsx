@@ -9,35 +9,35 @@ import { pju1Data } from '@/lib/data/pju-data';
 import PjuControlCardNew from '@/components/dashboard/pju/pju-control-card-new';
 
 const PjuPage: React.FC = () => {
-  return (
-    <div>
-      <div className='mb-5 flex flex-col md:flex-row md:justify-between items-start gap-5'>
+    return (
         <div>
-          <PageTitle className='mb-1'>Device PJU 1</PageTitle>
-          <PageDescription>Monitor kondisi device Penerangan Jalan Umum 1 (PJU 1) dan kontrol lampu PJU 1</PageDescription>
-        </div>
-        <Location
-          location={pju1Data.address}
-          lat={pju1Data.lat}
-          long={pju1Data.long}
-        />
-      </div>
+            <div className='mb-5 flex flex-col md:flex-row md:justify-between items-start gap-5'>
+                <div>
+                    <PageTitle className='mb-1'>Device PJU 1</PageTitle>
+                    <PageDescription>Monitor kondisi device Penerangan Jalan Umum 1 (PJU 1) dan kontrol lampu PJU 1</PageDescription>
+                </div>
+                <Location
+                    location={pju1Data.address}
+                    lat={pju1Data.lat}
+                    long={pju1Data.long}
+                />
+            </div>
 
-      <div className='mt-4'>
-        <BlockTitle>Data Device PJU 1</BlockTitle>
-        <div className='mt-4'>
-          <PjuMonitorGrid pjuId={1} />
-        </div>
-      </div>
+            <div className='mt-4'>
+                <BlockTitle>Data Device PJU 1</BlockTitle>
+                <div className='mt-4'>
+                    <PjuMonitorGrid pjuId={1} />
+                </div>
+            </div>
 
-      <div className='mt-4'>
-        <BlockTitle>Kontrol PJU</BlockTitle>
-        <div className='mt-4'>
-          <PjuControlCardNew pjuId={1} />
+            <div className='mt-4'>
+                <BlockTitle>Kontrol PJU</BlockTitle>
+                <div className='mt-4'>
+                    <PjuControlCardNew pjuId={1} />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default PjuPage;
