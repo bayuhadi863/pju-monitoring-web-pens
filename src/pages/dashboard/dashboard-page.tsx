@@ -3,7 +3,6 @@ import Location from '@/components/dashboard/location';
 import PageTitle from '@/components/dashboard/page-title/page-title';
 import PageDescription from '@/components/dashboard/page-title/page-description';
 import { pju2Data } from '@/lib/data/pju-data';
-import CustomAlert from '@/components/dashboard/custom-alert';
 import AirQualityAlert from '@/components/dashboard/air-quality/air-quality-alert';
 import WeatherSection from '@/components/dashboard/weather-section';
 import AirSection from '@/components/dashboard/air-section';
