@@ -1,28 +1,25 @@
 import React from 'react';
-import CustomContainer from '@/components/home/custom-container';
-import heroImage from '@/assets/hero-image.png';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className='h-[85vh] flex items-center'>
-      <CustomContainer className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10 lg:mt-0'>
+    <section className='h-[92vh] flex items-center'>
+      <div className='h-[90vh] w-full rounded-2xl mx-4 mb-4 bg-hero bg-cover bg-repeat-x bg-bottom shadow-lg shadow-slate-400/100 flex flex-col justify-center items-center'>
+        <div className='text-center text-lg font-semibold md:text-xl lg:text-2xl xl:text-4xl'>
+          Sistem Cerdas 
+          <br/>
+          Pemantau Penerangan Jalan Umum
+        </div>
+        <div className='text-center mx-4 pt-2 capitalize text-sm md:text-base lg:text-lg xl:text-xl'>
+          Pantau data sensor cuaca, kualitas udara, CCTV, dan kondisi perangkat PJU secara real-time <br/> untuk pengelolaan yang lebih efisien dan responsif.
+        </div>
         <div>
-          <h1 className='text-4xl font-semibold'>SISTEM CERDAS PEMANTAU PENERANGAN JALAN UMUM (PJU) TERINTEGRASI</h1>
-          <p className='mt-4'>Pantau data beberapa sensor cuaca dan kualitas udara, CCTV, dan kondisi perangkan PJU secara real time.</p>
           <Button className='mt-4'>
-            <Link to='/dashboard'>Lihat Kondisi Cuaca Saat Ini</Link>
+            <Link to='/dashboard'>Lihat Kondisi Cuaca</Link>
           </Button>
         </div>
-        <div className='flex justify-end'>
-          <img
-            src={heroImage}
-            alt='Hero Image'
-            className='w-full h-full max-w-[40rem] object-cover object-center'
-          />
-        </div>
-      </CustomContainer>
+      </div>
     </section>
   );
 };
