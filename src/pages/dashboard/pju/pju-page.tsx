@@ -7,6 +7,7 @@ import PageTitle from '@/components/dashboard/page-title/page-title';
 import PageDescription from '@/components/dashboard/page-title/page-description';
 import { pju1Data } from '@/lib/data/pju-data';
 import PjuControlCardNew from '@/components/dashboard/pju/pju-control-card-new';
+import LampStatusCard from '@/components/dashboard/card/lamp-status-card';
 
 const PjuPage: React.FC = () => {
     return (
@@ -30,10 +31,17 @@ const PjuPage: React.FC = () => {
                 </div>
             </div>
 
-            <div className='mt-4'>
-                <BlockTitle>Kontrol PJU</BlockTitle>
-                <div className='mt-4'>
-                    <PjuControlCardNew pjuId={1} />
+            <div className='mt-4 flex flex-col sm:flex-row gap-5'>
+                <div className='sm:basis-1/2 flex flex-col gap-4'>
+                    <BlockTitle>Status Lampu PJU</BlockTitle>
+                    <LampStatusCard pjuId={1} className='w-full h-full' />
+                </div>
+                <div className='sm:basis-1/2 flex flex-col gap-4'>
+                    <BlockTitle>Kontrol PJU</BlockTitle>
+                    <PjuControlCardNew
+                        pjuId={1}
+                        className='w-full h-full'
+                    />
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ import CustomAlert from '@/components/dashboard/custom-alert';
 import AirQualityAlert from '@/components/dashboard/air-quality/air-quality-alert';
 import WeatherSection from '@/components/dashboard/weather-section';
 import AirSection from '@/components/dashboard/air-section';
+import WeatherSummaryAlert from '@/components/dashboard/alert/weather-summary-alert';
 
 const DashboardPage: React.FC = () => {
     return (
@@ -24,11 +25,7 @@ const DashboardPage: React.FC = () => {
             </div>
 
             <div className='flex flex-col md:flex-row gap-4'>
-                <CustomAlert
-                    title='Kondisi Cuaca Baik'
-                    description='Kondisi cuaca saat ini tergolong baik untuk beraktivitas.'
-                    variant='success'
-                />
+                <WeatherSummaryAlert />
                 <AirQualityAlert pjuId={2} />
             </div>
 

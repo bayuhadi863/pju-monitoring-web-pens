@@ -16,6 +16,21 @@ const rainfallGenerateColor = (value?: number) => {
     return 'red';
 };
 
+export enum RainfallCategory {
+    GOOD = 'good',
+    MODERATE = 'moderate',
+    BAD = 'bad',
+    UNKNOWN = 'unknown',
+}
+
+export const getRainfallCategory = (value?: number): RainfallCategory => {
+    if (value === null || value === undefined) return RainfallCategory.UNKNOWN;
+    if (value >= 0 && value <= 24.9) return RainfallCategory.GOOD;
+    if (value >= 25 && value <= 99.9) return RainfallCategory.MODERATE;
+    if (value >= 100 && value <= 249.0) return RainfallCategory.BAD;
+    return RainfallCategory.BAD;
+};
+
 const rainfallGenerateIcon = (value?: number) => {
     if (value === null || value === undefined) return <div></div>;
     if (value >= 0 && value <= 24.9) return <BsFillCloudRainHeavyFill className='text-green-600' />;

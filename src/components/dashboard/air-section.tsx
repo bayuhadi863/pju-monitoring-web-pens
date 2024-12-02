@@ -88,7 +88,7 @@ const AirSection: React.FC = () => {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                     <CarbonDioxideCard
                         isLoading={isLoading}
                         value={carbonDioxideSensor?.value}
@@ -118,7 +118,7 @@ const AirSection: React.FC = () => {
                         isLoading={isLoading}
                         value={particulateMatter25Sensor?.value}
                     />
-
+                    <div className='hidden xl:block'></div>
                     <PM10Card
                         isLoading={isLoading}
                         value={particulateMatter10Sensor?.value}

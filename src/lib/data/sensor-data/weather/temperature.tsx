@@ -17,6 +17,22 @@ const temperatureGenerateColor = (value?: number) => {
     return 'red';
 };
 
+export enum TemperatureCategory {
+    GOOD = 'good',
+    MODERATE = 'moderate',
+    BAD = 'bad',
+    UNKNOWN = 'unknown',
+}
+
+export const getTemperatureCategory = (value?: number): TemperatureCategory => {
+    if (value === null || value === undefined) return TemperatureCategory.UNKNOWN;
+    if (value >= 20 && value <= 25) return TemperatureCategory.GOOD;
+    if (value > 25 && value <= 35) return TemperatureCategory.MODERATE;
+    if (value < 20) return TemperatureCategory.MODERATE;
+    if (value > 35) return TemperatureCategory.BAD;
+    return TemperatureCategory.UNKNOWN;
+};
+
 const temperatureGenerateIcon = (value?: number) => {
     if (value === null || value === undefined) return <div></div>;
     if (value < 20) return <TbTemperatureSnow className='text-primary' />;

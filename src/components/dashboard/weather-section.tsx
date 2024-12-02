@@ -18,6 +18,7 @@ import RainfallLevelCard from './card/rainfall-level-card';
 import WindDirectionCard from './card/wind-direction-card';
 import WindSpeedCard from './card/wind-speed-card';
 import SolarRadiationCard from './card/solar-radiation-card';
+import useWeatherSummaryStore, { Summary } from '@/stores/weather-summary-store';
 
 const WeatherSection: React.FC = () => {
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
@@ -25,15 +26,28 @@ const WeatherSection: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [, setIsUpdating] = useState<boolean>(false);
 
+    const { setSummary, setIsLoading: setSummaryLoading } = useWeatherSummaryStore();
+
     const fetchData = async () => {
         try {
             setIsLoading(true);
+            setSummaryLoading(true);
             const response = await axios.get(`${apiBaseUrl}/weather`);
             setData(response.data.data);
+            const summary: Summary = {
+                rainfallLevel: response.data.data.find((sensorData: SensorData) => sensorData.code === rainfall.sensorTypeCode)?.value || 0,
+                temperature: response.data.data.find((sensorData: SensorData) => sensorData.code === temperature.sensorTypeCode)?.value || 0,
+                solarRadiation: response.data.data.find((sensorData: SensorData) => sensorData.code === solar.sensorTypeCode)?.value || 0,
+            };
+
+            if (response.data.data.length > 0) {
+                setSummary(summary);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
             setIsLoading(false);
+            setSummaryLoading(false);
         }
     };
 
@@ -111,7 +125,7 @@ const WeatherSection: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
                     <HumidityCard
                         isLoading={isLoading}
                         value={humiditySensor?.value}

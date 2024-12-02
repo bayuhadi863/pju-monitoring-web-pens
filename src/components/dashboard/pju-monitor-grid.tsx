@@ -5,6 +5,7 @@ import { socket } from '@/lib/configs/socket';
 import { apiBaseUrl } from '@/lib/configs/api';
 import { pjuMonitorStaticData, PjuMonitorStaticDataType } from '@/lib/data/pju-monitor-data';
 import { Clock } from 'lucide-react';
+import useLampStatusStore from '@/stores/lamp-status-store';
 
 type PjuMonitorGridProps = {
     pjuId: number;
@@ -17,9 +18,12 @@ const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [timestamp, setTimestamp] = useState<string>('');
 
+    const { setPjuId, setIsOn, setIsLoading: setLampStatusLoading } = useLampStatusStore();
+
     const fetchData = async () => {
         try {
             setIsLoading(true);
+            setLampStatusLoading(true);
             const response = await axios.get(`${apiBaseUrl}/monitor/${pjuId}`);
             const responseData = response.data.data;
 
@@ -33,11 +37,20 @@ const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
                 data[index].value = monitorData.value;
             });
 
+            // find response data with code 'POW'
+            const lampStatus = responseData.find((data: any) => data.code === 'POW');
+
+            setPjuId(pjuId);
+            if (lampStatus) {
+                setIsOn(lampStatus.value > 0 ? true : false);
+            }
+
             setTimestamp(responseData[0].timestamp);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
             setIsLoading(false);
+            setLampStatusLoading(false);
         }
     };
 
