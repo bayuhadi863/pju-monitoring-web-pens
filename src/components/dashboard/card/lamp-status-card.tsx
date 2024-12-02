@@ -31,9 +31,9 @@ const LampStatusCard: React.FC<LampStatusCardProps> = ({ pjuId, className }) => 
                 ) : isOn === undefined ? (
                     <p className='text-center text-muted-foreground'>Data status lampu tidak ada</p>
                 ) : (
-                    <div className='flex flex-col items-center justify-center gap-4'>
+                    <div className='flex flex-col xl:flex-row items-center justify-center gap-4'>
                         {getLampIcon(isOn)}
-                        <span>{isOn ? 'Aktif' : 'Nonaktif'}</span>
+                        <span className='font-semibold text-lg'>{isOn ? 'Aktif' : 'Nonaktif'}</span>
                     </div>
                 )}
             </CardContent>

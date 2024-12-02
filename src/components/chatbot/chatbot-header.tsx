@@ -3,6 +3,7 @@ import ThemeSwitch from '../theme/theme-switch';
 import { Link } from 'react-router-dom';
 import pemkotLogo from '@/assets/pemkot.png';
 import pensLogo from '@/assets/pens.png';
+import { Undo2 } from 'lucide-react';
 
 const ChatbotHeader: React.FC = () => {
     return (
@@ -22,9 +23,10 @@ const ChatbotHeader: React.FC = () => {
                 </div>
                 <Link
                     to='/dashboard'
-                    className='hover:underline'
+                    className='text-gray-700 dark:text-gray-300 hover:text-primary flex items-center gap-1'
                 >
-                    Dashboard
+                    <Undo2 className='text-sm' />
+                    <span>Dashboard</span>
                 </Link>
             </div>
             <ThemeSwitch />
