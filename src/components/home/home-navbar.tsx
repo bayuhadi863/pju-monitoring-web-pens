@@ -9,8 +9,10 @@ import {
 } from "../ui/navigation-menu";
 import CustomContainer from "@/components/home/custom-container";
 import { Link } from "react-router-dom";
+import { useAuth } from '@/context/auth-context';
 
 const HomeNavbar: React.FC = () => {
+  const { user } = useAuth();
   return (
     <CustomContainer>
       <nav className="flex justify-between items-center h-[8vh]">
@@ -45,6 +47,15 @@ const HomeNavbar: React.FC = () => {
           </NavigationMenu>
         </div>
         <div>
+          {user ? (
+          <Button
+            size="default"
+            variant="outline"
+            className="w-20 border-[#E0E1E6] hover:bg-[#C6E2FF] hover:text-[#00296B] hover:border-inherit"
+          >
+            <Link to="/dashboard">Dashboard</Link>
+          </Button>
+                    ) : (
           <Button
             size="default"
             variant="outline"
@@ -52,6 +63,8 @@ const HomeNavbar: React.FC = () => {
           >
             <Link to="/login">Login</Link>
           </Button>
+                    )}
+          
         </div>
       </nav>
     </CustomContainer>

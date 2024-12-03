@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import BlockTitle from './block-title';
-import SensorCard from './sensor-card';
 import axios from 'axios';
 import { SensorData } from '@/lib/types/sensor-data-type';
 import { socket } from '@/lib/configs/socket';
@@ -11,135 +9,124 @@ import { nitrogenDioxide } from '@/lib/data/sensor-data/air-quality/nitrogen-dio
 import { sulfurDioxide } from '@/lib/data/sensor-data/air-quality/sulfur-dioxide';
 import { particulateMatter25 } from '@/lib/data/sensor-data/air-quality/particulate-matter-25';
 import { particulateMatter10 } from '@/lib/data/sensor-data/air-quality/particulate-matter-10';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Clock } from 'lucide-react';
+import CarbonDioxideCard from './card/carbon-dioxide-card';
+import OxygenCard from './card/oxygen-card';
+import OzoneCard from './card/ozone-card';
+import NitrogenDioxideCard from './card/nitrogen-dioxide';
+import SulfurDioxideCard from './card/sulfur-dioxide';
+import PM25Card from './card/pm25-card';
+import PM10Card from './card/pm10-card';
 
 const AirSection: React.FC = () => {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-  const [data, setData] = useState<SensorData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [, setIsUpdating] = useState<boolean>(false);
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+    const [data, setData] = useState<SensorData[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [, setIsUpdating] = useState<boolean>(false);
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`${apiBaseUrl}/air-quality`);
-      setData(response.data.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDataUpdate = async () => {
-    setIsUpdating(true);
-    await fetchData();
-    setIsUpdating(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-    socket.on('airQualityUpdate', handleDataUpdate);
-    return () => {
-      socket.off('airQualityUpdate');
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(`${apiBaseUrl}/air-quality`);
+            setData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
-  }, []);
 
-  const getSensorDataBySensorTypeCode = (code: string): SensorData | undefined => {
-    return data.find((sensorData) => sensorData.code === code);
-  };
+    const handleDataUpdate = async () => {
+        setIsUpdating(true);
+        await fetchData();
+        setIsUpdating(false);
+    };
 
-  const carbonDioxideSensor = getSensorDataBySensorTypeCode(carbonDioxide.sensorTypeCode);
-  const oxygenSensor = getSensorDataBySensorTypeCode(oxygen.sensorTypeCode);
-  const ozoneSensor = getSensorDataBySensorTypeCode(ozone.sensorTypeCode);
-  const nitrogenDioxideSensor = getSensorDataBySensorTypeCode(nitrogenDioxide.sensorTypeCode);
-  const sulfurDioxideSensor = getSensorDataBySensorTypeCode(sulfurDioxide.sensorTypeCode);
-  const particulateMatter25Sensor = getSensorDataBySensorTypeCode(particulateMatter25.sensorTypeCode);
-  const particulateMatter10Sensor = getSensorDataBySensorTypeCode(particulateMatter10.sensorTypeCode);
+    useEffect(() => {
+        fetchData();
+        socket.on('airQualityUpdate', handleDataUpdate);
+        return () => {
+            socket.off('airQualityUpdate');
+        };
+    }, []);
 
-  return (
-    <section className='mt-4'>
-      <BlockTitle>Data Sensor Kualitas Udara Terbaru</BlockTitle>
+    const getSensorDataBySensorTypeCode = (code: string): SensorData | undefined => {
+        return data.find((sensorData) => sensorData.code === code);
+    };
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2'>
-        <SensorCard
-          title={carbonDioxide.title}
-          subTitle={carbonDioxide.subtitle}
-          value={carbonDioxideSensor?.value}
-          unit={carbonDioxide.unit}
-          color={carbonDioxideSensor ? carbonDioxide.generateColor(carbonDioxideSensor.value) : ''}
-          icon={carbonDioxideSensor ? carbonDioxide.generateIcon(carbonDioxideSensor.value) : ''}
-          info={carbonDioxide.info}
-          isLoading={isLoading}
-        />
+    const carbonDioxideSensor = getSensorDataBySensorTypeCode(carbonDioxide.sensorTypeCode);
+    const oxygenSensor = getSensorDataBySensorTypeCode(oxygen.sensorTypeCode);
+    const ozoneSensor = getSensorDataBySensorTypeCode(ozone.sensorTypeCode);
+    const nitrogenDioxideSensor = getSensorDataBySensorTypeCode(nitrogenDioxide.sensorTypeCode);
+    const sulfurDioxideSensor = getSensorDataBySensorTypeCode(sulfurDioxide.sensorTypeCode);
+    const particulateMatter25Sensor = getSensorDataBySensorTypeCode(particulateMatter25.sensorTypeCode);
+    const particulateMatter10Sensor = getSensorDataBySensorTypeCode(particulateMatter10.sensorTypeCode);
 
-        <SensorCard
-          title={oxygen.title}
-          subTitle={oxygen.subtitle}
-          value={oxygenSensor?.value}
-          unit={oxygen.unit}
-          color={oxygenSensor ? oxygen.generateColor(oxygenSensor.value) : ''}
-          icon={oxygenSensor ? oxygen.generateIcon(oxygenSensor.value) : ''}
-          info={oxygen.info}
-          isLoading={isLoading}
-        />
+    const formatLastUpdated = (date: Date) => {
+        return new Intl.DateTimeFormat('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+        }).format(date);
+    };
 
-        <SensorCard
-          title={ozone.title}
-          subTitle={ozone.subtitle}
-          value={ozoneSensor?.value}
-          unit={ozone.unit}
-          color={ozoneSensor ? ozone.generateColor(ozoneSensor.value) : ''}
-          icon={ozoneSensor ? ozone.generateIcon(ozoneSensor.value) : ''}
-          info={ozone.info}
-          isLoading={isLoading}
-        />
+    const timestamp: string | undefined = carbonDioxideSensor?.timestamp;
 
-        <SensorCard
-          title={nitrogenDioxide.title}
-          subTitle={nitrogenDioxide.subtitle}
-          value={nitrogenDioxideSensor?.value}
-          unit={nitrogenDioxide.unit}
-          color={nitrogenDioxideSensor ? nitrogenDioxide.generateColor(nitrogenDioxideSensor.value) : ''}
-          icon={nitrogenDioxideSensor ? nitrogenDioxide.generateIcon(nitrogenDioxideSensor.value) : ''}
-          info={nitrogenDioxide.info}
-          isLoading={isLoading}
-        />
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>Informasi Kualitas Udara</CardTitle>
+                <CardDescription>
+                    <div className='flex items-center space-x-2'>
+                        <Clock className='h-5 w-5 text-slate-500' />
+                        <span className='text-sm text-muted-foreground'>Terakhir diupdate: {timestamp ? formatLastUpdated(new Date(timestamp)) : '---'}</span>
+                    </div>
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+                    <CarbonDioxideCard
+                        isLoading={isLoading}
+                        value={carbonDioxideSensor?.value}
+                    />
 
-        <SensorCard
-          title={sulfurDioxide.title}
-          subTitle={sulfurDioxide.subtitle}
-          value={sulfurDioxideSensor?.value}
-          unit={sulfurDioxide.unit}
-          color={sulfurDioxideSensor ? sulfurDioxide.generateColor(sulfurDioxideSensor.value) : ''}
-          icon={sulfurDioxideSensor ? sulfurDioxide.generateIcon(sulfurDioxideSensor.value) : ''}
-          info={sulfurDioxide.info}
-          isLoading={isLoading}
-        />
+                    <OxygenCard
+                        isLoading={isLoading}
+                        value={oxygenSensor?.value}
+                    />
 
-        <SensorCard
-          title={particulateMatter25.title}
-          subTitle={particulateMatter25.subtitle}
-          value={particulateMatter25Sensor?.value}
-          unit={particulateMatter25.unit}
-          color={particulateMatter25Sensor ? particulateMatter25.generateColor(particulateMatter25Sensor.value) : ''}
-          icon={particulateMatter25Sensor ? particulateMatter25.generateIcon(particulateMatter25Sensor.value) : ''}
-          info={particulateMatter25.info}
-          isLoading={isLoading}
-        />
+                    <OzoneCard
+                        isLoading={isLoading}
+                        value={ozoneSensor?.value}
+                    />
 
-        <SensorCard
-          title={particulateMatter10.title}
-          subTitle={particulateMatter10.subtitle}
-          value={particulateMatter10Sensor?.value}
-          unit={particulateMatter10.unit}
-          color={particulateMatter10Sensor ? particulateMatter10.generateColor(particulateMatter10Sensor.value) : ''}
-          icon={particulateMatter10Sensor ? particulateMatter10.generateIcon(particulateMatter10Sensor.value) : ''}
-          info={particulateMatter10.info}
-          isLoading={isLoading}
-        />
-      </div>
-    </section>
-  );
+                    <NitrogenDioxideCard
+                        isLoading={isLoading}
+                        value={nitrogenDioxideSensor?.value}
+                    />
+
+                    <SulfurDioxideCard
+                        isLoading={isLoading}
+                        value={sulfurDioxideSensor?.value}
+                    />
+
+                    <PM25Card
+                        isLoading={isLoading}
+                        value={particulateMatter25Sensor?.value}
+                    />
+                    <div className='hidden xl:block'></div>
+                    <PM10Card
+                        isLoading={isLoading}
+                        value={particulateMatter10Sensor?.value}
+                    />
+                </div>
+            </CardContent>
+        </Card>
+    );
 };
 
 export default AirSection;
