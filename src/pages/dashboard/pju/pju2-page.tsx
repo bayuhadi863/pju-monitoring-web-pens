@@ -6,7 +6,7 @@ import { pju2Data } from '@/lib/data/pju-data';
 import BlockTitle from '@/components/dashboard/block-title';
 import PjuMonitorGrid from '@/components/dashboard/pju-monitor-grid';
 import PjuControlCardNew from '@/components/dashboard/pju/pju-control-card-new';
-import LampStatusCard from '@/components/dashboard/card/lamp-status-card';
+// import LampStatusCard from '@/components/dashboard/card/lamp-status-card';
 
 const Pju2Page: FC = () => {
     return (
@@ -31,13 +31,13 @@ const Pju2Page: FC = () => {
             </div>
 
             <div className='mt-4 flex flex-col sm:flex-row gap-5'>
-                <div className='sm:basis-1/2 flex flex-col gap-4'>
+                {/* <div className='sm:basis-1/2 flex flex-col gap-4'>
                     <BlockTitle>Status Lampu PJU</BlockTitle>
                     <LampStatusCard
                         pjuId={2}
                         className='w-full h-full'
                     />
-                </div>
+                </div> */}
                 <div className='sm:basis-1/2 flex flex-col gap-4'>
                     <BlockTitle>Kontrol PJU</BlockTitle>
                     <PjuControlCardNew
