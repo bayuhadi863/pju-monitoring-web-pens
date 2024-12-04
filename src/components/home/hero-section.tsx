@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className='h-[92vh] flex items-center'>
+    <section id='home' className='h-[92vh] flex items-center'>
       <div className='h-[90vh] w-full rounded-2xl mx-4 mb-4 bg-hero bg-cover bg-repeat-x bg-bottom shadow-lg shadow-slate-400/100 flex flex-col justify-center items-center'>
         <div className='text-center text-lg font-semibold md:text-xl lg:text-2xl xl:text-4xl'>
           Sistem Cerdas 

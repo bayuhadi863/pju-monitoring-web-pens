@@ -4,6 +4,7 @@ import logoPENS from "@/assets/PENS.png";
 import logoPengmas from "@/assets/Logo Pengmas.png";
 import logoTutWuriHandayani from "@/assets/Logo Tut Wuri Handayani.png";
 import logoVokasi from "@/assets/Logo Vokasi.png";
+import pemkotLogo from '@/assets/pemkot.png';
 
 const FooterSection: React.FC = () => {
   return (
@@ -13,13 +14,18 @@ const FooterSection: React.FC = () => {
           <div className="flex flex-col py-8">
             <div className="flex justify-center gap-1">
               <img
+                src={pemkotLogo}
+                alt="Logo Pemkot Surabaya"
+                className="w-auto h-12 object-cover object-center"
+              />
+              <img
                 src={logoVokasi}
-                alt="Logo Pens"
+                alt="Logo Vokasi"
                 className="w-auto h-12 object-cover object-center"
               />
               <img
                 src={logoPengmas}
-                alt="Logo Pens"
+                alt="Logo Pengmas"
                 className="w-auto h-12 object-cover object-center"
               />
               <img
@@ -29,7 +35,7 @@ const FooterSection: React.FC = () => {
               />
               <img
                 src={logoTutWuriHandayani}
-                alt="Logo Pens"
+                alt="Logo Tut Wuri Handayani"
                 className="w-auto h-12 object-cover object-center"
               />
             </div>

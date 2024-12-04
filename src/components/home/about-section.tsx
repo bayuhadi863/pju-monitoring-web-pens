@@ -1,13 +1,14 @@
 import React from "react";
+import aboutImage from "@/assets/About Section.png";
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="h-auto py-8 flex items-center">
+    <section id='about' className="h-auto py-8 flex items-center">
       <div className="w-full px-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Left Section */}
         <div className="lg:col-span-1 rounded-2xl shadow-lg shadow-slate-400/100">
           <img
-            src="src/assets/About Section.png"
+            src={aboutImage}
             alt="Deskripsi gambar"
             className="w-0 h-0 lg:w-full lg:h-full sm object-cover rounded-2xl"
           />

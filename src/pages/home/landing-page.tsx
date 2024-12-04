@@ -5,14 +5,14 @@ import FooterSection from '@/components/home/footer-section';
 import AboutSection from '@/components/home/about-section';
 
 const LandingPage: React.FC = () => {
-  return (
-    <div>
-      <HomeNavbar />
-      <HeroSection />
-      <AboutSection />
-      <FooterSection />
-    </div>
-  );
+    return (
+        <div>
+            <HomeNavbar />
+            <HeroSection />
+            <AboutSection />
+            <FooterSection />
+        </div>
+    );
 };
 
 export default LandingPage;

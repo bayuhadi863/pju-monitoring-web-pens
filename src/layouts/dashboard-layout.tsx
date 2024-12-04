@@ -8,7 +8,7 @@ import SidebarLinks from '@/components/dashboard/sidebar-links';
 import { Link } from 'react-router-dom';
 import { userSidebarLinks, operatorSidebarLinks, adminSidebarLinks } from '@/lib/data/links';
 import MobileSidebarLinks from '@/components/dashboard/mobile-sidebar-links';
-import appLogo from '@/assets/app-logo-light-blue.png';
+import appLogo from '@/assets/Logo Si PJU.png'
 import { useAuth } from '@/context/auth-context';
 import { checkIsAdmin } from '@/lib/utils/check-role';
 
@@ -23,7 +23,7 @@ const SidebarHeader = () => {
                 alt='App Logo'
                 className='w-8 h-8'
             />
-            <span className='text-lg font-semibold text-primary uppercase'>Smart PJU Monitor</span>
+            <span className='text-lg font-semibold'>SmartPJU Monitor</span>
         </Link>
     );
 };
