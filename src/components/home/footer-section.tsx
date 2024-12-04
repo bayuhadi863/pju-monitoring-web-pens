@@ -39,10 +39,10 @@ const FooterSection: React.FC = () => {
                 className="w-auto h-12 object-cover object-center"
               />
             </div>
-            <div className="text-center text-sm font-semibold pt-4">
+            <div className="text-center text-sm font-semibold pt-4 text-gray-900">
               Tim Pengabdian Masyarakat PENS 2024
             </div>
-            <div className="text-center text-sm text-slate-400 font-medium">
+            <div className="text-center text-sm text-slate-500 font-medium">
               © 2024 SmartPJU All Rights Reserved
             </div>
           </div>

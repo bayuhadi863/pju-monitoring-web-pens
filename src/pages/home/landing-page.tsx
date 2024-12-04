@@ -6,7 +6,7 @@ import AboutSection from '@/components/home/about-section';
 
 const LandingPage: React.FC = () => {
     return (
-        <div>
+        <div className='bg-white'>
             <HomeNavbar />
             <HeroSection />
             <AboutSection />

@@ -17,7 +17,7 @@ const HomeNavbar: React.FC = () => {
                         alt='Logo'
                         className='w-8 h-8 object-contain'
                     />
-                    <h3 className='hidden sm:block text-2xl font-semibold'>SmartPJU</h3>
+                    <h3 className='hidden sm:block text-2xl font-semibold text-gray-900'>SmartPJU</h3>
                 </div>
                 <div className='text-sm font-medium'>
                     <NavigationMenu>
@@ -46,7 +46,7 @@ const HomeNavbar: React.FC = () => {
                         <Button
                             size='default'
                             variant='outline'
-                            className='px-4 py-3 border-[#E0E1E6] hover:bg-[#C6E2FF] hover:text-[#00296B] hover:border-inherit'
+                            className='px-4 py-3 border-[#E0E1E6] hover:bg-[#C6E2FF] hover:text-[#00296B] hover:border-inherit bg-white text-gray-800'
                         >
                             <Link to='/dashboard'>Dashboard</Link>
                         </Button>
