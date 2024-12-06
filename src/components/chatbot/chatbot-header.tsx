@@ -2,7 +2,7 @@ import React from 'react';
 import ThemeSwitch from '../theme/theme-switch';
 import { Link } from 'react-router-dom';
 import pemkotLogo from '@/assets/pemkot.png';
-import pensLogo from '@/assets/pens.png';
+import pensLogo from '@/assets/PENS.png';
 import { Undo2 } from 'lucide-react';
 
 const ChatbotHeader: React.FC = () => {

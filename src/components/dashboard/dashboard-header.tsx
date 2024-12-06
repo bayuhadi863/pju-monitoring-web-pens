@@ -6,7 +6,7 @@ import { LogIn } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import pemkotLogo from '@/assets/pemkot.png';
-import pensLogo from '@/assets/pens.png';
+import pensLogo from '@/assets/PENS.png';
 
 const DashboardHeader: React.FC = () => {
     const { user, logoutUser } = useAuth();
