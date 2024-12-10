@@ -15,6 +15,7 @@ import UserManagementPage from './pages/dashboard/user-management/user-managemen
 import Pju2Page from './pages/dashboard/pju/pju2-page';
 import SelectChatbotPage from './pages/dashboard/select-chatbot/select-chatbot-page';
 import AdminLayout from './layouts/admin-layout';
+import AccountPage from './pages/profile/account-page';
 
 export const router = createBrowserRouter([
     {
@@ -54,14 +55,14 @@ export const router = createBrowserRouter([
                         path: 'cctv',
                         element: <CctvPage />,
                     },
-                    // {
-                    //     path: 'account',
-                    //     element: (
-                    //         <ProtectedRoute>
-                    //             <AccountPage />
-                    //         </ProtectedRoute>
-                    //     ),
-                    // },
+                    {
+                        path: 'account',
+                        element: (
+                            <ProtectedRoute>
+                                <AccountPage />
+                            </ProtectedRoute>
+                        ),
+                    },
                     {
                         path: 'users',
                         element: (

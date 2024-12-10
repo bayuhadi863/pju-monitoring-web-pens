@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogOut, Loader2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { LogOut, Loader2, Settings } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { exceptionHandler } from '@/lib/utils/exception-handler';
 import { useToast } from '@/components/hooks/use-toast';
 import { AxiosResponse } from 'axios';
@@ -106,20 +106,20 @@ export default function ProfileAvatar({ username, avatarUrl, onLogout, roleCode 
                             <p className='font-medium text-foreground'>{username}</p>
                             <p className='text-xs'>{roleCode}</p>
                         </div>
-                        {/* <Link
+                        <Link
                             to='/dashboard/account'
                             className='flex items-center px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors duration-150 ease-in-out'
                             onClick={() => setIsOpen(false)}
                         >
                             <Settings className='mr-2 h-4 w-4' />
-                            Account Settings
-                        </Link> */}
+                            Pengaturan Akun
+                        </Link>
                         <button
                             onClick={handleLogout}
                             className='flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-150 ease-in-out'
                         >
                             {logoutLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <LogOut className='mr-2 h-4 w-4' />}
-                            Logout
+                            Keluar
                         </button>
                     </div>
                 </div>
