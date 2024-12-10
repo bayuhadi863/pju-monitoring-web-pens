@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { generateSolarBadge, solar } from '@/lib/data/sensor-data/weather/solar-radiation';
 import SolarRadiationChart from '../chart/solar-radiation-chart';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type SolarRadiationCardProps = {
     className?: string;
@@ -17,21 +18,26 @@ const SolarRadiationCard: FC<SolarRadiationCardProps> = ({ value, isLoading, cla
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={solarIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Radiasi Matahari</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={solarIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Radiasi Matahari</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{solar.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{solar.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={solar.title} sensorTypeCode={solar.sensorTypeCode} sensorType='weather' />
                     </div>
                 </div>
             </CardHeader>

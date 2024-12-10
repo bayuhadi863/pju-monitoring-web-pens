@@ -89,7 +89,9 @@ const PjuMonitorGrid: React.FC<PjuMonitorGridProps> = ({ pjuId }) => {
                 {data.map((item, i) => (
                     <PjuMonitorCard
                         key={i}
+                        pjuId={pjuId.toString()}
                         subTitle={item.subTitle}
+                        sensorTypeCode={item.code}
                         title={item.title}
                         value={isLoading ? 0 : item.value}
                         unit={item.unit}

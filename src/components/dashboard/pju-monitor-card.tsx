@@ -1,6 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
+import ExportSensorDialog from './dialog/export-sensor-dialog';
 
 export type PjuMonitorCardProps = {
+    pjuId: string;
     title: string;
     subTitle: string;
     unit: string;
@@ -8,9 +10,10 @@ export type PjuMonitorCardProps = {
     value: number;
     isLoading: boolean;
     isEmpty?: boolean;
+    sensorTypeCode: string;
 };
 
-export default function PjuMonitorCard({ value, title, subTitle, unit, icon, isLoading, isEmpty = false }: PjuMonitorCardProps) {
+export default function PjuMonitorCard({ pjuId, value, title, subTitle, unit, icon, isLoading, isEmpty = false, sensorTypeCode }: PjuMonitorCardProps) {
     const roundedValue = Math.round(Number(value) * 10) / 10;
 
     return (
@@ -23,10 +26,14 @@ export default function PjuMonitorCard({ value, title, subTitle, unit, icon, isL
                     </div>
                     <div className='bg-primary/10 p-3 rounded-full'>{icon}</div>
                 </div>
-                <div className='mt-4 flex items-baseline space-x-2'>
-                    <span className='text-4xl font-bold tracking-tighter'>{isLoading || isEmpty ? '---' : roundedValue}</span>
-                    <span className='text-sm font-medium text-muted-foreground'>{unit}</span>
+                <div className='flex justify-between items-baseline'>
+                    <div className='mt-4 flex items-baseline space-x-2'>
+                        <span className='text-4xl font-bold tracking-tighter'>{isLoading || isEmpty ? '---' : roundedValue}</span>
+                        <span className='text-sm font-medium text-muted-foreground'>{unit}</span>
+                    </div>
+                    <ExportSensorDialog name={title} sensorTypeCode={sensorTypeCode} sensorType='monitor' pjuId={pjuId} />
                 </div>
+
             </CardContent>
         </Card>
     );

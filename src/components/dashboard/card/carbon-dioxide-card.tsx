@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { carbonDioxide, generateCarbonDioxideBadge } from '@/lib/data/sensor-data/air-quality/carbon-dioxide';
 import CarbonDioxideChart from '../chart/carbon-dioxide-chart';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type CarbonDioxideCardProps = {
     className?: string;
@@ -17,21 +18,26 @@ const CarbonDioxideCard: FC<CarbonDioxideCardProps> = ({ value, isLoading, class
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={carbonDioxideIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Karbon Dioksida (CO2)</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={carbonDioxideIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Karbon Dioksida (CO2)</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{carbonDioxide.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{carbonDioxide.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={carbonDioxide.title} sensorTypeCode={carbonDioxide.sensorTypeCode} sensorType='air-quality' />
                     </div>
                 </div>
             </CardHeader>

@@ -4,6 +4,7 @@ import { generateTemperatureBadge, temperature } from '@/lib/data/sensor-data/we
 import TemperatureChart from '../chart/temperature-chart';
 import { Info } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type TemperatureCardProps = {
     className?: string;
@@ -49,6 +50,9 @@ const TemperatureCard: FC<TemperatureCardProps> = ({ className, isLoading, value
                     </Popover>
                 </div>
                 <div className='text-center'>{generateTemperatureBadge(isLoading ? undefined : value)}</div>
+                <div className='flex justify-center mt-4'>
+                    <ExportSensorDialog name={temperature.title} sensorTypeCode={temperature.sensorTypeCode} sensorType='weather' />
+                </div>
             </div>
             <div className='mt-6'>
                 <h4 className='mb-2 text-sm font-medium'>Trend Suhu hari ini, {formatDate(new Date())}</h4>

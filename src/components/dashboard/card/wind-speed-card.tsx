@@ -6,6 +6,7 @@ import { generateWindSpeedBadge, windSpeed } from '@/lib/data/sensor-data/weathe
 import WindSpeedChart from '../chart/wind-speed-chart';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Info } from 'lucide-react';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type WindSpeedCardProps = {
     className?: string;
@@ -13,16 +14,15 @@ type WindSpeedCardProps = {
     value?: number;
 };
 
-const WindSpeedCard: FC<WindSpeedCardProps> = ({ value, isLoading, className }) => {
-    return (
-        <Card className={className}>
-            <CardHeader>
+const WindSpeedCard: FC<WindSpeedCardProps> = ({ value, isLoading, className }) => (
+    <Card className={className}>
+        <CardHeader>
+            <div className='flex flex-col lg:flex-row justify-between gap-4'>
                 <div className='flex items-start gap-2'>
                     <img
                         src={windSpeedIcon}
                         alt='App Logo'
-                        className='w-6 mt-0'
-                    />
+                        className='w-6 mt-0' />
                     <div className='flex gap-1 items-center flex-wrap'>
                         <h5 className='font-semibold'>Kecepatan Angin</h5>
                         <Popover>
@@ -34,23 +34,26 @@ const WindSpeedCard: FC<WindSpeedCardProps> = ({ value, isLoading, className }) 
                         </Popover>
                     </div>
                 </div>
-            </CardHeader>
+                <div className='flex justify-center'>
+                    <ExportSensorDialog name={windSpeed.title} sensorTypeCode={windSpeed.sensorTypeCode} sensorType='weather' />
+                </div>
+            </div>
+        </CardHeader>
 
-            <CardContent>
-                <div className='flex flex-col justify-center items-center gap-2'>
-                    <div className='flex items-start gap-1 justify-center'>
-                        <h3 className='text-4xl font-semibold text-center'>{isLoading ? '--' : roundValue(value)}</h3>
-                        <span className='font-semibold text-muted-foreground mt-1'>{windSpeed.unit}</span>
-                    </div>
-                    <div>{generateWindSpeedBadge(isLoading ? undefined : value)}</div>
+        <CardContent>
+            <div className='flex flex-col justify-center items-center gap-2'>
+                <div className='flex items-start gap-1 justify-center'>
+                    <h3 className='text-4xl font-semibold text-center'>{isLoading ? '--' : roundValue(value)}</h3>
+                    <span className='font-semibold text-muted-foreground mt-1'>{windSpeed.unit}</span>
                 </div>
-                <div className='mt-2'>
-                    <h4 className='mb-2 text-sm font-medium'>Trend</h4>
-                    <WindSpeedChart />
-                </div>
-            </CardContent>
-        </Card>
-    );
-};
+                <div>{generateWindSpeedBadge(isLoading ? undefined : value)}</div>
+            </div>
+            <div className='mt-2'>
+                <h4 className='mb-2 text-sm font-medium'>Trend</h4>
+                <WindSpeedChart />
+            </div>
+        </CardContent>
+    </Card>
+);
 
 export default WindSpeedCard;

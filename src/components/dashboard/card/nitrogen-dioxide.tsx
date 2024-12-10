@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { generateNitrogenDioxideBadge, nitrogenDioxide } from '@/lib/data/sensor-data/air-quality/nitrogen-dioxide';
 import NitrogenDioxideChart from '../chart/nitrogen-dioxide-chart';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type NitrogenDioxideCardProps = {
     className?: string;
@@ -17,23 +18,29 @@ const NitrogenDioxideCard: FC<NitrogenDioxideCardProps> = ({ value, isLoading, c
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={nitrogenDioxideIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Nitrogen Dioksida (NO2)</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={nitrogenDioxideIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Nitrogen Dioksida (NO2)</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{nitrogenDioxide.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{nitrogenDioxide.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={nitrogenDioxide.title} sensorTypeCode={nitrogenDioxide.sensorTypeCode} sensorType='air-quality' />
                     </div>
                 </div>
+
             </CardHeader>
 
             <CardContent>

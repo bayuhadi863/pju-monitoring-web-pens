@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { generateOxygenBadge, oxygen } from '@/lib/data/sensor-data/air-quality/oxygen';
 import OxygenChart from '../chart/oxygen-chart';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type OxygenCardProps = {
     className?: string;
@@ -17,21 +18,26 @@ const OxygenCard: FC<OxygenCardProps> = ({ value, isLoading, className }) => {
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={oxygenIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Oksigen (O2)</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={oxygenIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Oksigen (O2)</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{oxygen.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{oxygen.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={oxygen.title} sensorTypeCode={oxygen.sensorTypeCode} sensorType='air-quality' />
                     </div>
                 </div>
             </CardHeader>

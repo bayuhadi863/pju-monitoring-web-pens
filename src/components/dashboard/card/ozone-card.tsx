@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { generateOzoneBadge, ozone } from '@/lib/data/sensor-data/air-quality/ozone';
 import OzoneChart from '../chart/ozone';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type OzoneCardProps = {
     className?: string;
@@ -17,21 +18,26 @@ const OzoneCard: FC<OzoneCardProps> = ({ value, isLoading, className }) => {
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={ozoneIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Gas Ozone (O3)</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={ozoneIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Gas Ozone (O3)</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{ozone.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{ozone.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={ozone.title} sensorTypeCode={ozone.sensorTypeCode} sensorType='air-quality' />
                     </div>
                 </div>
             </CardHeader>

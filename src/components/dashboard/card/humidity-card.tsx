@@ -7,6 +7,7 @@ import humidityIcon from '@/assets/humidity.png';
 import { roundValue } from '@/lib/utils/roundValue';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Info } from 'lucide-react';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type HumidityCardProps = {
     className?: string;
@@ -18,23 +19,29 @@ const HumidityCard: FC<HumidityCardProps> = ({ value, isLoading, className }) =>
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={humidityIcon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Kelembapan Udara</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={humidityIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Kelembapan Udara</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{humidity.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{humidity.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={humidity.title} sensorTypeCode={humidity.sensorTypeCode} sensorType='weather'/>
                     </div>
                 </div>
+
             </CardHeader>
 
             <CardContent>

@@ -105,7 +105,7 @@ const WeatherSection: React.FC = () => {
                 <div className='flex flex-col lg:flex-row gap-4'>
                     <div className='lg:basis-2/5 xl:basis-1/2 flex items-center'>
                         <TemperatureCard
-                            className='w-full'
+                            className='w-full  h-full flex flex-col justify-evenly p-4 rounded-lg border'
                             isLoading={isLoading}
                             value={temperatureSensor?.value}
                         />

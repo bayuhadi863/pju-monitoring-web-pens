@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import { generatePM25Badge, particulateMatter25 } from '@/lib/data/sensor-data/air-quality/particulate-matter-25';
 import PM25Chart from '../chart/pm25-chart';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type PM25CardProps = {
     className?: string;
@@ -17,21 +18,26 @@ const PM25Card: FC<PM25CardProps> = ({ value, isLoading, className }) => {
     return (
         <Card className={className}>
             <CardHeader>
-                <div className='flex items-start gap-2'>
-                    <img
-                        src={pm25Icon}
-                        alt='App Logo'
-                        className='w-6 mt-0'
-                    />
-                    <div className='flex gap-1 items-center flex-wrap'>
-                        <h5 className='font-semibold'>Partikulat Materi 2.5</h5>
-                        <Popover>
-                            <PopoverTrigger>
-                                <Info className='h-4 w-4 text-muted-foreground' />
-                            </PopoverTrigger>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={pm25Icon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Partikulat Materi 2.5</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
 
-                            <PopoverContent>{particulateMatter25.info}</PopoverContent>
-                        </Popover>
+                                <PopoverContent>{particulateMatter25.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={particulateMatter25.title} sensorTypeCode={particulateMatter25.sensorTypeCode} sensorType='air-quality' />
                     </div>
                 </div>
             </CardHeader>

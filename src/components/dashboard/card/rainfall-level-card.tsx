@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Info } from 'lucide-react';
 import RainfallLevelChart from '../chart/rainfall-level-chart';
 import { generateRainfallBadge, rainfall } from '@/lib/data/sensor-data/weather/rainfall-level';
+import ExportSensorDialog from '../dialog/export-sensor-dialog';
 
 type RainfallLevelCardProps = {
     className?: string;
@@ -16,26 +17,32 @@ type RainfallLevelCardProps = {
 const RainfallLevelCard: FC<RainfallLevelCardProps> = ({ value, isLoading, className }) => {
     return (
         <Card className={className}>
-            <CardContent className='mt-5'>
+            <CardContent className='mt-5 flex flex-col gap-4'>
+                <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                    <div className='flex items-start gap-2'>
+                        <img
+                            src={rainfallLevelIcon}
+                            alt='App Logo'
+                            className='w-6 mt-0'
+                        />
+                        <div className='flex gap-1 items-center flex-wrap'>
+                            <h5 className='font-semibold'>Curah Hujan</h5>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Info className='h-4 w-4 text-muted-foreground' />
+                                </PopoverTrigger>
+
+                                <PopoverContent>{rainfall.info}</PopoverContent>
+                            </Popover>
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <ExportSensorDialog name={rainfall.title} sensorTypeCode={rainfall.sensorTypeCode} sensorType='weather'/>
+                    </div>
+                </div>
                 <div className='flex flex-col lg:flex-row gap-2'>
                     <div className='lg:basis-1/2 flex flex-col gap-4'>
-                        <div className='flex items-start gap-2'>
-                            <img
-                                src={rainfallLevelIcon}
-                                alt='App Logo'
-                                className='w-6 mt-0'
-                            />
-                            <div className='flex gap-1 items-center flex-wrap'>
-                                <h5 className='font-semibold'>Curah Hujan</h5>
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Info className='h-4 w-4 text-muted-foreground' />
-                                    </PopoverTrigger>
 
-                                    <PopoverContent>{rainfall.info}</PopoverContent>
-                                </Popover>
-                            </div>
-                        </div>
                         <div className='flex flex-col justify-center items-center gap-2 h-full'>
                             <div className='flex items-start gap-1 justify-center'>
                                 <h3 className='text-4xl font-semibold text-center'>{isLoading ? '--' : roundValue(value)}</h3>

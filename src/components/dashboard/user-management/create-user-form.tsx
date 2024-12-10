@@ -142,7 +142,7 @@ export default function CreateUserForm() {
                         </FormItem>
                     )}
                 />
-                <FormField
+            <FormField
                     control={form.control}
                     name='password'
                     render={({ field }) => (
