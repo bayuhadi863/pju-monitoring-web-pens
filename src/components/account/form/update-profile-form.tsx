@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import {
   Form,
   FormControl,
@@ -161,7 +160,7 @@ export const UpdateForm: React.FC = () => {
                   </FormItem>
                 )}
               />
-              
+
               <div>
                 <Button className="mt-4 text-white" type="submit" disabled={form.formState.isSubmitting}>
                   {form.formState.isSubmitting ? (
