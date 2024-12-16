@@ -54,7 +54,7 @@ const HomeNavbar: React.FC = () => {
                         <Button
                             size='default'
                             variant='outline'
-                            className='px-4 py-3 border-[#E0E1E6] hover:bg-[#C6E2FF] hover:text-[#00296B] hover:border-inherit'
+                            className='px-4 py-3 border-[#E0E1E6] hover:bg-[#C6E2FF] hover:text-[#00296B] hover:border-inherit bg-white text-gray-800'
                         >
                             <Link to='/login'>Login</Link>
                         </Button>
