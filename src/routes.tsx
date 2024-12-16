@@ -18,85 +18,77 @@ import AdminLayout from './layouts/admin-layout';
 import AccountPage from './pages/profile/account-page';
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <RootLayout />,
-        errorElement: <NotFound />,
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: 'dashboard',
+        element: <DashboardLayout />,
         children: [
-            {
-                index: true,
-                element: <LandingPage />,
-            },
-            {
-                path: 'dashboard',
-                element: <DashboardLayout />,
-                children: [
-                    {
-                        index: true,
-                        element: <DashboardPage />,
-                    },
-                    {
-                        path: 'pju1',
-                        element: (
-                            <ProtectedRoute>
-                                <PjuPage />
-                            </ProtectedRoute>
-                        ),
-                    },
-                    {
-                        path: 'pju2',
-                        element: (
-                            <ProtectedRoute>
-                                <Pju2Page />
-                            </ProtectedRoute>
-                        ),
-                    },
-                    {
-                        path: 'cctv',
-                        element: <CctvPage />,
-                    },
-                    {
-                        path: 'account',
-                        element: (
-                            <ProtectedRoute>
-                                <AccountPage />
-                            </ProtectedRoute>
-                        ),
-                    },
-                    {
-                        path: 'users',
-                        element: (
-                            <ProtectedRoute>
-                                <AdminLayout>
-                                    <UserManagementPage />
-                                </AdminLayout>
-                            </ProtectedRoute>
-                        ),
-                    },
-                    {
-                        path: 'select-chatbot',
-                        element: <SelectChatbotPage />,
-                    },
-                ],
-            },
-            {
-                path: 'chatbot',
-                element: <ChatbotLayout />,
-                children: [
-                    {
-                        index: true,
-                        element: <ChatbotWelcomePage />,
-                    },
-                    {
-                        path: ':conversationId',
-                        element: <Chatbot />,
-                    },
-                ],
-            },
-            {
-                path: 'login',
-                element: <LoginPage />,
-            },
+          {
+            index: true,
+            element: <DashboardPage />,
+          },
+          {
+            path: 'pju1',
+            element: <PjuPage />,
+          },
+          {
+            path: 'pju2',
+            element: <Pju2Page />,
+          },
+          {
+            path: 'cctv',
+            element: <CctvPage />,
+          },
+          {
+            path: 'account',
+            element: (
+              <ProtectedRoute>
+                <AccountPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'users',
+            element: (
+              <ProtectedRoute>
+                <AdminLayout>
+                  <UserManagementPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'select-chatbot',
+            element: <SelectChatbotPage />,
+          },
         ],
-    },
+      },
+      {
+        path: 'chatbot',
+        element: <ChatbotLayout />,
+        children: [
+          {
+            index: true,
+            element: <ChatbotWelcomePage />,
+          },
+          {
+            path: ':conversationId',
+            element: <Chatbot />,
+          },
+        ],
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+    ],
+  },
 ]);

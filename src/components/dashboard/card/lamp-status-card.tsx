@@ -11,7 +11,7 @@ type LampStatusCardProps = {
 };
 
 const LampStatusCard: React.FC<LampStatusCardProps> = ({ pjuId, className }) => {
-    const { pjuId: lampStatePjuId, isOn, isLoading } = useLampStatusStore();
+  const { pjuId: lampStatePjuId, isOn, isLoading } = useLampStatusStore();
 
     const getLampIcon = (isOn: boolean) => {
         return isOn ? <LuLightbulb className='text-yellow-500 text-6xl' /> : <LuLightbulbOff className='text-gray-400 text-6xl' />;

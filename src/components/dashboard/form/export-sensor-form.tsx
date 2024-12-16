@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -10,18 +10,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 
-const formSchema = z
-  .object({
-    start_date: z
-      .date({ required_error: "Start Date harus dipilih." }),
-    end_date: z
-      .date({ required_error: "End Date harus dipilih." }),
-  });
+const formSchema = z.object({
+  start_date: z.date({ required_error: 'Start Date harus dipilih.' }),
+  end_date: z.date({ required_error: 'End Date harus dipilih.' }),
+});
 
 export default function ExportSensorForm({
   sensorTypeCode,
@@ -32,7 +33,7 @@ export default function ExportSensorForm({
   sensorTypeCode: string;
   pjuId?: string;
 }) {
-  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -40,18 +41,18 @@ export default function ExportSensorForm({
       start_date: new Date(),
       end_date: new Date(),
     },
-    mode: "onChange",
+    mode: 'onChange',
     shouldUnregister: false,
   });
 
   const generateDownloadLink = () => {
     const { start_date, end_date } = form.getValues();
 
-    const startDate = format(start_date, "yyyy-MM-dd");
-    const endDate = format(end_date, "yyyy-MM-dd");
+    const startDate = format(start_date, 'yyyy-MM-dd');
+    const endDate = format(end_date, 'yyyy-MM-dd');
 
     if (!sensorTypeCode) {
-      throw new Error("Sensor type code tidak boleh kosong.");
+      throw new Error('Sensor type code tidak boleh kosong.');
     }
 
     const params = new URLSearchParams({
@@ -60,18 +61,18 @@ export default function ExportSensorForm({
       code: sensorTypeCode,
     });
 
-    if (sensorType === "weather") {
+    if (sensorType === 'weather') {
       return `${baseURL}/weather/export?${params.toString()}`;
-    } else if (sensorType === "air-quality") {
+    } else if (sensorType === 'air-quality') {
       return `${baseURL}/air-quality/export?${params.toString()}`;
-    } else if (sensorType === "monitor" && pjuId) {
+    } else if (sensorType === 'monitor' && pjuId) {
       return `${baseURL}/monitor/${pjuId}/export?${params.toString()}`;
     }
 
-    throw new Error("Tipe sensor atau ID PJU tidak valid.");
+    throw new Error('Tipe sensor atau ID PJU tidak valid.');
   };
 
-  const renderDatePicker = (name: "start_date" | "end_date", label: string) => (
+  const renderDatePicker = (name: 'start_date' | 'end_date', label: string) => (
     <FormField
       control={form.control}
       name={name}
@@ -83,11 +84,12 @@ export default function ExportSensorForm({
               <FormControl>
                 <Button
                   variant="outline"
-                  className={`w-full pl-3 text-left font-normal ${!field.value && "text-muted-foreground"
-                    }`}
+                  className={`w-full pl-3 text-left font-normal ${
+                    !field.value && 'text-muted-foreground'
+                  }`}
                 >
                   {field.value ? (
-                    format(field.value, "PPP")
+                    format(field.value, 'PPP')
                   ) : (
                     <span>Pilih tanggal</span>
                   )}
@@ -99,10 +101,15 @@ export default function ExportSensorForm({
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(date) => {
+                  // Cek apakah `date` valid sebelum memperbarui nilai
+                  if (date) {
+                    field.onChange(date);
+                  }
+                }}
                 disabled={(date) =>
                   date > new Date() ||
-                  (name === "end_date" && date < form.getValues("start_date"))
+                  (name === 'end_date' && date < form.getValues('start_date'))
                 }
                 initialFocus
               />
@@ -124,8 +131,8 @@ export default function ExportSensorForm({
         className="space-y-4"
       >
         <div className="flex flex-col gap-4">
-          {renderDatePicker("start_date", "Pilih Tanggal Awal")}
-          {renderDatePicker("end_date", "Pilih Tanggal Akhir")}
+          {renderDatePicker('start_date', 'Pilih Tanggal Awal')}
+          {renderDatePicker('end_date', 'Pilih Tanggal Akhir')}
         </div>
 
         <a
@@ -134,9 +141,7 @@ export default function ExportSensorForm({
           rel="noopener noreferrer"
           className="w-full inline-block"
         >
-          <Button className="w-full">
-            Export
-          </Button>
+          <Button className="w-full">Export</Button>
         </a>
       </form>
     </Form>
