@@ -5,7 +5,7 @@ const VideoPlayer2: React.FC = () => {
     <div className='rounded-md aspect-video'>
       <iframe
         title='live-cctv'
-        src='https://rtsp.me/embed/2zES6Z3D/'
+        src='http://203.175.11.69/'
         className='rounded-md w-full aspect-video'
         allow='fullscreen'
         allowFullScreen
