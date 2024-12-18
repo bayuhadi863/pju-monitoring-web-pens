@@ -47,7 +47,7 @@ const TemperatureCard: FC<TemperatureCardProps> = ({
       <div>
         <div className="flex items-start gap-2 justify-center">
           <h3 className="text-7xl font-semibold text-center mb-1">
-            {isLoading ? '--' : roundValue(value)}
+            {isLoading && typeof value !== 'number' ? '--' : roundValue(value)}
           </h3>
           <span className="font-semibold text-muted-foreground mt-2">
             {temperature.unit}

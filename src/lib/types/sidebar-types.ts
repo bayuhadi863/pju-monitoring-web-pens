@@ -4,4 +4,6 @@ export interface SidebarLinkDataType {
   icon?: React.ReactNode;
   removeIcon?: React.ReactNode;
   onRemove?: () => void;
+  isTargetBlank?: boolean;
+  targetUrl?: string;
 }

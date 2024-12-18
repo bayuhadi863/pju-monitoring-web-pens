@@ -12,9 +12,10 @@ export const userSidebarLinks: SidebarLinkDataType[] = [
         icon: <RiDashboardFill />,
     },
     {
-        to: '/dashboard/cctv',
+        to: 'http://203.175.11.69/',
         label: 'CCTV',
         icon: <BiSolidCctv />,
+        isTargetBlank: true
     },
     {
         to: '/dashboard/select-chatbot',

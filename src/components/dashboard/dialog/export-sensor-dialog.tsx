@@ -9,8 +9,6 @@ export default function ExportSensorDialog({ name, sensorTypeCode, sensorType, p
   const setOpen = useSensorManagementStore((state) => state.setExportSensorDialogOpen);
   const sensorCode = useSensorManagementStore((state) => state.sensorCode);
   const setSensorCode = useSensorManagementStore((state) => state.setSensorCode);
-  console.log('sensorTypeCode', sensorTypeCode);
-  console.log('name', name);
 
   return (
     <Dialog

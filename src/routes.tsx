@@ -5,12 +5,12 @@ import RootLayout from './layouts/root-layout';
 import LoginPage from './pages/auth/login-page';
 import DashboardLayout from './layouts/dashboard-layout';
 import PjuPage from './pages/dashboard/pju/pju-page';
-import CctvPage from './pages/dashboard/cctv-page';
+// import CctvPage from './pages/dashboard/cctv-page';
 import ProtectedRoute from './layouts/protected-route';
 import NotFound from './pages/error/not-found';
-import ChatbotLayout from './pages/chatbot/chatbot-layout';
-import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
-import Chatbot from './pages/chatbot/chatbot-page';
+// import ChatbotLayout from './pages/chatbot/chatbot-layout';
+// import ChatbotWelcomePage from './pages/chatbot/chatbot-welcome-page';
+// import Chatbot from './pages/chatbot/chatbot-page';
 import UserManagementPage from './pages/dashboard/user-management/user-management-page';
 import Pju2Page from './pages/dashboard/pju/pju2-page';
 import SelectChatbotPage from './pages/dashboard/select-chatbot/select-chatbot-page';
@@ -43,10 +43,10 @@ export const router = createBrowserRouter([
             path: 'pju2',
             element: <Pju2Page />,
           },
-          {
-            path: 'cctv',
-            element: <CctvPage />,
-          },
+          // {
+          //   path: 'cctv',
+          //   element: <CctvPage />,
+          // },
           {
             path: 'account',
             element: (
@@ -71,20 +71,20 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: 'chatbot',
-        element: <ChatbotLayout />,
-        children: [
-          {
-            index: true,
-            element: <ChatbotWelcomePage />,
-          },
-          {
-            path: ':conversationId',
-            element: <Chatbot />,
-          },
-        ],
-      },
+      // {
+      //   path: 'chatbot',
+      //   element: <ChatbotLayout />,
+      //   children: [
+      //     {
+      //       index: true,
+      //       element: <ChatbotWelcomePage />,
+      //     },
+      //     {
+      //       path: ':conversationId',
+      //       element: <Chatbot />,
+      //     },
+      //   ],
+      // },
       {
         path: 'login',
         element: <LoginPage />,

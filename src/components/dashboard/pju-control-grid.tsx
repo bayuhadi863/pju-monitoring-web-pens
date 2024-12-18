@@ -64,8 +64,6 @@ export default function PjuControlGrid() {
       } else {
         setInsertAutoLoading(true);
         setWebAutoMode(automated);
-
-        console.log('auto');
       }
 
       const body = {
@@ -80,8 +78,6 @@ export default function PjuControlGrid() {
       };
 
       await axios.post(`${apiBaseUrl}/lamp`, body, { headers });
-
-      console.log('Lamp log inserted successfully');
     } catch (error) {
       console.error('Error updating lamp status:', error);
     }
