@@ -19,6 +19,7 @@ const MobileSidebarLinks: React.FC<MobileSidebarLinksProps> = ({ links, fontWeig
               icon={link.icon}
               className='w-full mb-1'
               fontWeight={fontWeight}
+              isTargetBlank={link.isTargetBlank}
             >
               {link.label}
             </MobileSidebarLink>

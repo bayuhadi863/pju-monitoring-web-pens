@@ -41,6 +41,7 @@ const SidebarLinks: React.FC<SidebarLinksProps> = ({ links, fontWeight }) => {
               icon={link.icon}
               className='mb-1'
               fontWeight={fontWeight}
+              isTargetBlank={link.isTargetBlank}
               rightSection={
                 link.removeIcon && (
                   <button

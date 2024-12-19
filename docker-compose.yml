@@ -1,0 +1,10 @@
+services:
+  smart-pju-fe:
+    container_name: smart-pju-fe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bayuhadi863/smart-pju-fe
+    ports:
+      - "3000:80"
+    restart: always

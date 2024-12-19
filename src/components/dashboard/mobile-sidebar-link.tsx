@@ -31,7 +31,6 @@ const MobileSidebarLink: React.FC<MobileSidebarLinkProps> = ({
       {isTargetBlank ? (
         <a
           href={to}
-          target="_blank"
           className={`${className} flex items-center gap-2 py-2 px-4 rounded ${
             isActive ? 'bg-primary/10 text-primary' : ''
           } transition hover:bg-primary/10`}
